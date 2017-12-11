@@ -24,7 +24,10 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version     = '>= 2.0.0'
   spec.required_rubygems_version = '>= 2.2.0'
 
-  spec.add_development_dependency 'bundler', '~> 1.15'
-  spec.add_development_dependency 'rake',    '~> 12.3.0'
-  spec.add_development_dependency 'rubocop', '~> 0.51.0'
+  spec.add_development_dependency 'bundler',          '~> 1.15'
+  spec.add_development_dependency 'rails',            '~> 5.1.4'
+  spec.add_development_dependency 'rake',             '~> 12.3.0'
+  spec.add_development_dependency 'rubocop',          '~> 0.51.0'
+  spec.add_development_dependency 'sqlite3',          '~> 1.3.13'
+  spec.add_development_dependency 'require_reloader', '~> 0.2.1'
 end
