@@ -7,6 +7,7 @@ require 'active_support/core_ext/object/blank'
 module Bemer
   extend ActiveSupport::Autoload
 
+  autoload :Component
   autoload :Configuration
   autoload :Tags
   autoload :Builders
