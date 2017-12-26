@@ -25,11 +25,14 @@ Gem::Specification.new do |spec|
   spec.required_rubygems_version = '>= 2.2.0'
 
   spec.add_development_dependency 'bundler',          '~> 1.15'
+  spec.add_development_dependency 'bundler-audit',    '~> 0.6.0'
+  spec.add_development_dependency 'fasterer',         '~> 0.3.2'
+  spec.add_development_dependency 'overcommit',       '~> 0.41.0'
   spec.add_development_dependency 'rails',            '~> 5.1.4'
   spec.add_development_dependency 'rake',             '~> 12.3.0'
+  spec.add_development_dependency 'require_reloader', '~> 0.2.1'
   spec.add_development_dependency 'rubocop',          '~> 0.51.0'
   spec.add_development_dependency 'sqlite3',          '~> 1.3.13'
-  spec.add_development_dependency 'require_reloader', '~> 0.2.1'
 
   spec.add_runtime_dependency 'railties', '>= 3.2', '<= 5.2'
 end

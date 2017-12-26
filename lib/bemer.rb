@@ -2,11 +2,16 @@
 
 require 'forwardable'
 require 'active_support/dependencies/autoload'
+require 'active_support/core_ext/object/blank'
 
 module Bemer
   extend ActiveSupport::Autoload
 
+  autoload :Component
   autoload :Configuration
+  autoload :Helpers
+  autoload :Tags
+  autoload :Builders
 
   class << self
     extend Forwardable
@@ -30,7 +35,15 @@ module Bemer
     def setup
       yield config
     end
+
+    def eager_load!
+      super
+
+      Tags.eager_load!
+      Builders.eager_load!
+    end
   end
 end
 
 require 'bemer/version'
+require 'bemer/railtie' if defined?(::Rails::Railtie)
