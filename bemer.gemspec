@@ -30,4 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop',          '~> 0.51.0'
   spec.add_development_dependency 'sqlite3',          '~> 1.3.13'
   spec.add_development_dependency 'require_reloader', '~> 0.2.1'
+
+  spec.add_runtime_dependency 'railties', '>= 3.2', '<= 5.2'
 end
