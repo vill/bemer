@@ -2,11 +2,13 @@
 
 require 'forwardable'
 require 'active_support/dependencies/autoload'
+require 'active_support/core_ext/object/blank'
 
 module Bemer
   extend ActiveSupport::Autoload
 
   autoload :Configuration
+  autoload :Tags
 
   class << self
     extend Forwardable
@@ -29,6 +31,12 @@ module Bemer
 
     def setup
       yield config
+    end
+
+    def eager_load!
+      super
+
+      Tags.eager_load!
     end
   end
 end
