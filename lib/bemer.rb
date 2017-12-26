@@ -9,6 +9,7 @@ module Bemer
 
   autoload :Component
   autoload :Configuration
+  autoload :Helpers
   autoload :Tags
   autoload :Builders
 
