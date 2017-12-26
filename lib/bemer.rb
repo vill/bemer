@@ -46,3 +46,4 @@ module Bemer
 end
 
 require 'bemer/version'
+require 'bemer/railtie' if defined?(::Rails::Railtie)
