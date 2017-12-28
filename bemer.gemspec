@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Build reusable UI components for Rails applications using the BEM methodology.'
   spec.description   = 'Build reusable UI components for Rails applications using the BEM methodology.'
   # rubocop:enable Metrics/LineLength
+  spec.homepage      = 'https://github.com/vill/bemer'
   spec.license       = 'MIT'
   spec.require_paths = ['lib']
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
