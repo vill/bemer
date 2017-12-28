@@ -21,7 +21,7 @@ module Bemer
                             :default_block_tag,
                             :default_context,
                             :default_element_tag,
-                            :element_separator,
+                            :element_name_separator,
                             :modifier_name_separator,
                             :modifier_value_separator,
                             :path,
