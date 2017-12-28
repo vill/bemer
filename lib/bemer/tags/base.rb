@@ -104,7 +104,7 @@ module Bemer
           return attrs unless Bemer.transform_string_values
 
           attrs.split(' ').reject(&:blank?).map do |mixin|
-            build_mixin mixin.split(Bemer.element_separator)
+            build_mixin mixin.split(Bemer.element_name_separator)
           end.join(' ')
         end
       end
@@ -119,7 +119,7 @@ module Bemer
         return if !bem? || block.blank?
 
         base_class = [css_class(block), css_class(element)].reject(&:blank?)
-                                                           .join(Bemer.element_separator)
+                                                           .join(Bemer.element_name_separator)
 
         return base_class if modifier.blank?
 
