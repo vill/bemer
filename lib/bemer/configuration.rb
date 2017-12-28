@@ -20,6 +20,7 @@ module Bemer
       @element_separator        = element_file_separator
       @modifier_name_separator  = modifier_file_separator
       @modifier_value_separator = modifier_value_file_separator
+      @path                     = 'app/bem_components'
       @transform_string_values  = false
     end
 
