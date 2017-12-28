@@ -1,6 +1,6 @@
 # Bemer
 
-Build reusable UI components for Rails applications using the BEM methodology.
+Build reusable UI components for Rails applications using the [BEM methodology](https://en.bem.info/methodology/).
 
 ## Installation
 
