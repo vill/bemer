@@ -5,7 +5,7 @@ module Bemer
     attr_reader :partial, :template, :options
 
     def initialize(name, template, context = nil, **options)
-      context ||= Bemer.default_context.call(template).to_s
+      context ||= default_context(template)
       name      = name.to_s.underscore
 
       @partial  = [context, name, name].reject(&:blank?).join('/')
@@ -37,6 +37,12 @@ module Bemer
       template.view_paths = view_paths
 
       output
+    end
+
+    def default_context(template)
+      return Bemer.default_context.to_s unless Bemer.default_context.respond_to?(:call)
+
+      Bemer.default_context.call(template)
     end
   end
 end

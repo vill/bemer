@@ -15,7 +15,7 @@ module Bemer
     def initialize
       @bem                      = true
       @default_block_tag        = :div
-      @default_context          = proc {}
+      @default_context          = nil
       @default_element_tag      = :div
       @element_separator        = element_file_separator
       @modifier_name_separator  = modifier_file_separator
