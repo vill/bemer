@@ -5,27 +5,27 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class Component
-    attr_reader :name, :options, :partial, :template
+    attr_reader :name, :options, :partial, :view
 
-    def initialize(name, template, context = nil, **options)
-      context ||= default_context(template)
+    def initialize(name, view, context = nil, **options)
+      context ||= default_context_from(view)
 
       name         = name.to_s.underscore
       partial_name = name.dasherize
 
-      @name     = name
-      @options  = options
-      @partial  = [context, partial_name, partial_name].reject(&:blank?).join('/')
-      @template = template
+      @name    = name
+      @options = options
+      @partial = [context, partial_name, partial_name].reject(&:blank?).join('/')
+      @view    = view
     end
 
     def render(&block)
       prepend_view_path_and_render do
-        next template.render(as: name, **options, partial: partial) if options.key?(:collection)
+        next view.render(as: name, **options, partial: partial) if options.key?(:collection)
 
         callback = block_given? ? block : proc {}
 
-        template.render(partial, options, &callback)
+        view.render(partial, options, &callback)
       end
     end
 
@@ -33,22 +33,22 @@ module Bemer
 
     def prepend_view_path_and_render
       path       = Bemer.path.to_s
-      paths      = template.view_paths.map { |view_path| view_path.instance_variable_get(:@path) }
-      view_paths = template.view_paths.dup
+      paths      = view.view_paths.map { |view_path| view_path.instance_variable_get(:@path) }
+      view_paths = view.view_paths.dup
 
-      template.controller.prepend_view_path(path) unless paths.include?(path)
+      view.controller.prepend_view_path(path) unless paths.include?(path)
 
       output = yield
 
-      template.view_paths = view_paths
+      view.view_paths = view_paths
 
       output
     end
 
-    def default_context(template)
+    def default_context_from(view)
       return Bemer.default_context.to_s unless Bemer.default_context.respond_to?(:call)
 
-      Bemer.default_context.call(template)
+      Bemer.default_context.call(view)
     end
   end
 end
