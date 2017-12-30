@@ -1,21 +1,27 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/string/inflections'
+require 'active_support/core_ext/object/blank'
+
 module Bemer
   class Component
-    attr_reader :partial, :template, :options
+    attr_reader :name, :options, :partial, :template
 
     def initialize(name, template, context = nil, **options)
       context ||= default_context(template)
-      name      = name.to_s.underscore
 
-      @partial  = [context, name, name].reject(&:blank?).join('/')
+      name         = name.to_s.underscore
+      partial_name = name.dasherize
+
+      @name     = name
       @options  = options
+      @partial  = [context, partial_name, partial_name].reject(&:blank?).join('/')
       @template = template
     end
 
     def render(&block)
       prepend_view_path_and_render do
-        next template.render(options.merge(partial: partial)) if options.key?(:collection)
+        next template.render(as: name, **options, partial: partial) if options.key?(:collection)
 
         callback = block_given? ? block : proc {}
 

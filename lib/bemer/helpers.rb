@@ -3,7 +3,7 @@
 module Bemer
   module Helpers
     def block(name = nil, **options, &block)
-      name ||= File.basename(@virtual_path).to_s[/[^_]\w+/]
+      name ||= File.basename(@virtual_path).to_s[/[^_]\S+/]
 
       Bemer::Builders::Block.new(name, self, options).render(&block)
     end
