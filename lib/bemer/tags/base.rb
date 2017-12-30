@@ -2,7 +2,7 @@
 
 module Bemer
   module Tags
-    class Base
+    class Base # rubocop:disable Metrics/ClassLength
       attr_reader :block_name, :template, :builder, :html_options
 
       def initialize(block_name, template, builder, **options)
@@ -112,7 +112,11 @@ module Bemer
       def build_modifier(attrs)
         return attrs.map { |mods| build_modifier(mods) } if attrs.instance_of?(Hash)
 
-        bem_class_for(block_name, element: element_name, modifier: attrs)
+        modifier_class_from(attrs)
+      end
+
+      def modifier_class_from(attrs)
+        bem_class_for(block_name, modifier: attrs)
       end
 
       def bem_class_for(block, element: nil, modifier: nil)
