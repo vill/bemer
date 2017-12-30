@@ -18,8 +18,8 @@ module Bemer
         @html_options  = options
       end
 
-      def render(&block)
-        output = template.capture(builder, &block) if block_given?
+      def render(content = nil, &block)
+        output = content.nil? && block_given? ? template.capture(builder, &block) : content
 
         template.content_tag(tag, output, class: css_classes, **html_options)
       end

@@ -11,8 +11,8 @@ module Bemer
         @block = block
       end
 
-      def render(&callback)
-        Tags::Element.new(block.name, name, template, self, options).render(&callback)
+      def render(content = nil, &callback)
+        Tags::Element.new(block.name, name, template, self, options).render(content, &callback)
       end
     end
   end

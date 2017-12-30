@@ -2,10 +2,10 @@
 
 module Bemer
   module Helpers
-    def block(name = nil, **options, &block)
+    def block(name = nil, content: nil, **options, &block)
       name ||= File.basename(@virtual_path).to_s[/[^_]\S+/]
 
-      Bemer::Builders::Block.new(name, self, options).render(&block)
+      Bemer::Builders::Block.new(name, self, options).render(content, &block)
     end
 
     def render_component(name, context = nil, **options, &block)
