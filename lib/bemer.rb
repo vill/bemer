@@ -10,8 +10,6 @@ module Bemer
   autoload :Component
   autoload :Configuration
   autoload :Helpers
-  autoload :Tags
-  autoload :Builders
 
   class << self
     extend Forwardable
@@ -39,8 +37,8 @@ module Bemer
     def eager_load!
       super
 
-      Tags.eager_load!
-      Builders.eager_load!
+      Bemer::Tags.eager_load!
+      Bemer::Builders.eager_load!
     end
   end
 end
