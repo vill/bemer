@@ -20,6 +20,12 @@ module Bemer
       def default_tag
         Bemer.default_element_tag
       end
+
+      protected
+
+      def modifier_class_from(attrs)
+        bem_class_for(block_name, element: element_name, modifier: attrs)
+      end
     end
   end
 end
