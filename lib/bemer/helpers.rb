@@ -8,8 +8,8 @@ module Bemer
       Bemer::Builders::Block.new(name, self, options).render(content, &block)
     end
 
-    def render_component(name, context = nil, **options, &block)
-      Bemer::Component.new(name, self, context, options).render(&block)
+    def render_component(level_and_name, **options, &block)
+      Bemer::Component.new(level_and_name, self, options).render(&block)
     end
 
     alias render_block render_component
