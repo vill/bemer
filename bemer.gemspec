@@ -18,8 +18,9 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.homepage      = 'https://github.com/vill/bemer'
   spec.license       = 'MIT'
   spec.require_paths = ['lib']
+  spec.test_files    = `git ls-files -z -- spec/*`.split("\x0")
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/|^Gemfile.lock$})
+    f.match(%r{^spec/|^Gemfile.lock$})
   end
 
   spec.required_ruby_version     = '>= 2.0.0'
