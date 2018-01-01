@@ -53,3 +53,7 @@ PreCommit:
 
   TrailingWhitespace:
     enabled: true
+
+PrePush:
+  RSpec:
+    enabled: true
