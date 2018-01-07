@@ -10,3 +10,9 @@ Metrics/LineLength:
   Max: 100
   IgnoredPatterns:
     - '^\s*#'
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
