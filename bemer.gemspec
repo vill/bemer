@@ -23,7 +23,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
     f.match(%r{^spec/|^Gemfile.lock$})
   end
 
-  spec.required_ruby_version     = '>= 2.1.0'
+  spec.required_ruby_version     = '>= 2.2.0'
   spec.required_rubygems_version = '>= 2.2.0'
 
   spec.add_development_dependency 'bundler',          '~> 1.15'
