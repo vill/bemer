@@ -84,6 +84,18 @@ module Bemer
 
       names.map { |name| css_class(name) }.join(element_name_separator)
     end
+
+    def compound_css_class(*parts, separator: '-')
+      parts.flatten.reject(&:blank?).map { |part| css_class(part) }.join(separator)
+    end
+
+    def css_class(name)
+      name_without_whitespace = name.to_s.delete(' ')
+
+      return name_without_whitespace if !transform_string_values && name.instance_of?(String)
+
+      name_without_whitespace.underscore.dasherize
+    end
   end
 end
 

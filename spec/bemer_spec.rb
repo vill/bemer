@@ -85,17 +85,17 @@ RSpec.describe Bemer do
     end
   end
 
-  describe '.css_class' do
-    subject(:css_class) { described_class.method(:css_class) }
+  describe '.compound_css_class' do
+    subject(:compound_css_class) { described_class.method(:compound_css_class) }
 
     it 'creates an empty class from empty arguments', :aggregate_failures do
-      expect(css_class.call).to eq empty_class
-      expect(css_class.call(*empty_arguments)).to eq empty_class
-      expect(css_class.call(*empty_arguments, [*empty_arguments])).to eq empty_class
+      expect(compound_css_class.call).to eq empty_class
+      expect(compound_css_class.call(*empty_arguments)).to eq empty_class
+      expect(compound_css_class.call(*empty_arguments, [*empty_arguments])).to eq empty_class
     end
 
     it 'creates a class from arguments with whitespaces' do
-      expect(css_class.call('  removes  ', :' all ', ' white  spaces ')).to eq 'removes-all-whitespaces'
+      expect(compound_css_class.call('  removes  ', :' all ', ' white  spaces ')).to eq 'removes-all-whitespaces'
     end
 
     context 'when transform_string_values is set to true' do
@@ -104,15 +104,15 @@ RSpec.describe Bemer do
       end
 
       it 'creates a class from strings and symbols' do
-        expect(css_class.call(:some, :Awesome, 'CSS', 'Class')).to eq 'some-awesome-css-class'
+        expect(compound_css_class.call(:some, :Awesome, 'CSS', 'Class')).to eq 'some-awesome-css-class'
       end
 
       it 'creates a class from strings and symbols with custom separator' do
-        expect(css_class.call(:some, :Awesome, 'CSS', 'Class', separator: '_')).to eq 'some_awesome_css_class'
+        expect(compound_css_class.call(:some, :Awesome, 'CSS', 'Class', separator: '_')).to eq 'some_awesome_css_class'
       end
 
       it 'creates a class from nested strings and symbols' do
-        expect(css_class.call(:Some, ['Awesome', [:CSS]], ['Class'])).to eq 'some-awesome-css-class'
+        expect(compound_css_class.call(:Some, ['Awesome', [:CSS]], ['Class'])).to eq 'some-awesome-css-class'
       end
     end
 
@@ -122,15 +122,15 @@ RSpec.describe Bemer do
       end
 
       it 'creates a class from strings and symbols' do
-        expect(css_class.call(:some, :Awesome, 'CSS', 'Class')).to eq 'some-awesome-CSS-Class'
+        expect(compound_css_class.call(:some, :Awesome, 'CSS', 'Class')).to eq 'some-awesome-CSS-Class'
       end
 
       it 'creates a class from strings and symbols with custom separator' do
-        expect(css_class.call(:some, :Awesome, 'CSS', 'Class', separator: '_')).to eq 'some_awesome_CSS_Class'
+        expect(compound_css_class.call(:some, :Awesome, 'CSS', 'Class', separator: '_')).to eq 'some_awesome_CSS_Class'
       end
 
       it 'creates a class from nested strings and symbols' do
-        expect(css_class.call(:Some, ['Awesome', [:CSS]], ['Class'])).to eq 'some-Awesome-css-Class'
+        expect(compound_css_class.call(:Some, ['Awesome', [:CSS]], ['Class'])).to eq 'some-Awesome-css-Class'
       end
     end
   end
