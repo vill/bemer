@@ -77,14 +77,12 @@ module Bemer
       [css_class(block), css_class(element)].reject(&:blank?).join(element_name_separator)
     end
 
-    def css_class(*parts, separator: '-')
-      parts.flatten.reject(&:blank?).map do |part|
-        part_without_whitespace = part.to_s.delete(' ')
+    def entity_name(block, element = nil)
+      names = [block]
 
-        next part_without_whitespace if !transform_string_values && part.instance_of?(String)
+      names << element unless element.nil?
 
-        part_without_whitespace.underscore.dasherize
-      end.join(separator)
+      names.map { |name| css_class(name) }.join(element_name_separator)
     end
   end
 end
