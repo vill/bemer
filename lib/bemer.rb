@@ -50,32 +50,31 @@ module Bemer
       Bemer::Builders.eager_load!
     end
 
-    def bem_class(block_name, element_name = nil, modifier = nil)
+    def bem_class(block, element = nil, modifier = nil)
       modifier_name, modifier_value = *[*modifier, true].flatten
-      modifier_css_class            = modifier_css_class(block_name, element_name,
+      modifier_css_class            = modifier_css_class(block, element,
                                                          modifier_name, modifier_value)
 
-      modifier_css_class.blank? ? entity_css_class(block_name, element_name) : modifier_css_class
+      modifier_css_class.blank? ? entity_css_class(block, element) : modifier_css_class
     end
 
-    def modifier_css_class(block_name, element_name, modifier_name, modifier_value = true)
-      entity_css_class = entity_css_class(block_name, element_name)
+    def modifier_css_class(block, element, modifier_name, modifier_value = true)
+      entity_css_class = entity_css_class(block, element)
       modifier_name    = nil if modifier_value.blank?
 
       return '' if entity_css_class.blank? || modifier_name.blank?
 
       modifier_value = nil if modifier_value.instance_of?(TrueClass)
-      modifier       = css_class(modifier_name, modifier_value,
-                                 separator: modifier_value_separator)
+      modifier       = compound_css_class(modifier_name, modifier_value,
+                                          separator: modifier_value_separator)
 
       [entity_css_class, modifier].join(modifier_name_separator)
     end
 
-    def entity_css_class(block_name, element_name = nil)
-      return '' if block_name.blank?
+    def entity_css_class(block, element = nil)
+      return '' if block.blank?
 
-      [css_class(block_name), css_class(element_name)].reject(&:blank?)
-                                                      .join(element_name_separator)
+      [css_class(block), css_class(element)].reject(&:blank?).join(element_name_separator)
     end
 
     def css_class(*parts, separator: '-')
