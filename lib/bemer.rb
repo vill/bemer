@@ -80,7 +80,7 @@ module Bemer
 
     def css_class(*parts, separator: '-')
       parts.flatten.reject(&:blank?).map do |part|
-        part_without_whitespace = part.to_s.tr(' ', '')
+        part_without_whitespace = part.to_s.delete(' ')
 
         next part_without_whitespace if !transform_string_values && part.instance_of?(String)
 
