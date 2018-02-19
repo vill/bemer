@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Bemer::ModifierList do
-  let(:empty_modifier_list)      { described_class.new(:block) }
+  let(:empty_modifier_list)      { described_class.new(:block, :elem, '') }
   let(:modifier_list_from_array) { described_class.new(:block, :elem, [:hidden, { theme: :green_islands, visible: false, disabled: true }, 'has_tail']) }
   let(:modifier_list_from_hash)  { described_class.new(:block, :elem, hidden: true, theme: :green_islands, visible: false, disabled: true, 'has_tail' => true) }
   let(:modifiers_as_string)      { modifiers_as_array.join(' ') }
