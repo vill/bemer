@@ -4,7 +4,7 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class ModifierList # rubocop:disable Style/Documentation
-    def initialize(block, element = nil, mods = nil)
+    def initialize(block, element, mods)
       @block     = block
       @element   = element
       @modifiers = build_modifiers(mods)
