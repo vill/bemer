@@ -11,6 +11,7 @@ module Bemer
   autoload :Component
   autoload :Configuration
   autoload :Helpers
+  autoload :ModifierList
 
   class << self
     extend Forwardable
