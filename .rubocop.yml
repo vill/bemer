@@ -1,10 +1,18 @@
 inherit_from: .rubocop_todo.yml
 
+require: rubocop-rspec
+
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.2
   DisplayCopNames: true
 
 Metrics/LineLength:
   Max: 100
   IgnoredPatterns:
     - '^\s*#'
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

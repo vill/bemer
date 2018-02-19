@@ -5,23 +5,24 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class Component
-    attr_reader :name, :options, :partial, :view
+    attr_reader :local_name, :options, :partial, :view
 
-    def initialize(name, view, context = nil, **options)
-      context ||= default_context_from(view)
+    def initialize(level_and_name, view, context: true, **options)
+      *level, name = level_and_name.to_s.split('/')
+      local_name   = name.underscore
+      partial_name = local_name.dasherize
+      partial_dir  = partial_name
+      context      = build_context(context, view)
 
-      name         = name.to_s.underscore
-      partial_name = name.dasherize
-
-      @name    = name
-      @options = options
-      @partial = [context, partial_name, partial_name].reject(&:blank?).join('/')
-      @view    = view
+      @local_name = local_name
+      @options    = options
+      @partial    = [context, *level, partial_dir, partial_name].reject(&:blank?).join('/')
+      @view       = view
     end
 
     def render(&block)
       prepend_view_path_and_render do
-        next view.render(as: name, **options, partial: partial) if options.key?(:collection)
+        next view.render(as: local_name, **options, partial: partial) if options.key?(:collection)
 
         callback = block_given? ? block : proc {}
 
@@ -45,7 +46,13 @@ module Bemer
       output
     end
 
-    def default_context_from(view)
+    def build_context(context, view)
+      return context if context.instance_of?(String) || context.instance_of?(Symbol)
+
+      default_context(view) if context
+    end
+
+    def default_context(view)
       return Bemer.default_context.to_s unless Bemer.default_context.respond_to?(:call)
 
       Bemer.default_context.call(view)

@@ -6,7 +6,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'bemer/version'
 
-Gem::Specification.new do |spec|
+Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.name          = 'bemer'
   spec.version       = Bemer::VERSION
   spec.author        = 'Alexander Grigorev'
@@ -18,11 +18,12 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/vill/bemer'
   spec.license       = 'MIT'
   spec.require_paths = ['lib']
+  spec.test_files    = `git ls-files -z -- spec/*`.split("\x0")
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/|^Gemfile.lock$})
+    f.match(%r{^spec/|^Gemfile.lock$})
   end
 
-  spec.required_ruby_version     = '>= 2.0.0'
+  spec.required_ruby_version     = '>= 2.2.0'
   spec.required_rubygems_version = '>= 2.2.0'
 
   spec.add_development_dependency 'bundler',          '~> 1.15'
@@ -32,7 +33,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rails',            '~> 5.1.4'
   spec.add_development_dependency 'rake',             '~> 12.3.0'
   spec.add_development_dependency 'require_reloader', '~> 0.2.1'
-  spec.add_development_dependency 'rubocop',          '~> 0.51.0'
+  spec.add_development_dependency 'rspec',            '~> 3.7.0'
+  spec.add_development_dependency 'rspec-rails',      '~> 3.7.2'
+  spec.add_development_dependency 'rubocop',          '~> 0.52.1'
+  spec.add_development_dependency 'rubocop-rspec',    '~> 1.21'
   spec.add_development_dependency 'sqlite3',          '~> 1.3.13'
 
   spec.add_runtime_dependency 'railties', '>= 3.2', '<= 5.2'

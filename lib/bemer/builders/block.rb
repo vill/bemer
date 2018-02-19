@@ -4,11 +4,11 @@ module Bemer
   module Builders
     class Block < Base
       def render(content = nil, &block)
-        Tags::Block.new(name, template, self, options).render(content, &block)
+        Tags::Block.new(name, view, self, options).render(content, &block)
       end
 
       def element(name, content: nil, **options, &block)
-        Builders::Element.new(name, template, self, options).render(content, &block)
+        Builders::Element.new(name, view, self, options).render(content, &block)
       end
     end
   end

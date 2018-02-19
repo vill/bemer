@@ -3,12 +3,12 @@
 module Bemer
   module Builders
     class Base
-      attr_reader :name, :template, :options
+      attr_reader :name, :view, :options
 
-      def initialize(name, template, **options)
-        @name     = name.to_s.underscore.dasherize
-        @options  = options
-        @template = template
+      def initialize(name, view, **options)
+        @name    = name.to_s.underscore.dasherize
+        @options = options
+        @view    = view
       end
 
       def render

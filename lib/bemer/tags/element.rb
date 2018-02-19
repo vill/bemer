@@ -5,10 +5,10 @@ module Bemer
     class Element < Base
       attr_reader :element_name
 
-      def initialize(block_name, element_name, template, builder, **options)
+      def initialize(block_name, element_name, view, builder, **options)
         options = options.merge(bem_recursive: builder.block.options[:bem_recursive])
 
-        super(block_name, template, builder, options)
+        super(block_name, view, builder, options)
 
         @element_name = element_name
       end

@@ -3,12 +3,12 @@
 module Bemer
   module Tags
     class Base # rubocop:disable Metrics/ClassLength
-      attr_reader :block_name, :template, :builder, :html_options
+      attr_reader :block_name, :view, :builder, :html_options
 
-      def initialize(block_name, template, builder, **options)
+      def initialize(block_name, view, builder, **options)
         @block_name    = block_name
         @builder       = builder
-        @template      = template
+        @view          = view
         @bem           = options.delete(:bem)
         @bem_recursive = options.delete(:bem_recursive)
         @css_classes   = options.delete(:class)
@@ -19,9 +19,9 @@ module Bemer
       end
 
       def render(content = nil, &block)
-        output = content.nil? && block_given? ? template.capture(builder, &block) : content
+        output = content.nil? && block_given? ? view.capture(builder, &block) : content
 
-        template.content_tag(tag, output, class: css_classes, **html_options)
+        view.content_tag(tag, output, class: css_classes, **html_options)
       end
 
       def css_classes
