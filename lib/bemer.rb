@@ -15,6 +15,7 @@ module Bemer
   autoload :Helpers
   autoload :MixinList
   autoload :ModifierList
+  autoload :Renderer
 
   class << self
     extend Forwardable
