@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Bemer::MixinList, focus: true do
+RSpec.describe Bemer::MixinList do
   let(:empty_mixin_list) { described_class.new('') }
   let(:mixin_list)       { described_class.new(:block, { block_1: :elem_1, block: ['elem_1', :elem_2] }, 'block1', 'block__elem1') }
   let(:mixins_as_sring)  { mixins_as_array.join(' ') }
