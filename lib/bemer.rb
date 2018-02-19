@@ -10,6 +10,7 @@ module Bemer
 
   autoload :Component
   autoload :Configuration
+  autoload :Entity
   autoload :Helpers
   autoload :MixinList
   autoload :ModifierList
