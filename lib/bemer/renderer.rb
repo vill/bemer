@@ -9,8 +9,8 @@ module Bemer
     extend  Forwardable
     include ::ActionView::Helpers::TagHelper
 
-    def render(entity)
-      @entity = entity
+    def render(builder)
+      @builder = builder
 
       return content if tag.blank?
 
@@ -21,7 +21,7 @@ module Bemer
 
     METHOD_NAMES = %i[attrs bem? bem_class cls content js_attrs js_class mix mods tag].freeze
 
-    def_instance_delegators :@entity, *METHOD_NAMES
+    def_instance_delegators :@builder, *METHOD_NAMES
 
     def html_options
       bem? ? { **attrs, **js_attrs } : attrs
