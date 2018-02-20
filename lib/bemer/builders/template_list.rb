@@ -8,13 +8,13 @@ module Bemer
       end
 
       def block(name = '*', **options)
-        builder = Builders::Template.new(templates, **options, block: name)
+        builder = Builders::Template.new(templates, **options, block: name, elem: nil)
 
         block_given? ? yield(builder) : builder
       end
 
-      def elem(name = '*', **options)
-        builder = Builders::Template.new(templates, **options, elem: name)
+      def elem(name = '*', block: '*', **options)
+        builder = Builders::Template.new(templates, **options, block: block || '*', elem: name)
 
         block_given? ? yield(builder) : builder
       end
