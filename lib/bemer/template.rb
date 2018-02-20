@@ -2,16 +2,15 @@
 
 module Bemer
   class Template # rubocop:disable Style/Documentation
-    attr_reader :mode
+    attr_reader :mode, :wildcard
+
+    alias wildcard? wildcard
 
     def initialize(mode, body, predicate)
       @body      = body
       @mode      = mode
       @predicate = predicate
-    end
-
-    def wildcard?
-      predicate.name.include?('*')
+      @wildcard  = predicate.name.include?('*')
     end
 
     def match?(node)
