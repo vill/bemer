@@ -7,6 +7,8 @@ module Bemer
     eager_autoload do
       autoload :NodeReplacer
       autoload :NodeReplacerElement
+      autoload :Template
+      autoload :TemplateList
       autoload :Tree
       autoload :TreeElement
     end
