@@ -17,8 +17,8 @@ module Bemer
       predicate.match? build_context(node)
     end
 
-    def name?(name)
-      predicate.name?(name)
+    def name_match?(name)
+      predicate.name_match?(name)
     end
 
     def apply!(node) # rubocop:disable Metrics/AbcSize
