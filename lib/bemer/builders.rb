@@ -5,9 +5,10 @@ module Bemer
     extend ActiveSupport::Autoload
 
     eager_autoload do
-      autoload :Base
-      autoload :Block
-      autoload :Element
+      autoload :NodeReplacer
+      autoload :NodeReplacerElement
+      autoload :Tree
+      autoload :TreeElement
     end
   end
 end
