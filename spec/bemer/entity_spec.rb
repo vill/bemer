@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Bemer::Entity, focus: true do
+RSpec.describe Bemer::Entity do
   subject(:entity) { described_class.new(:block, cls: 'class-1 class_2', class: [:class_3, 'class_4']) }
 
   describe '#cls' do
