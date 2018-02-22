@@ -4,6 +4,8 @@ require 'action_view/helpers/tag_helper'
 
 module Bemer
   class Renderer # rubocop:disable Style/Documentation
+    include ::ActionView::Helpers::TagHelper
+
     def render(builder)
       return builder.content if builder.tag.blank?
 
