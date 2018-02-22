@@ -4,10 +4,8 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class Entity # rubocop:disable Style/Documentation
-    METHOD_NAMES = %i[attrs bem bem_cascade bem_class block
-                      cls content elem js mix mods name tag].freeze
-
-    attr_reader(*METHOD_NAMES)
+    attr_accessor :attrs, :bem, :bem_cascade, :block, :content, :elem, :js, :tag
+    attr_reader   :bem_class, :cls, :mix, :mods, :name
 
     alias element elem
 
@@ -30,6 +28,18 @@ module Bemer
     end
 
     alias element? elem?
+
+    def mods=(new_mods)
+      @mods = ModifierList.new(block, element, new_mods).to_a
+    end
+
+    def mix=(new_mix)
+      @mix = MixinList.new(new_mix).to_a
+    end
+
+    def cls=(classes)
+      @cls = build_css_classes(classes)
+    end
 
     protected
 
