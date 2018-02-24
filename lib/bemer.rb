@@ -18,6 +18,10 @@ module Bemer
   autoload :Renderer
   autoload :Template
 
+  autoload_under 'tree' do
+    autoload :Node
+  end
+
   class << self
     extend Forwardable
 
