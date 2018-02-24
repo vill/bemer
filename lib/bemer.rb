@@ -17,6 +17,7 @@ module Bemer
   autoload :ModifierList
   autoload :Renderer
   autoload :Template
+  autoload :Tree
 
   autoload_under 'tree' do
     autoload :Node

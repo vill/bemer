@@ -42,15 +42,15 @@ module Bemer
       end
 
       def last?
-        @last ||= tree.last?(object_id)
+        tree.node_metadata[object_id][:last]
       end
 
       def first?
-        @first ||= position.eql?(1)
+        position.eql?(1)
       end
 
       def position
-        @position ||= tree.position(object_id)
+        tree.node_metadata[object_id][:position]
       end
 
       def add_child_nodes
@@ -72,6 +72,16 @@ module Bemer
         tree.parent_node = old_parent_node
 
         output
+      end
+
+      def print(level = 0)
+        prefix = '   ' * level
+
+        puts [prefix, name, "(#{object_id})"].join
+
+        children.each do |node|
+          node.print(level + 1)
+        end
       end
 
       protected
