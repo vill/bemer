@@ -16,12 +16,17 @@ module Bemer
   autoload :Helpers
   autoload :MixinList
   autoload :ModifierList
+  autoload :Pipeline
   autoload :Renderer
   autoload :Template
   autoload :Tree
 
   autoload_under 'context_extentions' do
     autoload :Structure
+  end
+
+  autoload_under 'pipeline' do
+    autoload :Handler
   end
 
   autoload_under 'tree' do
