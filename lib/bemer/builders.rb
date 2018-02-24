@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/dependencies/autoload'
+
 module Bemer
   module Builders
     extend ActiveSupport::Autoload
