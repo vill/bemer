@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bemer
   class Pipeline # rubocop:disable Style/Documentation
     ADD_ATTRS_MODE = :add_attrs
