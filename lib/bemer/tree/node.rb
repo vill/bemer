@@ -74,6 +74,16 @@ module Bemer
         output
       end
 
+      def print(level = 0)
+        prefix = '   ' * level
+
+        puts [prefix, name, "(#{object_id})"].join
+
+        children.each do |node|
+          node.print(level + 1)
+        end
+      end
+
       protected
 
       attr_reader :renderer
