@@ -25,15 +25,15 @@ module Bemer
     end
 
     def replace(node) # rubocop:disable Metrics/AbcSize
-      nodes    = parent_node.nil? ? root_nodes : parent_node.children
+      siblings = parent_node.nil? ? root_nodes : parent_node.children
       metadata = node_metadata.delete(node.object_id)
       position = metadata[:position]
       offset   = position + node.replacers.count
 
       insert_metadata(position, metadata[:last], node.replacers)
-      update_metadata(offset, nodes[position..-1])
+      update_metadata(offset, siblings[position..-1])
 
-      nodes[position - 1...position] = node.replacers
+      siblings[position - 1...position] = node.replacers
     end
 
     def print
@@ -85,34 +85,34 @@ module Bemer
     end
 
     def add_metadata(node_id)
-      nodes     = parent_node.nil? ? root_nodes : parent_node.children
-      last_node = nodes.last
+      siblings     = parent_node.nil? ? root_nodes : parent_node.children
+      last_sibling = siblings.last
 
-      node_metadata[last_node.object_id][:last] = false if last_node
+      node_metadata[last_sibling.object_id][:last] = false if last_sibling
 
-      node_metadata[node_id] = { position: nodes.count + 1, last: true }
+      node_metadata[node_id] = { position: siblings.count + 1, last: true }
     end
 
-    def insert_metadata(position, last, nodes)
-      last_position = nodes.count - 1
+    def insert_metadata(position, last, replacers)
+      last_position = replacers.count - 1
       index         = 0
 
-      while index < nodes.count
-        data  = { position: position + index, last: last && last_position.eql?(index) }
-        node  = nodes[index]
-        index += 1
+      while index < replacers.count
+        data = { position: position + index, last: last && last_position.eql?(index) }
 
-        node_metadata[node.object_id] = data
+        node_metadata[replacers[index].object_id] = data
+
+        index += 1
       end
     end
 
-    def update_metadata(offset, nodes)
+    def update_metadata(offset, siblings)
       index = 0
 
-      while index < nodes.count
-        node = nodes[index]
+      while index < siblings.count
+        sibling = siblings[index]
 
-        node_metadata[node.object_id][:position] = offset + index
+        node_metadata[sibling.object_id][:position] = offset + index
 
         index += 1
       end
