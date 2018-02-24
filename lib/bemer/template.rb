@@ -38,27 +38,29 @@ module Bemer
 
     attr_reader :body, :predicate
 
-    def capture(node, builder)
+    def capture(node)
       return body unless body.respond_to?(:call)
 
-      body.binding.receiver.capture(build_context(node), builder, &body)
+      builder = Builders::Tree.new(node.tree)
+
+      node.replace_parent_and_execute do
+        body.binding.receiver.capture(builder, build_context(node), &body)
+      end
     end
 
     def perform_replacement_mode(node)
-      builder       = Builders::NodeReplacer.new(node)
-      output        = capture(node, builder)
-      node.replaced = true
+      node.need_replace = true
+      output            = capture(node)
 
       return if output.blank?
 
-      node.prepend_text_replacer(output)
+      node.replacers.unshift Tree::TextNode.new(node.tree, output)
     end
 
     def perform_content_mode(node)
       node.content_replaced = true
-      builder               = Builders::Tree.new(node.tree)
 
-      node.replace_parent_and_execute { capture(node, builder) }
+      capture(node)
     end
 
     def build_context(node)
