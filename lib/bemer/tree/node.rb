@@ -7,11 +7,11 @@ module Bemer
     class Node # rubocop:disable Style/Documentation
       extend Forwardable
 
-      attr_accessor :params, :content_replaced, :need_replace
-      attr_reader   :applied_modes, :children, :entity_builder, :entity, :tree, :replacers
+      attr_accessor :content_replaced, :need_replace, :params
+      attr_reader   :applied_modes, :children, :entity, :entity_builder, :replacers, :tree
 
-      alias need_replace? need_replace
       alias content_replaced? content_replaced
+      alias need_replace? need_replace
 
       def_delegators :entity, :attrs, :bem, :bem_cascade, :block, :block?, :cls,
                      :content, :elem, :elem?, :element?, :js, :mix, :mods, :name, :tag
