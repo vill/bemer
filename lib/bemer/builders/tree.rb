@@ -15,6 +15,10 @@ module Bemer
         tree.add_node(block, name, options, &content)
       end
 
+      def text(content = nil, **options, &callback)
+        tree.add_text_node(content, **options, &callback)
+      end
+
       protected
 
       attr_reader :tree

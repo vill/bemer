@@ -57,6 +57,15 @@ module Bemer
       nil
     end
 
+    def add_text_node(content = nil, **options, &callback)
+      bem_cascade = parent_node.nil? ? params[:bem_cascade] : parent_node.bem_cascade
+      new_options = { **params, bem_cascade: bem_cascade, **options }
+
+      add TextNode.new(self, content, new_options, &callback)
+
+      nil
+    end
+
     protected
 
     attr_reader :callback, :root_nodes, :params
