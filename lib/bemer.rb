@@ -31,6 +31,7 @@ module Bemer
 
   autoload_under 'tree' do
     autoload :Node
+    autoload :TextNode
   end
 
   class << self
