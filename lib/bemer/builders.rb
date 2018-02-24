@@ -5,8 +5,6 @@ module Bemer
     extend ActiveSupport::Autoload
 
     eager_autoload do
-      autoload :NodeReplacer
-      autoload :NodeReplacerElement
       autoload :Template
       autoload :TemplateList
       autoload :Tree
