@@ -10,6 +10,7 @@ module Bemer
 
   autoload :Component
   autoload :Configuration
+  autoload :Context
   autoload :Entity
   autoload :EntityBuilder
   autoload :Helpers
@@ -18,6 +19,10 @@ module Bemer
   autoload :Renderer
   autoload :Template
   autoload :Tree
+
+  autoload_under 'context_extentions' do
+    autoload :Structure
+  end
 
   autoload_under 'tree' do
     autoload :Node
