@@ -13,7 +13,7 @@ module Bemer
       end
 
       def apply!(mode, node)
-        return '' if node.applied_modes[mode].present?
+        return if node.applied_modes[mode].present?
 
         template = find_template(mode, node)
 
@@ -27,7 +27,7 @@ module Bemer
       def apply_template!(template, mode, node)
         node.applied_modes[mode] = true
 
-        output = template ? template.apply!(node) : ''
+        output = template ? template.apply!(node) : nil
 
         return output unless [Pipeline::TAG_MODE, Pipeline::BEM_MODE].include?(mode)
 
