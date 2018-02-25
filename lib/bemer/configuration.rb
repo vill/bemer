@@ -6,14 +6,19 @@ module Bemer
   class Configuration
     include Singleton
 
-    attr_writer :path
-
     attr_accessor :bem, :default_block_tag, :default_element_tag,
                   :default_context, :element_name_separator, :modifier_name_separator,
                   :modifier_value_separator, :transform_string_values
+    attr_reader   :can_use_dig, :can_use_new_matcher
+    attr_writer   :path
 
-    def initialize
+    alias can_use_dig? can_use_dig
+    alias can_use_new_matcher? can_use_new_matcher
+
+    def initialize # rubocop:disable Metrics/MethodLength
       @bem                      = true
+      @can_use_dig              = RUBY_VERSION >= '2.3.0'
+      @can_use_new_matcher      = RUBY_VERSION >= '2.4.0'
       @default_block_tag        = :div
       @default_context          = nil
       @default_element_tag      = :div
