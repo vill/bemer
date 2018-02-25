@@ -69,7 +69,6 @@ module Bemer
     def eager_load!
       super
 
-      Bemer::Tags.eager_load!
       Bemer::Builders.eager_load!
     end
 
