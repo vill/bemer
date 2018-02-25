@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'forwardable'
+require 'active_support/core_ext/string/output_safety'
 
 module Bemer
   class Tree

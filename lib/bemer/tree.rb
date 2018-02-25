@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/string/output_safety'
+
 module Bemer
   class Tree # rubocop:disable Style/Documentation
     attr_accessor :parent_node
