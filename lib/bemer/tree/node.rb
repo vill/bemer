@@ -30,7 +30,7 @@ module Bemer
       end
 
       def render
-        entity_builder.content = collect_content
+        entity_builder.content = capture_content
 
         renderer.render(entity_builder)
       end
@@ -82,7 +82,7 @@ module Bemer
 
       attr_reader :renderer
 
-      def collect_content
+      def capture_content
         output     = ActiveSupport::SafeBuffer.new
         plain_text = replace_parent_and_execute { add_child_nodes } if need_add_child_nodes?
 
