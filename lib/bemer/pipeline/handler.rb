@@ -13,21 +13,57 @@ module Bemer
       end
 
       def apply!(mode, node)
-        return '' if node.applied_modes[mode].present?
+        return if node.applied_modes[mode].present?
 
         template = find_template(mode, node)
 
         apply_template!(template, mode, node)
       end
 
+      def apply_next(current_template, node, **params)
+        position = priorities[current_template.mode][current_template.object_id] + 1
+        template = find_template(current_template.mode, node, position)
+
+        apply_template(template, node, params)
+      end
+
+      def apply(mode, current_template, node, **params)
+        return unless can_apply?(mode, current_template.mode)
+
+        if current_template.mode.eql?(mode)
+          apply_next(current_template, node, params)
+        else
+          template = find_template(mode, node)
+
+          apply_template(template, node, params)
+        end
+      end
+
       protected
 
       attr_reader :priorities, :container
 
+      def can_apply?(mode, current_mode)
+        count = ([mode, current_mode] - Pipeline::STRUCTURE_RELATED_MODES).count
+
+        count.zero? || count.even?
+      end
+
+      def apply_template(template, node, **params)
+        return unless template
+
+        old_params  = Hash[node.params]
+        node.params = { **node.params, **params }
+        output      = template.apply(node)
+        node.params = old_params
+
+        output
+      end
+
       def apply_template!(template, mode, node)
         node.applied_modes[mode] = true
 
-        output = template ? template.apply!(node) : ''
+        output = template ? template.apply!(node) : nil
 
         return output unless [Pipeline::TAG_MODE, Pipeline::BEM_MODE].include?(mode)
 

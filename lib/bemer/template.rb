@@ -21,12 +21,21 @@ module Bemer
       predicate.name_match?(name)
     end
 
+    def apply(node)
+      case mode
+      when Pipeline::REPLACE_MODE then perform_replacement_mode(node)
+      when Pipeline::CONTENT_MODE then capture(node)
+      else
+        body.respond_to?(:call) ? body.call(build_context(node)) : body
+      end
+    end
+
     def apply!(node) # rubocop:disable Metrics/AbcSize
-      return perform_replacement_mode(node) if Pipeline::REPLACE_MODE.eql?(mode)
+      return perform_replacement_mode!(node) if Pipeline::REPLACE_MODE.eql?(mode)
 
       content =
         if Pipeline::CONTENT_MODE.eql?(mode)
-          perform_content_mode(node)
+          perform_content_mode!(node)
         else
           body.respond_to?(:call) ? body.call(build_context(node)) : body
         end
@@ -43,24 +52,27 @@ module Bemer
 
       builder = Builders::Tree.new(node.tree)
 
-      node.replace_parent_and_execute do
-        body.binding.receiver.capture(builder, build_context(node), &body)
-      end
+      body.binding.receiver.capture(builder, build_context(node), &body)
     end
 
     def perform_replacement_mode(node)
-      node.need_replace = true
-      output            = capture(node)
+      output = capture(node)
 
       return if output.blank?
 
       node.replacers.unshift Tree::TextNode.new(node.tree, output)
     end
 
-    def perform_content_mode(node)
+    def perform_replacement_mode!(node)
+      node.need_replace = true
+
+      node.replace_parent_and_execute { perform_replacement_mode(node) }
+    end
+
+    def perform_content_mode!(node)
       node.content_replaced = true
 
-      capture(node)
+      node.replace_parent_and_execute { capture(node) }
     end
 
     def build_context(node)
