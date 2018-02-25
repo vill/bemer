@@ -51,7 +51,7 @@ module Bemer
       def add_child_nodes
         return content unless content.respond_to?(:call)
 
-        builder = Builders::TreeElement.new(tree, block) if block?
+        builder = Builders::Tree::Element.new(tree, block) if block?
 
         content.binding.receiver.capture(builder, &content)
       end
