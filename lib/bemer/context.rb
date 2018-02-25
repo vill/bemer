@@ -16,6 +16,14 @@ module Bemer
       include_extention!(template.mode)
     end
 
+    def apply_next(**params)
+      node.tree.pipeline.apply_next(template, node, params)
+    end
+
+    def apply(mode, **params)
+      node.tree.pipeline.apply(mode, template, node, params)
+    end
+
     protected
 
     def include_extention!(mode)
