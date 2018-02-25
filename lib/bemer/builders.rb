@@ -10,9 +10,12 @@ module Bemer
       autoload :Template
       autoload :TemplateList
       autoload :Tree
-      autoload :TreeElement
 
       autoload_under 'tag' do
+        autoload :Element
+      end
+
+      autoload_under 'tree' do
         autoload :Element
       end
     end
