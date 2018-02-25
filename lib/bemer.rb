@@ -18,6 +18,7 @@ module Bemer
   autoload :ModifierList
   autoload :Pipeline
   autoload :Renderer
+  autoload :Tag
   autoload :Template
   autoload :Tree
 
