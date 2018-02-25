@@ -40,6 +40,8 @@ module Bemer
 
     # rubocop:disable Layout/AlignParameters
     def_delegators :config, :bem,
+                            :can_use_dig?,
+                            :can_use_new_matcher?,
                             :default_block_tag,
                             :default_context,
                             :default_element_tag,
@@ -56,14 +58,6 @@ module Bemer
 
     def setup
       yield config
-    end
-
-    def can_use_new_matcher?
-      @can_use_new_matcher ||= RUBY_VERSION >= '2.4.0'
-    end
-
-    def can_use_dig?
-      @can_use_new_matcher ||= RUBY_VERSION >= '2.3.0'
     end
 
     def eager_load!
