@@ -33,10 +33,10 @@ module Bemer
     end
 
     def run!(node)
-      return node if node.all_modes_applied?
+      return node if node.instance_of?(Tree::TextNode)
 
       MODES.each do |mode|
-        next if node.applied_modes[mode].present?
+        next if node.applied_modes[mode]
 
         handler_by(node.name).apply!(mode, node)
 

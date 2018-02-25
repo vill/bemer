@@ -81,7 +81,7 @@ module Bemer
       while position < root_nodes.count
         root_node = root_nodes[position]
 
-        pipeline.run!(root_node) unless root_node.all_modes_applied?
+        pipeline.run!(root_node)
 
         next replace(root_node) if root_node.need_replace?
 

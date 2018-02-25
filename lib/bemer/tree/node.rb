@@ -29,12 +29,6 @@ module Bemer
         @tree              = tree
       end
 
-      def all_modes_applied?
-        return true if @all_modes_applied
-
-        @all_modes_applied = applied_modes.values.all?
-      end
-
       def render
         entity_builder.content = collect_content
 
@@ -115,7 +109,7 @@ module Bemer
           while position < children.count
             node = children[position]
 
-            tree.pipeline.run!(node) unless node.all_modes_applied?
+            tree.pipeline.run!(node)
 
             next tree.replace(node) if node.need_replace?
 
