@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/string/output_safety'
+
 module Bemer
   class Tree # rubocop:disable Style/Documentation
     attr_accessor :parent_node
@@ -81,7 +83,7 @@ module Bemer
       while position < root_nodes.count
         root_node = root_nodes[position]
 
-        pipeline.run!(root_node) unless root_node.all_modes_applied?
+        pipeline.run!(root_node)
 
         next replace(root_node) if root_node.need_replace?
 

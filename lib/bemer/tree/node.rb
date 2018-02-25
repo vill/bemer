@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'forwardable'
+require 'active_support/core_ext/string/output_safety'
 
 module Bemer
   class Tree
@@ -29,14 +30,8 @@ module Bemer
         @tree              = tree
       end
 
-      def all_modes_applied?
-        return true if @all_modes_applied
-
-        @all_modes_applied = applied_modes.values.all?
-      end
-
       def render
-        entity_builder.content = collect_content
+        entity_builder.content = capture_content
 
         renderer.render(entity_builder)
       end
@@ -88,7 +83,7 @@ module Bemer
 
       attr_reader :renderer
 
-      def collect_content
+      def capture_content
         output     = ActiveSupport::SafeBuffer.new
         plain_text = replace_parent_and_execute { add_child_nodes } if need_add_child_nodes?
 
@@ -115,7 +110,7 @@ module Bemer
           while position < children.count
             node = children[position]
 
-            tree.pipeline.run!(node) unless node.all_modes_applied?
+            tree.pipeline.run!(node)
 
             next tree.replace(node) if node.need_replace?
 
