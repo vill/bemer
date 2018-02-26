@@ -7,7 +7,7 @@ module Bemer
     include Singleton
 
     attr_accessor :bem, :default_block_tag, :default_element_tag,
-                  :default_context, :element_name_separator, :modifier_name_separator,
+                  :default_path_prefix, :element_name_separator, :modifier_name_separator,
                   :modifier_value_separator, :transform_string_values
     attr_reader   :can_use_dig, :can_use_new_matcher
     attr_writer   :path
@@ -16,29 +16,17 @@ module Bemer
     alias can_use_new_matcher? can_use_new_matcher
 
     def initialize # rubocop:disable Metrics/MethodLength
-      @bem                      = true
+      @bem                      = false
       @can_use_dig              = RUBY_VERSION >= '2.3.0'
       @can_use_new_matcher      = RUBY_VERSION >= '2.4.0'
       @default_block_tag        = :div
-      @default_context          = nil
       @default_element_tag      = :div
-      @element_name_separator   = element_file_separator
-      @modifier_name_separator  = modifier_file_separator
-      @modifier_value_separator = modifier_value_file_separator
-      @path                     = 'app/bem_components'
+      @default_path_prefix      = nil
+      @element_name_separator   = '__'
+      @modifier_name_separator  = '_'
+      @modifier_value_separator = '_'
+      @path                     = 'app/bemer_components'
       @transform_string_values  = false
-    end
-
-    def element_file_separator
-      '__'
-    end
-
-    def modifier_file_separator
-      '_'
-    end
-
-    def modifier_value_file_separator
-      modifier_file_separator
     end
 
     def path
