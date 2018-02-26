@@ -22,23 +22,11 @@ module Bemer
       @default_block_tag        = :div
       @default_element_tag      = :div
       @default_path_prefix      = nil
-      @element_name_separator   = element_file_separator
-      @modifier_name_separator  = modifier_file_separator
-      @modifier_value_separator = modifier_value_file_separator
+      @element_name_separator   = '__'
+      @modifier_name_separator  = '_'
+      @modifier_value_separator = '_'
       @path                     = 'app/bem_components'
       @transform_string_values  = false
-    end
-
-    def element_file_separator
-      '__'
-    end
-
-    def modifier_file_separator
-      '_'
-    end
-
-    def modifier_value_file_separator
-      modifier_file_separator
     end
 
     def path
