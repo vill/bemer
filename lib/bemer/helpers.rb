@@ -10,6 +10,14 @@ module Bemer
       Bemer::Tag.new(block, element, options, &content).render
     end
 
+    def bem_mix(*mix)
+      Bemer::MixinList.new(*mix).to_s
+    end
+
+    def bem_mods(block, element, mods)
+      Bemer::ModifierList.new(block, element, mods).to_s
+    end
+
     def render_component(level_and_name, **options, &block)
       Bemer::Component.new(level_and_name, self, options).render(&block)
     end
