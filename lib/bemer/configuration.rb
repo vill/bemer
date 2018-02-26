@@ -25,7 +25,7 @@ module Bemer
       @element_name_separator   = '__'
       @modifier_name_separator  = '_'
       @modifier_value_separator = '_'
-      @path                     = 'app/bem_components'
+      @path                     = 'app/bemer_components'
       @transform_string_values  = false
     end
 
