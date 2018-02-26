@@ -44,9 +44,9 @@ module Bemer
       attr_reader :priorities, :container
 
       def can_apply?(mode, current_mode)
-        count = ([mode, current_mode] - Pipeline::STRUCTURE_RELATED_MODES).count
+        return true if Pipeline::STRUCTURE_RELATED_MODES.include?(current_mode)
 
-        count.zero? || count.even?
+        !Pipeline::STRUCTURE_RELATED_MODES.include?(mode)
       end
 
       def apply_template(template, node, **params)
