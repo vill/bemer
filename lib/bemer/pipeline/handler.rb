@@ -119,6 +119,8 @@ module Bemer
       end
 
       def find_template(mode, node, start = 0)
+        return unless Pipeline::MODES.include?(mode)
+
         templates = container[mode][start..-1]
 
         return if templates.empty?
