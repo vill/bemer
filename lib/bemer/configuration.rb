@@ -16,7 +16,7 @@ module Bemer
     alias can_use_new_matcher? can_use_new_matcher
 
     def initialize # rubocop:disable Metrics/MethodLength
-      @bem                      = true
+      @bem                      = false
       @can_use_dig              = RUBY_VERSION >= '2.3.0'
       @can_use_new_matcher      = RUBY_VERSION >= '2.4.0'
       @default_block_tag        = :div
