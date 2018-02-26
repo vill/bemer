@@ -52,7 +52,7 @@ module Bemer
 
       builder = Builders::Tree.new(node.tree)
 
-      body.binding.receiver.capture(builder, build_context(node), &body)
+      body.binding.receiver.capture(build_context(node), builder, &body)
     end
 
     def perform_replacement_mode(node)
