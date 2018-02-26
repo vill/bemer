@@ -35,36 +35,8 @@ RSpec.describe Bemer do
       expect(bem_class.call(block_name)).to eq block_class
     end
 
-    it 'creates an element class', :aggregate_failures do # rubocop:disable RSpec/ExampleLength
-      empty_arguments.each do |arg|
-        expect(bem_class.call(block_name, element_name, arg)).to eq element_class
-        expect(bem_class.call(block_name, element_name, arg => true)).to eq element_class
-        expect(bem_class.call(block_name, element_name, modifier_name => arg)).to eq element_class
-        expect(bem_class.call(block_name, element_name, [modifier_name, arg])).to eq element_class
-        expect(bem_class.call(block_name, element_name, [arg, true])).to eq element_class
-      end
-    end
-
-    it 'creates a modifier class with only name', :aggregate_failures do
-      expect(bem_class.call(block_name, element_name, modifier_name)).to eq modifier_class
-      expect(bem_class.call(block_name, element_name, modifier_name => true)).to eq modifier_class
-      expect(bem_class.call(block_name, element_name, [modifier_name, true])).to eq modifier_class
-      expect(bem_class.call(block_name, element_name, [modifier_name])).to eq modifier_class
-    end
-
-    it 'creates a modifier class with name and value', :aggregate_failures do
-      expect(bem_class.call(block_name, element_name, [modifier_name, modifier_value])).to eq modifier_class_with_value
-      expect(bem_class.call(block_name, element_name, modifier_name => modifier_value)).to eq modifier_class_with_value
-    end
-  end
-
-  shared_examples 'entity_css_class' do
-    it 'creates a block class' do
-      expect(entity_css_class.call(block_name)).to eq block_class
-    end
-
     it 'creates an element class' do
-      expect(entity_css_class.call(block_name, element_name)).to eq element_class
+      expect(bem_class.call(block_name, element_name)).to eq element_class
     end
   end
 
@@ -135,24 +107,24 @@ RSpec.describe Bemer do
     end
   end
 
-  describe '.entity_css_class' do
-    subject(:entity_css_class) { described_class.method(:entity_css_class) }
+  describe '.bem_class' do
+    subject(:bem_class) { described_class.method(:bem_class) }
 
     it 'creates an empty class from empty arguments', :aggregate_failures do
       empty_arguments.combination(2).each do |block, element|
-        expect(entity_css_class.call(block, element_name)).to eq empty_class
-        expect(entity_css_class.call(block, element)).to eq empty_class
+        expect(bem_class.call(block, element_name)).to eq empty_class
+        expect(bem_class.call(block, element)).to eq empty_class
       end
     end
 
     context 'when transform_string_values is set to true' do
       include_context  'when transform_string_values is set to true'
-      include_examples 'entity_css_class'
+      include_examples 'bem_class'
     end
 
     context 'when transform_string_values is set to false' do
       include_context 'when transform_string_values is set to false'
-      include_examples 'entity_css_class'
+      include_examples 'bem_class'
     end
   end
 

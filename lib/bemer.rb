@@ -67,22 +67,22 @@ module Bemer
     end
 
     def modifier_css_class(block, element, modifier_name, modifier_value = true)
-      entity_css_class = entity_css_class(block, element)
-      modifier_name    = nil if modifier_value.blank?
+      bem_class     = bem_class(block, element)
+      modifier_name = nil if modifier_value.blank?
 
-      return '' if entity_css_class.blank? || modifier_name.blank?
+      return '' if bem_class.blank? || modifier_name.blank?
 
       modifier_value = nil if modifier_value.instance_of?(TrueClass)
       modifier       = compound_css_class(modifier_name, modifier_value,
                                           separator: modifier_value_separator)
 
-      [entity_css_class, modifier].join(modifier_name_separator)
+      [bem_class, modifier].join(modifier_name_separator)
     end
 
-    def entity_css_class(block, element = nil)
-      return '' if block.blank?
+    def bem_class(block, element = nil)
+      return '' if block.blank? || (!element.nil? && element.blank?)
 
-      [css_class(block), css_class(element)].reject(&:blank?).join(element_name_separator)
+      entity_name(block, element)
     end
 
     def entity_name(block, element = nil)

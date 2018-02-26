@@ -10,7 +10,7 @@ module Bemer
     alias element elem
 
     def initialize(block = '', element = nil, **options, &content)
-      @bem_class = Bemer.entity_css_class(block, element)
+      @bem_class = Bemer.bem_class(block, element)
       @block     = block
       @content   = extract_content(options.delete(:content), &content)
       @elem      = element
