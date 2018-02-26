@@ -30,12 +30,12 @@ module Bemer
       case mixin
       when Hash
         mixin.map do |block, element|
-          next Bemer.entity_css_class(block, element) unless element.instance_of?(Array)
+          next Bemer.bem_class(block, element) unless element.instance_of?(Array)
 
-          element.map { |elem| Bemer.entity_css_class(block, elem) }
+          element.map { |elem| Bemer.bem_class(block, elem) }
         end
       when Symbol
-        Bemer.entity_css_class(mixin)
+        Bemer.bem_class(mixin)
       end
     end
   end
