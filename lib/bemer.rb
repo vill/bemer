@@ -66,14 +66,6 @@ module Bemer
       Bemer::Builders.eager_load!
     end
 
-    def bem_class(block, element = nil, modifier = nil)
-      modifier_name, modifier_value = *[*modifier, true].flatten
-      modifier_css_class            = modifier_css_class(block, element,
-                                                         modifier_name, modifier_value)
-
-      modifier_css_class.blank? ? entity_css_class(block, element) : modifier_css_class
-    end
-
     def modifier_css_class(block, element, modifier_name, modifier_value = true)
       entity_css_class = entity_css_class(block, element)
       modifier_name    = nil if modifier_value.blank?

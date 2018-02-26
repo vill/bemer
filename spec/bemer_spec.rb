@@ -177,23 +177,4 @@ RSpec.describe Bemer do
       include_examples 'modifier_css_class'
     end
   end
-
-  describe '.bem_class' do
-    subject(:bem_class) { described_class.method(:bem_class) }
-
-    it 'creates an empty class from empty arguments', :aggregate_failures do
-      expect(bem_class.call(*empty_arguments[0..2])).to eq empty_class
-      expect(bem_class.call(nil, element_name)).to eq empty_class
-    end
-
-    context 'when transform_string_values is set to true' do
-      include_context  'when transform_string_values is set to true'
-      include_examples 'bem_class'
-    end
-
-    context 'when transform_string_values is set to false' do
-      include_context  'when transform_string_values is set to false'
-      include_examples 'bem_class'
-    end
-  end
 end
