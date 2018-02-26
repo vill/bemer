@@ -52,8 +52,8 @@ module Bemer
       def apply_template(template, node, **params)
         return unless template
 
-        old_params  = Hash[node.params]
-        node.params = { **node.params, **params }
+        old_params  = node.params
+        node.params = params
         output      = template.apply(node)
         node.params = old_params
 
