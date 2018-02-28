@@ -3,7 +3,7 @@
 require 'forwardable'
 
 module Bemer
-  class Context # rubocop:disable Style/Documentation
+  class Context
     extend Forwardable
 
     def_delegators :node, :attrs, :bem, :bem_cascade, :block, :cls, :elem,

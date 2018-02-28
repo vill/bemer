@@ -2,7 +2,7 @@
 
 module Bemer
   module Builders
-    class Template # rubocop:disable Style/Documentation
+    class Template
       def initialize(templates, **options)
         @options   = options
         @predicate = Bemer::Predicate.new(options)

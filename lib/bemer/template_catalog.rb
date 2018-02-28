@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bemer
-  class TemplateCatalog # rubocop:disable Style/Documentation
+  class TemplateCatalog
     def initialize
       @drawers        = {}
       @template_queue = []

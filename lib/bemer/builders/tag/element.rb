@@ -3,7 +3,7 @@
 module Bemer
   module Builders
     module Tag
-      class Element # rubocop:disable Style/Documentation
+      class Element
         def initialize(block, bem_cascade)
           @bem_cascade = bem_cascade
           @block       = block

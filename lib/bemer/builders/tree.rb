@@ -2,7 +2,7 @@
 
 module Bemer
   module Builders
-    class Tree # rubocop:disable Style/Documentation
+    class Tree
       def initialize(tree)
         @tree = tree
       end

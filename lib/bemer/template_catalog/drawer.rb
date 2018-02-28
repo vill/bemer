@@ -2,7 +2,7 @@
 
 module Bemer
   class TemplateCatalog
-    class Drawer # rubocop:disable Style/Documentation
+    class Drawer
       def initialize(&block)
         @templates = [block]
       end

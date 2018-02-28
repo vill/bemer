@@ -3,7 +3,7 @@
 require 'action_view/helpers/tag_helper'
 
 module Bemer
-  class Renderer # rubocop:disable Style/Documentation
+  class Renderer
     include ::ActionView::Helpers::TagHelper
 
     def render(builder)

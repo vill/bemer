@@ -5,7 +5,7 @@ require 'active_support/core_ext/string/output_safety'
 
 module Bemer
   class Tree
-    class Node # rubocop:disable Style/Documentation
+    class Node
       extend Forwardable
 
       attr_accessor :content_replaced, :need_replace, :params

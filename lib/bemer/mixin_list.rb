@@ -3,7 +3,7 @@
 require 'active_support/core_ext/object/blank'
 
 module Bemer
-  class MixinList # rubocop:disable Style/Documentation
+  class MixinList
     def initialize(*mix)
       @mixins = build_mixins(mix)
     end

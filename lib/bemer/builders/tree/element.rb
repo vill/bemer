@@ -3,7 +3,7 @@
 module Bemer
   module Builders
     class Tree
-      class Element # rubocop:disable Style/Documentation
+      class Element
         def initialize(tree, block)
           @tree  = tree
           @block = block

@@ -3,7 +3,7 @@
 require 'active_support/core_ext/string/output_safety'
 
 module Bemer
-  class Tree # rubocop:disable Style/Documentation
+  class Tree
     attr_accessor :parent_node
     attr_reader   :node_metadata, :pipeline
 
