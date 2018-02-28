@@ -27,9 +27,9 @@ module Bemer
 
     MODES = [REPLACE_MODE, TAG_MODE, *TAG_RELATED_MODES, CONTENT_MODE].freeze
 
-    def initialize(&block)
-      @compiled_templates = compile_templates(&block)
-      @handlers           = {}
+    def initialize(template_catalog)
+      @handlers         = {}
+      @template_catalog = template_catalog
     end
 
     def run!(node)
@@ -56,20 +56,7 @@ module Bemer
 
     protected
 
-    attr_reader :compiled_templates, :handlers
-
-    def compile_templates(&block)
-      templates     = block.binding.receiver.instance_variable_get(:@bemer_templates) if block_given? # rubocop:disable Metrics/LineLength
-      template_list = templates.last if templates.instance_of?(Array)
-
-      return [] if template_list.frozen?
-
-      templates = template_list.compiled_templates
-
-      template_list.freeze
-
-      templates
-    end
+    attr_reader :handlers, :template_catalog
 
     def handler_by(name)
       return handlers[name] if handlers.key?(name)
@@ -77,6 +64,10 @@ module Bemer
       templates = compiled_templates.select { |template| template.name_match?(name) }
 
       handlers[name] = Handler.new(templates)
+    end
+
+    def compiled_templates
+      @compiled_templates ||= template_catalog.compiled_templates
     end
   end
 end

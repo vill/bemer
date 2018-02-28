@@ -7,12 +7,11 @@ module Bemer
     attr_accessor :parent_node
     attr_reader   :node_metadata, :pipeline
 
-    def initialize(**params, &callback)
-      @callback      = callback
+    def initialize(template_catalog, **params)
       @node_metadata = {}
       @params        = params
       @parent_node   = nil
-      @pipeline      = Pipeline.new(&callback)
+      @pipeline      = Pipeline.new(template_catalog)
       @root_nodes    = []
     end
 
