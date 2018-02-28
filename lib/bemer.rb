@@ -20,6 +20,7 @@ module Bemer
   autoload :Renderer
   autoload :Tag
   autoload :Template
+  autoload :TemplateCatalog
   autoload :Tree
 
   autoload_under 'context_extentions' do
@@ -28,6 +29,10 @@ module Bemer
 
   autoload_under 'pipeline' do
     autoload :Handler
+  end
+
+  autoload_under 'template_catalog' do
+    autoload :Drawer
   end
 
   autoload_under 'tree' do
