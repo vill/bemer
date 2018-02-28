@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/object/blank'
+
 module Bemer
   class TemplateList < DefaultTemplateList # rubocop:disable Style/Documentation
     def initialize(view, path, path_prefix: true, **options)
