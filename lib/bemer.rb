@@ -22,6 +22,7 @@ module Bemer
   autoload :Tag
   autoload :Template
   autoload :TemplateCatalog
+  autoload :TemplateList
   autoload :Tree
 
   autoload_under 'context_extentions' do
