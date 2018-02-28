@@ -18,14 +18,11 @@ module Bemer
     TAG_MODE       = :tag
 
     STRUCTURE_RELATED_MODES = [REPLACE_MODE, CONTENT_MODE].freeze
-
-    BEM_RELATED_MODES = [JS_MODE, ADD_JS_MODE, MIX_MODE,
-                         ADD_MIX_MODE, MODS_MODE, ADD_MODS_MODE].freeze
-
-    TAG_RELATED_MODES = [BEM_MODE, *BEM_RELATED_MODES, CLS_MODE,
-                         ADD_CLS_MODE, ATTRS_MODE, ADD_ATTRS_MODE].freeze
-
-    MODES = [REPLACE_MODE, TAG_MODE, *TAG_RELATED_MODES, CONTENT_MODE].freeze
+    # rubocop:disable Metrics/LineLength
+    BEM_RELATED_MODES       = [JS_MODE, ADD_JS_MODE, MIX_MODE, ADD_MIX_MODE, MODS_MODE, ADD_MODS_MODE].freeze
+    TAG_RELATED_MODES       = [BEM_MODE, *BEM_RELATED_MODES, CLS_MODE, ADD_CLS_MODE, ATTRS_MODE, ADD_ATTRS_MODE].freeze
+    # rubocop:enable Metrics/LineLength
+    MODES                   = [REPLACE_MODE, TAG_MODE, *TAG_RELATED_MODES, CONTENT_MODE].freeze
 
     def initialize(template_catalog)
       @handlers         = {}
