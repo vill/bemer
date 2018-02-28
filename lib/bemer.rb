@@ -31,6 +31,10 @@ module Bemer
     autoload :Handler
   end
 
+  autoload_under 'template_catalog' do
+    autoload :Drawer
+  end
+
   autoload_under 'tree' do
     autoload :Node
     autoload :TextNode
