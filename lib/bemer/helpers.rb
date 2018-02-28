@@ -20,11 +20,15 @@ module Bemer
       Bemer::ModifierList.new(block, element, mods).to_s
     end
 
-    def render_component(level_and_name, **options, &block)
-      Bemer::Component.new(level_and_name, self, options).render(&block)
+    def render_component(path, **options, &block)
+      Bemer::TemplateList.new(self, path, options).compile(&block)
     end
 
-    alias render_block render_component
+    alias refine_component render_component
+
+    def define_templates(&block)
+      Bemer::DefaultTemplateList.new(self).compile(&block)
+    end
 
     def define_component(**options, &block)
       Bemer::Component.new(self).render(options, &block)
