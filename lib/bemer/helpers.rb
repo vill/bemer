@@ -25,5 +25,9 @@ module Bemer
     end
 
     alias render_block render_component
+
+    def define_component(**options, &block)
+      Bemer::Component.new(self).render(options, &block)
+    end
   end
 end
