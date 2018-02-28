@@ -4,7 +4,7 @@ require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/string/inflections'
 
 module Bemer
-  class Entity # rubocop:disable Style/Documentation
+  class Entity
     attr_accessor :attrs, :bem, :bem_cascade, :block, :content, :elem, :js, :tag
     attr_reader   :bem_class, :cls, :mix, :mods, :name
 

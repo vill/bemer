@@ -2,7 +2,7 @@
 
 module Bemer
   module ContextExtentions
-    module Structure # rubocop:disable Style/Documentation
+    module Structure
       def content
         node.add_child_nodes
       end

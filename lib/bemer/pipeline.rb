@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bemer
-  class Pipeline # rubocop:disable Style/Documentation
+  class Pipeline
     ADD_ATTRS_MODE = :add_attrs
     ADD_CLS_MODE   = :add_cls
     ADD_JS_MODE    = :add_js

@@ -2,7 +2,7 @@
 
 module Bemer
   module Builders
-    class TemplateList # rubocop:disable Style/Documentation
+    class TemplateList
       def initialize(templates)
         @templates = templates
       end

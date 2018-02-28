@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bemer
-  class Template # rubocop:disable Style/Documentation
+  class Template
     attr_reader :mode, :wildcard
 
     alias wildcard? wildcard

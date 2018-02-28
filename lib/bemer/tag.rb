@@ -3,7 +3,7 @@
 require 'forwardable'
 
 module Bemer
-  class Tag # rubocop:disable Style/Documentation
+  class Tag
     extend Forwardable
 
     def initialize(block = '', element = nil, **options, &content)

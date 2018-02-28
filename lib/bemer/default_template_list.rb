@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bemer
-  class DefaultTemplateList # rubocop:disable Style/Documentation
+  class DefaultTemplateList
     def initialize(view)
       @path = ''
       @view = view

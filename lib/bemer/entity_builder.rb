@@ -3,7 +3,7 @@
 require 'active_support/core_ext/object/blank'
 
 module Bemer
-  class EntityBuilder < Entity # rubocop:disable Style/Documentation
+  class EntityBuilder < Entity
     def cls
       return @cls unless bem?
 

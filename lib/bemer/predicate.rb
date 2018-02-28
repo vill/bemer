@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Bemer
-  class Predicate # rubocop:disable Style/Documentation
+  class Predicate
     attr_reader :name
 
     def initialize(**options)

@@ -3,7 +3,7 @@
 require 'active_support/core_ext/object/blank'
 
 module Bemer
-  class ModifierList # rubocop:disable Style/Documentation
+  class ModifierList
     def initialize(block, element, mods)
       @block     = block
       @element   = element

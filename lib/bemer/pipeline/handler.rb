@@ -4,7 +4,7 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class Pipeline
-    class Handler # rubocop:disable Style/Documentation
+    class Handler
       def initialize(templates)
         @priorities = Pipeline::MODES.map { |mode| [mode, {}] }.to_h
         @container  = Pipeline::MODES.map { |mode| [mode, []] }.to_h
