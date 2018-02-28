@@ -7,22 +7,21 @@ module Bemer
     attr_accessor :parent_node
     attr_reader   :node_metadata, :pipeline
 
-    def initialize(**params, &callback)
-      @callback      = callback
+    def initialize(template_catalog, **params)
       @node_metadata = {}
       @params        = params
       @parent_node   = nil
-      @pipeline      = Pipeline.new(&callback)
+      @pipeline      = Pipeline.new(template_catalog)
       @root_nodes    = []
     end
 
-    def render
-      return unless callback
+    def render(&block)
+      return unless block_given?
 
       builder = Builders::Tree.new(self)
       output  = ActiveSupport::SafeBuffer.new
 
-      output << callback.binding.receiver.capture(builder, &callback)
+      output << block.binding.receiver.capture(builder, &block)
       output << render_root_nodes
     end
 
@@ -70,7 +69,7 @@ module Bemer
 
     protected
 
-    attr_reader :callback, :root_nodes, :params
+    attr_reader :root_nodes, :params
 
     def need_replace_parent_node?
       !parent_node.nil? && parent_node.need_replace?

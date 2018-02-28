@@ -18,18 +18,15 @@ module Bemer
     TAG_MODE       = :tag
 
     STRUCTURE_RELATED_MODES = [REPLACE_MODE, CONTENT_MODE].freeze
+    # rubocop:disable Metrics/LineLength
+    BEM_RELATED_MODES       = [JS_MODE, ADD_JS_MODE, MIX_MODE, ADD_MIX_MODE, MODS_MODE, ADD_MODS_MODE].freeze
+    TAG_RELATED_MODES       = [BEM_MODE, *BEM_RELATED_MODES, CLS_MODE, ADD_CLS_MODE, ATTRS_MODE, ADD_ATTRS_MODE].freeze
+    # rubocop:enable Metrics/LineLength
+    MODES                   = [REPLACE_MODE, TAG_MODE, *TAG_RELATED_MODES, CONTENT_MODE].freeze
 
-    BEM_RELATED_MODES = [JS_MODE, ADD_JS_MODE, MIX_MODE,
-                         ADD_MIX_MODE, MODS_MODE, ADD_MODS_MODE].freeze
-
-    TAG_RELATED_MODES = [BEM_MODE, *BEM_RELATED_MODES, CLS_MODE,
-                         ADD_CLS_MODE, ATTRS_MODE, ADD_ATTRS_MODE].freeze
-
-    MODES = [REPLACE_MODE, TAG_MODE, *TAG_RELATED_MODES, CONTENT_MODE].freeze
-
-    def initialize(&block)
-      @compiled_templates = compile_templates(&block)
-      @handlers           = {}
+    def initialize(template_catalog)
+      @handlers         = {}
+      @template_catalog = template_catalog
     end
 
     def run!(node)
@@ -56,20 +53,7 @@ module Bemer
 
     protected
 
-    attr_reader :compiled_templates, :handlers
-
-    def compile_templates(&block)
-      templates     = block.binding.receiver.instance_variable_get(:@bemer_templates) if block_given? # rubocop:disable Metrics/LineLength
-      template_list = templates.last if templates.instance_of?(Array)
-
-      return [] if template_list.frozen?
-
-      templates = template_list.compiled_templates
-
-      template_list.freeze
-
-      templates
-    end
+    attr_reader :handlers, :template_catalog
 
     def handler_by(name)
       return handlers[name] if handlers.key?(name)
@@ -77,6 +61,10 @@ module Bemer
       templates = compiled_templates.select { |template| template.name_match?(name) }
 
       handlers[name] = Handler.new(templates)
+    end
+
+    def compiled_templates
+      @compiled_templates ||= template_catalog.compiled_templates
     end
   end
 end
