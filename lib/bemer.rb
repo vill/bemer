@@ -11,6 +11,7 @@ module Bemer
   autoload :Component
   autoload :Configuration
   autoload :Context
+  autoload :DefaultTemplateList
   autoload :Entity
   autoload :EntityBuilder
   autoload :Helpers
@@ -21,6 +22,7 @@ module Bemer
   autoload :Tag
   autoload :Template
   autoload :TemplateCatalog
+  autoload :TemplateList
   autoload :Tree
 
   autoload_under 'context_extentions' do
