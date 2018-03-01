@@ -37,6 +37,10 @@ module Bemer
     autoload :Drawer
   end
 
+  autoload_under 'template_list' do
+    autoload :Cache
+  end
+
   autoload_under 'tree' do
     autoload :Node
     autoload :TextNode
