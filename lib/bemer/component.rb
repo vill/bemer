@@ -3,13 +3,11 @@
 module Bemer
   class Component
     def initialize(view)
-      # rubocop:disable Metrics/LineLength
-      @template_catalog = view.instance_variable_get(:@bemer_template_catalog) || TemplateCatalog.new
-      # rubocop:enable Metrics/LineLength
+      @template_catalog = view.instance_variable_get(:@bemer_template_catalog)
     end
 
     def render(**options, &block)
-      return unless block_given?
+      return if !block_given? || template_catalog.nil?
 
       Tree.new(template_catalog, options).render(&block)
     end

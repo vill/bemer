@@ -3,7 +3,12 @@
 module Bemer
   class TemplateCatalog
     class Drawer
-      def initialize(&block)
+      attr_reader :cached
+
+      alias cached? cached
+
+      def initialize(cached = false, &block)
+        @cached    = cached
         @templates = [block]
       end
 
