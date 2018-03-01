@@ -11,7 +11,7 @@ module Bemer
     end
 
     initializer 'bemer.prepend_assets_path', group: :all, after: :append_assets_path do |app|
-      app.config.assets.paths.unshift(Bemer.path)
+      app.config.assets.paths.unshift(Bemer.path) if defined?(::Sprockets)
     end
 
     initializer 'bemer.prepend_view_path', group: :all, after: :add_view_paths do
