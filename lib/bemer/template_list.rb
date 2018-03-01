@@ -4,8 +4,8 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class TemplateList < DefaultTemplateList
-    def initialize(view, path, prefix: true, **options)
-      super(view)
+    def initialize(view, path, cached: false, prefix: true, **options)
+      super(view, cached)
 
       @options = options
       @path    = build_full_path(prefix, path)

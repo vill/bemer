@@ -2,18 +2,19 @@
 
 module Bemer
   class DefaultTemplateList
-    def initialize(view)
-      @path = ''
-      @view = view
+    def initialize(view, cached = false)
+      @path   = ''
+      @view   = view
+      @cached = cached
     end
 
     def compile(&block)
-      template_catalog.add(path, &block)
+      template_catalog.add(path, cached, &block)
     end
 
     protected
 
-    attr_reader :path, :view
+    attr_reader :cached, :path, :view
 
     def template_catalog
       template_catalog = view.instance_variable_get(:@bemer_template_catalog)
