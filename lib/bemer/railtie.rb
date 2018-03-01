@@ -9,5 +9,9 @@ module Bemer
         include Bemer::Helpers
       end
     end
+
+    initializer 'bemer.prepend_assets_path', group: :all, after: :append_assets_path do |app|
+      app.config.assets.paths.unshift(Bemer.path)
+    end
   end
 end
