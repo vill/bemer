@@ -18,7 +18,7 @@ module Bemer
 
       output = view.render(template: template, locals: { **options })
 
-      remove_template_catalog_if_needed!
+      remove_template_catalog!
 
       output
     end
@@ -53,7 +53,7 @@ module Bemer
       Bemer.default_path_prefix.call(path, view)
     end
 
-    def remove_template_catalog_if_needed!
+    def remove_template_catalog!
       return unless template_catalog.owner.eql?(object_id)
 
       view.remove_instance_variable(:@bemer_template_catalog)
