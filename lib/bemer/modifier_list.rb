@@ -23,13 +23,17 @@ module Bemer
     attr_reader :block, :element, :modifiers
 
     def build_modifiers(mods)
+      return [] if mods.blank?
+
       [*mods].flat_map { |attrs| build_modifier(attrs) }.reject(&:blank?).uniq
     end
 
     def build_modifier(mods)
-      return mods.map { |attrs| build_modifier(attrs) } if mods.instance_of?(Hash)
+      return mods.flat_map { |attrs| build_modifier(attrs) } if mods.instance_of?(Hash)
 
-      Bemer.modifier_css_class(block, element, *mods)
+      name, values = *mods, true
+
+      [*values].map { |value| Bemer.modifier_css_class(block, element, name, value) }
     end
   end
 end
