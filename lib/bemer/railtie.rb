@@ -13,5 +13,7 @@ module Bemer
     initializer 'bemer.prepend_assets_path', group: :all, after: :append_assets_path do |app|
       app.config.assets.paths.unshift(Bemer.path)
     end
+
+    config.after_initialize { ActionController::Base.prepend_view_path(Bemer.path) }
   end
 end
