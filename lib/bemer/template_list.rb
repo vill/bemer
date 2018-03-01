@@ -16,7 +16,11 @@ module Bemer
 
       add_default_templates
 
-      view.render(template: template, locals: { **options })
+      output = view.render(template: template, locals: { **options })
+
+      remove_template_catalog_if_needed!
+
+      output
     end
 
     protected
@@ -47,6 +51,12 @@ module Bemer
       return Bemer.default_path_prefix.to_s unless Bemer.default_path_prefix.respond_to?(:call)
 
       Bemer.default_path_prefix.call(path, view)
+    end
+
+    def remove_template_catalog_if_needed!
+      return unless template_catalog.owner.eql?(object_id)
+
+      view.remove_instance_variable(:@bemer_template_catalog)
     end
   end
 end
