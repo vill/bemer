@@ -24,7 +24,7 @@ module Bemer
     end
 
     def build_template_catalog!
-      template_catalog = TemplateCatalog.new
+      template_catalog = TemplateCatalog.new(object_id)
 
       view.assign(bemer_template_catalog: template_catalog)
 

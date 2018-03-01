@@ -2,8 +2,11 @@
 
 module Bemer
   class TemplateCatalog
-    def initialize
+    attr_reader :owner
+
+    def initialize(owner)
       @drawers        = {}
+      @owner          = owner
       @template_queue = []
     end
 
