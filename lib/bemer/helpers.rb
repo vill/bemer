@@ -33,5 +33,9 @@ module Bemer
     def define_component(**options, &block)
       Bemer::Component.new(self).render(options, &block)
     end
+
+    def bemer_cache(&block)
+      Bemer::TemplateList::Cache.new(self).enable(&block)
+    end
   end
 end
