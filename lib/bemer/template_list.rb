@@ -4,11 +4,11 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class TemplateList < DefaultTemplateList
-    def initialize(view, path, path_prefix: true, **options)
+    def initialize(view, path, prefix: true, **options)
       super(view)
 
       @options = options
-      @path    = build_full_path(path_prefix, path)
+      @path    = build_full_path(prefix, path)
     end
 
     def compile
@@ -35,10 +35,10 @@ module Bemer
       [path, name].join('/')
     end
 
-    def build_full_path(path_prefix, path)
-      return path if !path_prefix.nil? && path_prefix.blank?
+    def build_full_path(prefix, path)
+      return path if prefix.blank?
 
-      path_prefix = default_path_prefix(path) if need_default_path_prefix?(path_prefix)
+      path_prefix = prefix.instance_of?(TrueClass) ? default_path_prefix(path) : prefix
 
       [path_prefix, path].reject(&:blank?).join('/')
     end
@@ -47,10 +47,6 @@ module Bemer
       return Bemer.default_path_prefix.to_s unless Bemer.default_path_prefix.respond_to?(:call)
 
       Bemer.default_path_prefix.call(path, view)
-    end
-
-    def need_default_path_prefix?(path_prefix)
-      ![String, Symbol, FalseClass].include?(path_prefix.class)
     end
   end
 end
