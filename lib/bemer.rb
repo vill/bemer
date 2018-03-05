@@ -9,6 +9,7 @@ require 'active_support/core_ext/string/inflections'
 module Bemer
   extend ActiveSupport::Autoload
 
+  autoload :Builders
   autoload :Component
   autoload :Configuration
   autoload :Context
@@ -20,6 +21,7 @@ module Bemer
   autoload :MixinList
   autoload :ModifierList
   autoload :Pipeline
+  autoload :Predicate
   autoload :Renderer
   autoload :Tag
   autoload :Template
