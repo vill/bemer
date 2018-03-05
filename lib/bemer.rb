@@ -46,6 +46,7 @@ module Bemer
                             :modifier_name_separator,
                             :modifier_value_separator,
                             :path,
+                            :precompile,
                             :prepend_assets_path,
                             :transform_string_values
     # rubocop:enable Layout/AlignParameters
