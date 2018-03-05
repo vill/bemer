@@ -4,19 +4,27 @@ module Bemer
   class Railtie < ::Rails::Railtie
     config.eager_load_namespaces << Bemer if config.respond_to?(:eager_load_namespaces)
 
+    config.after_initialize do
+      ActionController::Base.prepend_view_path(Bemer.path)
+      ActionMailer::Base.prepend_view_path(Bemer.path)
+    end
+
     initializer 'bemer.helpers' do
       ActiveSupport.on_load(:action_view) { include Bemer::Helpers }
     end
 
-    initializer 'bemer.prepend_assets_path', group: :all, after: :load_config_initializers do |app|
+    initializer_name =
+      case Rails::VERSION::MAJOR
+      when 5
+        :append_assets_path
+      when 3..4
+        :load_config_initializers
+      end
+
+    initializer 'bemer.prepend_assets_path', group: :all, after: initializer_name do |app|
       next unless defined?(::Sprockets) && Bemer.prepend_assets_path?
 
-      app.config.assets.paths.unshift(Bemer.path)
-    end
-
-    initializer 'bemer.prepend_view_path', group: :all, after: :load_config_initializers do
-      ActionController::Base.prepend_view_path(Bemer.path)
-      ActionMailer::Base.prepend_view_path(Bemer.path)
+      app.config.assets.paths.unshift(Bemer.path.to_s)
     end
 
     initializer 'bemer.assets_precompile', group: :all, after: :load_config_initializers do |app|
