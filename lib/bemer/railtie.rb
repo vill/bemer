@@ -12,7 +12,7 @@ module Bemer
       app.config.assets.paths.unshift(Bemer.path) if defined?(::Sprockets)
     end
 
-    initializer 'bemer.prepend_view_path', group: :all, after: :add_view_paths do
+    initializer 'bemer.prepend_view_path', group: :all, after: :load_config_initializers do
       ActionController::Base.prepend_view_path(Bemer.path)
     end
   end
