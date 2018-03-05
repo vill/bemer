@@ -5,9 +5,7 @@ module Bemer
     config.eager_load_namespaces << Bemer if config.respond_to?(:eager_load_namespaces)
 
     initializer 'bemer.helpers' do
-      ActiveSupport.on_load :action_view do
-        include Bemer::Helpers
-      end
+      ActiveSupport.on_load(:action_view) { include Bemer::Helpers }
     end
 
     initializer 'bemer.prepend_assets_path', group: :all, after: :append_assets_path do |app|

@@ -12,7 +12,7 @@ module Bemer
     attr_reader   :can_use_dig, :can_use_new_matcher
     attr_writer   :path
 
-    alias can_use_dig? can_use_dig
+    alias can_use_dig?         can_use_dig
     alias can_use_new_matcher? can_use_new_matcher
 
     def initialize # rubocop:disable Metrics/MethodLength
