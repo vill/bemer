@@ -2,7 +2,7 @@
 
 module Bemer
   class Railtie < ::Rails::Railtie
-    config.eager_load_namespaces << Bemer
+    config.eager_load_namespaces << Bemer if config.respond_to?(:eager_load_namespaces)
 
     initializer 'bemer.helpers' do
       ActiveSupport.on_load :action_view do
