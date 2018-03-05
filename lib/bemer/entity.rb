@@ -6,8 +6,7 @@ require 'active_support/core_ext/string/inflections'
 module Bemer
   class Entity
     attr_accessor :attrs, :bem, :bem_cascade, :block, :content, :elem, :js
-    attr_reader   :bem_class, :cls, :mix, :mods, :name
-    attr_writer   :tag
+    attr_reader   :bem_class, :cls, :mix, :mods, :name, :tag
 
     alias element elem
 
@@ -43,10 +42,8 @@ module Bemer
       @cls = build_css_classes(classes)
     end
 
-    def tag
-      return @tag unless @tag.instance_of?(String)
-
-      @tag.to_sym
+    def tag=(new_tag)
+      @tag = build_tag(new_tag)
     end
 
     protected
@@ -62,7 +59,7 @@ module Bemer
       @js          = options.delete(:js)
       @mix         = MixinList.new(options.delete(:mix)).to_a
       @mods        = ModifierList.new(block, element, options.delete(:mods)).to_a
-      @tag         = options.delete(:tag)
+      @tag         = build_tag(options.delete(:tag))
       @attrs       = options
     end
 
@@ -72,6 +69,10 @@ module Bemer
 
         css_class.instance_of?(String) ? css_class.split : css_class.to_s.underscore.dasherize
       end.flatten
+    end
+
+    def build_tag(new_tag)
+      new_tag.instance_of?(String) ? new_tag.to_sym : new_tag
     end
   end
 end
