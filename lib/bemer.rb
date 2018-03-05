@@ -11,6 +11,7 @@ module Bemer
   autoload :Component
   autoload :Configuration
   autoload :Context
+  autoload :ContextExtentions
   autoload :DefaultTemplateList
   autoload :Entity
   autoload :EntityBuilder
