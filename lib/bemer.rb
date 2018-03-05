@@ -46,8 +46,11 @@ module Bemer
                             :modifier_name_separator,
                             :modifier_value_separator,
                             :path,
+                            :prepend_assets_path,
                             :transform_string_values
     # rubocop:enable Layout/AlignParameters
+
+    alias prepend_assets_path? prepend_assets_path
 
     def config
       Configuration.instance
