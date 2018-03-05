@@ -5,8 +5,9 @@ require 'active_support/core_ext/string/inflections'
 
 module Bemer
   class Entity
-    attr_accessor :attrs, :bem, :bem_cascade, :block, :content, :elem, :js, :tag
+    attr_accessor :attrs, :bem, :bem_cascade, :block, :content, :elem, :js
     attr_reader   :bem_class, :cls, :mix, :mods, :name
+    attr_writer   :tag
 
     alias element elem
 
@@ -40,6 +41,12 @@ module Bemer
 
     def cls=(classes)
       @cls = build_css_classes(classes)
+    end
+
+    def tag
+      return @tag unless @tag.instance_of?(String)
+
+      @tag.to_sym
     end
 
     protected
