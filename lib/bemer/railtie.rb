@@ -13,10 +13,18 @@ module Bemer
       ActiveSupport.on_load(:action_view) { include Bemer::Helpers }
     end
 
-    initializer 'bemer.prepend_assets_path', group: :all, after: :load_config_initializers do |app|
+    initializer_name =
+      case Rails::VERSION::MAJOR
+      when 5
+        :append_assets_path
+      when 3..4
+        :load_config_initializers
+      end
+
+    initializer 'bemer.prepend_assets_path', group: :all, after: initializer_name do |app|
       next unless defined?(::Sprockets) && Bemer.prepend_assets_path?
 
-      app.config.assets.paths.unshift(Bemer.path)
+      app.config.assets.paths.unshift(Bemer.path.to_s)
     end
 
     initializer 'bemer.assets_precompile', group: :all, after: :load_config_initializers do |app|
