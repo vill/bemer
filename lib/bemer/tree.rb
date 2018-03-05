@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/string/output_safety'
+require 'active_support/dependencies/autoload'
 
 module Bemer
   class Tree
+    extend ActiveSupport::Autoload
+
+    eager_autoload do
+      autoload :Node
+      autoload :TextNode
+    end
+
     attr_accessor :parent_node
     attr_reader   :node_metadata, :pipeline
 

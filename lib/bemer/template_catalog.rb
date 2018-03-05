@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
+require 'active_support/dependencies/autoload'
+
 module Bemer
   class TemplateCatalog
+    extend ActiveSupport::Autoload
+
+    eager_autoload do
+      autoload :Drawer
+    end
+
     attr_reader :owner
 
     def initialize(owner)

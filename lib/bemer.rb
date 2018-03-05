@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'forwardable'
+require 'active_support'
 require 'active_support/dependencies/autoload'
 require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/string/inflections'
@@ -8,42 +9,27 @@ require 'active_support/core_ext/string/inflections'
 module Bemer
   extend ActiveSupport::Autoload
 
+  autoload :Builders
   autoload :Component
   autoload :Configuration
   autoload :Context
+  autoload :ContextExtentions
   autoload :DefaultTemplateList
   autoload :Entity
   autoload :EntityBuilder
-  autoload :Helpers
   autoload :MixinList
   autoload :ModifierList
   autoload :Pipeline
+  autoload :Predicate
   autoload :Renderer
   autoload :Tag
   autoload :Template
-  autoload :TemplateCatalog
   autoload :TemplateList
   autoload :Tree
 
-  autoload_under 'context_extentions' do
-    autoload :Structure
-  end
-
-  autoload_under 'pipeline' do
-    autoload :Handler
-  end
-
-  autoload_under 'template_catalog' do
-    autoload :Drawer
-  end
-
-  autoload_under 'template_list' do
-    autoload :Cache
-  end
-
-  autoload_under 'tree' do
-    autoload :Node
-    autoload :TextNode
+  eager_autoload do
+    autoload :Helpers
+    autoload :TemplateCatalog
   end
 
   class << self

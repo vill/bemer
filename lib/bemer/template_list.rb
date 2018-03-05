@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/object/blank'
+require 'active_support/dependencies/autoload'
 
 module Bemer
   class TemplateList < DefaultTemplateList
+    extend ActiveSupport::Autoload
+
+    autoload :Cache
+
     def initialize(view, path, cached: false, prefix: true, **options)
       super(view, cached)
 

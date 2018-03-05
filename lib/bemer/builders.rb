@@ -10,12 +10,12 @@ module Bemer
       autoload :Template
       autoload :TemplateList
       autoload :Tree
+    end
 
-      autoload_under 'tag' do
-        autoload :Element
-      end
+    module Tag
+      extend ActiveSupport::Autoload
 
-      autoload_under 'tree' do
+      eager_autoload do
         autoload :Element
       end
     end
