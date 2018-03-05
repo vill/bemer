@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
+require 'active_support/dependencies/autoload'
+
 module Bemer
   class Pipeline
+    extend ActiveSupport::Autoload
+
+    eager_autoload do
+      autoload :Handler
+    end
+
     ADD_ATTRS_MODE = :add_attrs
     ADD_CLS_MODE   = :add_cls
     ADD_JS_MODE    = :add_js

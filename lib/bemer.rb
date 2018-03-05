@@ -17,7 +17,6 @@ module Bemer
   autoload :DefaultTemplateList
   autoload :Entity
   autoload :EntityBuilder
-  autoload :Helpers
   autoload :MixinList
   autoload :ModifierList
   autoload :Pipeline
@@ -25,29 +24,12 @@ module Bemer
   autoload :Renderer
   autoload :Tag
   autoload :Template
-  autoload :TemplateCatalog
   autoload :TemplateList
   autoload :Tree
 
-  autoload_under 'context_extentions' do
-    autoload :Structure
-  end
-
-  autoload_under 'pipeline' do
-    autoload :Handler
-  end
-
-  autoload_under 'template_catalog' do
-    autoload :Drawer
-  end
-
-  autoload_under 'template_list' do
-    autoload :Cache
-  end
-
-  autoload_under 'tree' do
-    autoload :Node
-    autoload :TextNode
+  eager_autoload do
+    autoload :Helpers
+    autoload :TemplateCatalog
   end
 
   class << self

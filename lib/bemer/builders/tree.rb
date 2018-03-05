@@ -1,8 +1,16 @@
 # frozen_string_literal: true
 
+require 'active_support/dependencies/autoload'
+
 module Bemer
   module Builders
     class Tree
+      extend ActiveSupport::Autoload
+
+      eager_autoload do
+        autoload :Element
+      end
+
       def initialize(tree)
         @tree = tree
       end
