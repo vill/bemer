@@ -6,13 +6,13 @@ module Bemer
   class Configuration
     include Singleton
 
-    attr_accessor :bem, :default_block_tag, :default_element_tag,
-                  :default_path_prefix, :element_name_separator, :modifier_name_separator,
-                  :modifier_value_separator, :transform_string_values
+    attr_accessor :bem, :default_block_tag, :default_element_tag, :default_path_prefix,
+                  :element_name_separator, :modifier_name_separator, :modifier_value_separator,
+                  :prepend_assets_path, :transform_string_values
     attr_reader   :can_use_dig, :can_use_new_matcher
     attr_writer   :path
 
-    alias can_use_dig? can_use_dig
+    alias can_use_dig?         can_use_dig
     alias can_use_new_matcher? can_use_new_matcher
 
     def initialize # rubocop:disable Metrics/MethodLength
@@ -26,6 +26,7 @@ module Bemer
       @modifier_name_separator  = '_'
       @modifier_value_separator = '_'
       @path                     = 'app/bemer_components'
+      @prepend_assets_path      = true
       @transform_string_values  = false
     end
 
