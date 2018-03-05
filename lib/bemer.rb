@@ -11,6 +11,7 @@ module Bemer
 
   autoload :Builders
   autoload :Component
+  autoload :ComponentPack
   autoload :Configuration
   autoload :Context
   autoload :ContextExtentions

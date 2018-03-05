@@ -34,8 +34,8 @@ module Bemer
       Bemer::Component.new(self).render(options, &block)
     end
 
-    def bemer_cache(&block)
-      Bemer::TemplateList::Cache.new(self).enable(&block)
+    def component_pack(collection = [], &block)
+      Bemer::ComponentPack.new(self, collection).render(&block)
     end
   end
 end
