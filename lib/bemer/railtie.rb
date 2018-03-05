@@ -16,6 +16,7 @@ module Bemer
 
     initializer 'bemer.prepend_view_path', group: :all, after: :load_config_initializers do
       ActionController::Base.prepend_view_path(Bemer.path)
+      ActionMailer::Base.prepend_view_path(Bemer.path)
     end
 
     initializer 'bemer.assets_precompile', group: :all, after: :load_config_initializers do |app|
