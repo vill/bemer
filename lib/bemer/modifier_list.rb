@@ -25,7 +25,7 @@ module Bemer
     def build_modifiers(mods)
       return [] if mods.blank?
 
-      [*mods].flat_map { |attrs| build_modifier(attrs) }.reject(&:blank?).uniq
+      Array(mods).flat_map { |attrs| build_modifier(attrs) }.reject(&:blank?).uniq
     end
 
     def build_modifier(mods)
@@ -33,7 +33,7 @@ module Bemer
 
       name, values = *mods, true
 
-      [*values].map { |value| Bemer.modifier_css_class(block, element, name, value) }
+      Array(values).map { |value| Bemer.modifier_css_class(block, element, name, value) }
     end
   end
 end
