@@ -35,6 +35,8 @@ module Bemer
   class << self
     extend Forwardable
 
+    attr_accessor :loose_app_assets
+
     # rubocop:disable Layout/AlignParameters
     def_delegators :config, :bem,
                             :can_use_dig?,
