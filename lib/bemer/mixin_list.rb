@@ -5,23 +5,26 @@ require 'active_support/core_ext/object/blank'
 module Bemer
   class MixinList
     def initialize(*mix)
-      @mixins = build_mixins(mix)
+      @mix    = mix
+      @mixins = nil
     end
 
     def to_a
-      mixins
+      build_mixins
     end
 
     def to_s
-      @css_classes ||= mixins.join(' ')
+      @mix_as_string ||= to_a.join(' ')
     end
 
     protected
 
     attr_reader :mixins
 
-    def build_mixins(mix)
-      mix.map { |mixin| build_mixin(mixin) }.flatten.reject(&:blank?).uniq
+    def build_mixins
+      return mixins unless mixins.nil?
+
+      @mixins = @mix.map { |mixin| build_mixin(mixin) }.flatten.reject(&:blank?).uniq
     end
 
     def build_mixin(mixin)

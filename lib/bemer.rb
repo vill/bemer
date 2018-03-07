@@ -70,19 +70,6 @@ module Bemer
       Bemer::Builders.eager_load!
     end
 
-    def modifier_css_class(block, element, modifier_name, modifier_value = true)
-      bem_class     = bem_class(block, element)
-      modifier_name = nil if modifier_value.blank?
-
-      return '' if bem_class.blank? || modifier_name.blank?
-
-      modifier_value = nil if modifier_value.instance_of?(TrueClass)
-      modifier       = compound_css_class(modifier_name, modifier_value,
-                                          separator: modifier_value_separator)
-
-      [bem_class, modifier].join(modifier_name_separator)
-    end
-
     def bem_class(block, element = nil)
       return '' if block.blank? || (!element.nil? && element.blank?)
 

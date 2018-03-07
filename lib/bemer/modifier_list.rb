@@ -1,39 +1,76 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/hash/indifferent_access'
 
 module Bemer
   class ModifierList
     def initialize(block, element, mods)
-      @block     = block
-      @element   = element
-      @modifiers = build_modifiers(mods)
+      @bem_class = Bemer.bem_class(block, element)
+      @modifiers = nil
+      @mods      = mods
     end
 
     def to_a
-      modifiers
+      @mods_as_array ||= begin
+        to_h.flat_map do |name, value|
+          Array(value).map { |val| build_css_class(name, val) }
+        end
+      end
     end
 
     def to_s
-      @css_classes ||= modifiers.join(' ')
+      @mods_as_string ||= to_a.join(' ')
+    end
+
+    def to_h
+      modifiers.nil? ? build_modifiers : modifiers
     end
 
     protected
 
-    attr_reader :block, :element, :modifiers
+    attr_reader :modifiers
 
-    def build_modifiers(mods)
-      return [] if mods.blank?
+    def build_modifiers
+      @modifiers = ActiveSupport::HashWithIndifferentAccess.new
 
-      Array(mods).flat_map { |attrs| build_modifier(attrs) }.reject(&:blank?).uniq
+      return modifiers if @mods.blank? || @bem_class.blank?
+
+      Array(@mods).each do |mods|
+        mods.instance_of?(Hash) ? mods.each { |attrs| add_modifier(attrs) } : add_modifier(mods)
+      end
+
+      modifiers
     end
 
-    def build_modifier(mods)
-      return mods.flat_map { |attrs| build_modifier(attrs) } if mods.instance_of?(Hash)
+    def add_modifier(attrs)
+      name, value = normalize(*attrs)
 
-      name, values = *mods, true
+      return if name.blank? || value.blank?
 
-      Array(values).map { |value| Bemer.modifier_css_class(block, element, name, value) }
+      modifiers[name] = modifiers.key?(name) ? [*modifiers[name], *value] : value
+    end
+
+    def normalize(name, value = true)
+      value =
+        case value
+        when String, Symbol
+          Bemer.css_class(value)
+        when Array
+          value.map { |val| Bemer.css_class(val) }
+        else
+          value
+        end
+
+      [Bemer.css_class(name), value]
+    end
+
+    def build_css_class(name, value)
+      # rubocop:disable Metrics/LineLength
+      modifier = value.instance_of?(TrueClass) ? name : [name, value].join(Bemer.modifier_value_separator)
+      # rubocop:enable Metrics/LineLength
+
+      [@bem_class, modifier].join(Bemer.modifier_name_separator)
     end
   end
 end
