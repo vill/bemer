@@ -40,17 +40,6 @@ RSpec.describe Bemer do
     end
   end
 
-  shared_examples 'modifier_css_class' do
-    it 'creates a modifier class with only name', :aggregate_failures do
-      expect(modifier_css_class.call(block_name, element_name, modifier_name)).to eq modifier_class
-      expect(modifier_css_class.call(block_name, element_name, modifier_name, true)).to eq modifier_class
-    end
-
-    it 'creates a modifier class with name and value' do
-      expect(modifier_css_class.call(block_name, element_name, modifier_name, modifier_value)).to eq modifier_class_with_value
-    end
-  end
-
   describe '.config' do
     it 'returns instance of the Configuration class' do
       expect(described_class.config).to be Bemer::Configuration.instance
@@ -125,28 +114,6 @@ RSpec.describe Bemer do
     context 'when transform_string_values is set to false' do
       include_context 'when transform_string_values is set to false'
       include_examples 'bem_class'
-    end
-  end
-
-  describe '.modifier_css_class' do
-    subject(:modifier_css_class) { described_class.method(:modifier_css_class) }
-
-    it 'creates an empty class from empty arguments', :aggregate_failures do
-      empty_arguments.combination(3).each do |block, element, modifier|
-        expect(modifier_css_class.call(block, element, modifier)).to eq empty_class
-        expect(modifier_css_class.call(block, element, modifier_name)).to eq empty_class
-        expect(modifier_css_class.call(block_name, element_name, modifier_name, modifier)).to eq empty_class
-      end
-    end
-
-    context 'when transform_string_values is set to true' do
-      include_context  'when transform_string_values is set to true'
-      include_examples 'modifier_css_class'
-    end
-
-    context 'when transform_string_values is set to false' do
-      include_context  'when transform_string_values is set to false'
-      include_examples 'modifier_css_class'
     end
   end
 end
