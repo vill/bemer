@@ -10,16 +10,21 @@ module Bemer
 
     def apply!(node)
       case mode
-      when Pipeline::REPLACE_MODE
-        node.need_replace = true
-
-        node.replacers << node.dup
-
-        nil
+      when Pipeline::REPLACE_MODE then replace!(node)
       when Pipeline::CONTENT_MODE then node.add_child_nodes
       else
         node.public_send mode.to_s.sub('add_', '')
       end
+    end
+
+    protected
+
+    def replace!(node)
+      node.need_replace = true
+
+      node.replacers << node.dup
+
+      nil
     end
   end
 end
