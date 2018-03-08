@@ -8,6 +8,7 @@ module Bemer
 
     def initialize(mode, body, predicate)
       @body      = body
+      @method    = "#{mode}="
       @mode      = mode
       @predicate = predicate
       @wildcard  = predicate.name.include?('*')
@@ -23,31 +24,28 @@ module Bemer
 
     def apply(node)
       case mode
-      when Pipeline::REPLACE_MODE then perform_replacement_mode(node)
-      when Pipeline::CONTENT_MODE then capture(node)
+      when Pipeline::REPLACE_MODE then replace(node)
+      when Pipeline::CONTENT_MODE then capture_content(node)
       else
-        body.respond_to?(:call) ? body.call(build_context(node)) : body
+        duplicate = node.dup
+
+        duplicate.entity_builder.public_send(method, capture_body(duplicate))
       end
     end
 
-    def apply!(node) # rubocop:disable Metrics/AbcSize
-      return perform_replacement_mode!(node) if Pipeline::REPLACE_MODE.eql?(mode)
+    def apply!(node)
+      return replace!(node) if Pipeline::REPLACE_MODE.eql?(mode)
 
-      content =
-        if Pipeline::CONTENT_MODE.eql?(mode)
-          perform_content_mode!(node)
-        else
-          body.respond_to?(:call) ? body.call(build_context(node)) : body
-        end
+      content = Pipeline::CONTENT_MODE.eql?(mode) ? capture_content!(node) : capture_body(node)
 
-      node.entity_builder.public_send("#{mode}=", content)
+      node.entity_builder.public_send(method, content)
     end
 
     protected
 
-    attr_reader :body, :predicate
+    attr_reader :body, :method, :predicate
 
-    def capture(node)
+    def capture_content(node)
       return body unless body.respond_to?(:call)
 
       builder = Builders::Tree.new(node.tree)
@@ -55,24 +53,30 @@ module Bemer
       body.binding.receiver.capture(build_context(node), builder, &body)
     end
 
-    def perform_replacement_mode(node)
-      output = capture(node)
+    def capture_body(node)
+      body.respond_to?(:call) ? body.call(build_context(node)) : body
+    end
+
+    def replace(node)
+      output = capture_content(node)
 
       return if output.blank?
 
       node.replacers.unshift Tree::TextNode.new(node.tree, output)
+
+      nil
     end
 
-    def perform_replacement_mode!(node)
+    def replace!(node)
       node.need_replace = true
 
-      node.replace_parent_and_execute { perform_replacement_mode(node) }
+      node.replace_parent_and_execute { replace(node) }
     end
 
-    def perform_content_mode!(node)
+    def capture_content!(node)
       node.content_replaced = true
 
-      node.replace_parent_and_execute { capture(node) }
+      node.replace_parent_and_execute { capture_content(node) }
     end
 
     def build_context(node)
