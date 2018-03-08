@@ -12,7 +12,7 @@ module Bemer
       attr_reader   :applied_modes, :children, :entity, :entity_builder, :replacers, :tree
 
       alias content_replaced? content_replaced
-      alias need_replace? need_replace
+      alias need_replace?     need_replace
 
       def_delegators :entity, :attrs, :bem, :bem_cascade, :block, :block?, :cls,
                      :content, :elem, :elem?, :element?, :js, :mix, :mods, :name, :tag
