@@ -22,9 +22,8 @@ module Bemer
 
       def apply_next(current_template, node, **params)
         position = priorities[current_template.mode][current_template.object_id] + 1
-        template = find_template(current_template.mode, node, position)
 
-        apply_template(template, node, params)
+        apply_template(current_template.mode, node, position, params)
       end
 
       def apply(mode, current_template, node, **params)
@@ -33,9 +32,7 @@ module Bemer
         if current_template.mode.eql?(mode)
           apply_next(current_template, node, params)
         else
-          template = find_template(mode, node)
-
-          apply_template(template, node, params)
+          apply_template(mode, node, params)
         end
       end
 
@@ -53,9 +50,8 @@ module Bemer
         Pipeline::MODES.include?(mode)
       end
 
-      def apply_template(template, node, **params)
-        return unless template
-
+      def apply_template(mode, node, position = 0, **params)
+        template    = find_template(mode, node, position)
         old_params  = node.params
         node.params = params
         output      = template.nil? ? CommonTemplate.new(mode).apply!(node) : template.apply(node)
