@@ -5,8 +5,8 @@ require 'active_support/core_ext/string/inflections'
 
 module Bemer
   class Entity
-    attr_accessor :attrs, :bem, :bem_cascade, :block, :content, :elem, :js
-    attr_reader   :bem_class, :cls, :mix, :mods, :name, :tag
+    attr_accessor :attrs, :bem, :bem_cascade, :content, :js
+    attr_reader   :bem_class, :block, :cls, :elem, :mix, :mods, :name, :tag
 
     alias element elem
 
