@@ -129,6 +129,7 @@ module Bemer
         @content_replaced       = false
         @entity                 = original.entity.dup
         @entity_builder         = original.entity_builder.dup
+        @entity_builder.content = @entity.content
         @need_replace           = false
         @replacers              = []
       end
