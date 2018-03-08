@@ -5,17 +5,17 @@ require 'active_support/core_ext/string/output_safety'
 
 module Bemer
   class Tree
-    class Node
+    class Node # rubocop:disable Metrics/ClassLength
       extend Forwardable
 
       attr_accessor :content_replaced, :need_replace, :params
       attr_reader   :applied_modes, :children, :entity, :entity_builder, :replacers, :tree
 
       alias content_replaced? content_replaced
-      alias need_replace? need_replace
+      alias need_replace?     need_replace
 
-      def_delegators :entity, :attrs, :bem, :bem_cascade, :block, :block?, :cls,
-                     :content, :elem, :elem?, :element?, :js, :mix, :mods, :name, :tag
+      def_delegators :entity, :bem, :bem_cascade, :block, :block?,
+                     :content, :elem, :elem?, :element?, :name, :tag
 
       def initialize(tree, block = '', element = nil, **options, &content)
         @applied_modes     = Pipeline::MODES.map { |mode| [mode, false] }.to_h
@@ -28,6 +28,26 @@ module Bemer
         @renderer          = Renderer.new
         @replacers         = []
         @tree              = tree
+      end
+
+      def attrs
+        @attrs ||= entity.attrs.freeze
+      end
+
+      def cls
+        @cls ||= entity.cls.freeze
+      end
+
+      def js
+        @js ||= entity.js.freeze
+      end
+
+      def mix
+        @mix ||= entity.mix.freeze
+      end
+
+      def mods
+        @mods ||= entity.mods.freeze
       end
 
       def render
