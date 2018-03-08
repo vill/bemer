@@ -43,7 +43,7 @@ module Bemer
 
       attr_reader :priorities, :container
 
-      def can_apply?(mode, current_mode)
+      def compatible_modes?(mode, current_mode)
         return true if Pipeline::STRUCTURE_RELATED_MODES.include?(current_mode)
 
         !Pipeline::STRUCTURE_RELATED_MODES.include?(mode)
