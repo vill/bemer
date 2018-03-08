@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/object/blank'
-require 'active_support/core_ext/string/inflections'
 
 module Bemer
   class Entity
@@ -67,8 +66,8 @@ module Bemer
       classes.flatten.map do |css_class|
         next [] if css_class.blank?
 
-        css_class.instance_of?(String) ? css_class.split : css_class.to_s.underscore.dasherize
-      end.flatten
+        css_class.instance_of?(String) ? css_class.split : Bemer.css_class(css_class)
+      end.flatten.uniq
     end
 
     def build_tag(new_tag)
