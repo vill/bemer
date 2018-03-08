@@ -54,7 +54,7 @@ module Bemer
 
         old_params  = node.params
         node.params = params
-        output      = template.apply(node)
+        output      = template.nil? ? CommonTemplate.new(mode).apply!(node) : template.apply(node)
         node.params = old_params
 
         output
