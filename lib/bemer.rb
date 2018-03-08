@@ -10,6 +10,7 @@ module Bemer
   extend ActiveSupport::Autoload
 
   autoload :Builders
+  autoload :CommonTemplate
   autoload :Component
   autoload :ComponentPack
   autoload :Configuration
