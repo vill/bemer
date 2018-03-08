@@ -13,7 +13,7 @@ module Bemer
       end
 
       def apply!(mode, node)
-        return if node.applied_modes[mode].present?
+        return if node.applied_modes[mode].present? || !allowable_mode?(mode)
 
         template = find_template(mode, node)
 
@@ -22,20 +22,17 @@ module Bemer
 
       def apply_next(current_template, node, **params)
         position = priorities[current_template.mode][current_template.object_id] + 1
-        template = find_template(current_template.mode, node, position)
 
-        apply_template(template, node, params)
+        apply_template(current_template.mode, node, position, params)
       end
 
       def apply(mode, current_template, node, **params)
-        return unless can_apply?(mode, current_template.mode)
+        return unless allowable_mode?(mode) && compatible_modes?(mode, current_template.mode)
 
         if current_template.mode.eql?(mode)
           apply_next(current_template, node, params)
         else
-          template = find_template(mode, node)
-
-          apply_template(template, node, params)
+          apply_template(mode, node, params)
         end
       end
 
@@ -43,18 +40,21 @@ module Bemer
 
       attr_reader :priorities, :container
 
-      def can_apply?(mode, current_mode)
+      def compatible_modes?(mode, current_mode)
         return true if Pipeline::STRUCTURE_RELATED_MODES.include?(current_mode)
 
         !Pipeline::STRUCTURE_RELATED_MODES.include?(mode)
       end
 
-      def apply_template(template, node, **params)
-        return unless template
+      def allowable_mode?(mode)
+        Pipeline::MODES.include?(mode)
+      end
 
+      def apply_template(mode, node, position = 0, **params)
+        template    = find_template(mode, node, position)
         old_params  = node.params
         node.params = params
-        output      = template.apply(node)
+        output      = template.nil? ? CommonTemplate.new(mode).apply!(node) : template.apply(node)
         node.params = old_params
 
         output
@@ -119,8 +119,6 @@ module Bemer
       end
 
       def find_template(mode, node, start = 0)
-        return unless Pipeline::MODES.include?(mode)
-
         templates = container[mode][start..-1]
 
         return if templates.empty?

@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 module Bemer
-  class Template
-    attr_reader :mode, :wildcard
+  class Template < CommonTemplate
+    attr_reader :wildcard
 
     alias wildcard? wildcard
 
     def initialize(mode, body, predicate)
+      super(mode)
+
       @body      = body
       @method    = "#{mode}="
-      @mode      = mode
       @predicate = predicate
       @wildcard  = predicate.name.include?('*')
     end
