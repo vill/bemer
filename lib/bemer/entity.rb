@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/object/blank'
-require 'active_support/core_ext/string/inflections'
 
 module Bemer
   class Entity
-    attr_accessor :attrs, :bem, :bem_cascade, :block, :content, :elem, :js
-    attr_reader   :bem_class, :cls, :mix, :mods, :name, :tag
+    attr_accessor :bem_cascade
+    attr_reader   :attrs, :bem, :bem_class, :block, :content, :elem, :js, :name
 
     alias element elem
 
@@ -24,51 +23,57 @@ module Bemer
       !element?
     end
 
+    def cls
+      @cls ||= build_css_classes(css_classes)
+    end
+
     def elem?
       !elem.nil?
     end
 
     alias element? elem?
 
-    def mods=(new_mods)
-      @mods = ModifierList.new(block, element, new_mods).to_a
+    def mix
+      @mix ||= mixins.to_a
     end
 
-    def mix=(new_mix)
-      @mix = MixinList.new(new_mix).to_a
+    def mods
+      @mods ||= modifiers.to_h
     end
 
-    def cls=(classes)
-      @cls = build_css_classes(classes)
-    end
-
-    def tag=(new_tag)
-      @tag = build_tag(new_tag)
+    def tag
+      @tag ||= build_tag(html_tag)
     end
 
     protected
+
+    attr_reader :css_classes, :html_tag, :mixins, :modifiers
 
     def extract_content(plain_text, &content)
       block_given? ? content : plain_text
     end
 
-    def extract_options!(options) # rubocop:disable Metrics/AbcSize
+    def extract_options!(options)
       @bem         = options.delete(:bem)
       @bem_cascade = options.delete(:bem_cascade)
-      @cls         = build_css_classes(options.delete(:class), options.delete(:cls))
+      @css_classes = [options.delete(:class), options.delete(:cls)]
+      @html_tag    = options.delete(:tag)
       @js          = options.delete(:js)
-      @mix         = MixinList.new(options.delete(:mix)).to_a
-      @mods        = ModifierList.new(block, element, options.delete(:mods)).to_a
-      @tag         = build_tag(options.delete(:tag))
+      @mixins      = MixinList.new(options.delete(:mix))
+      @modifiers   = ModifierList.new(block, element, options.delete(:mods))
       @attrs       = options
     end
 
     def build_css_classes(*classes)
-      classes.flatten.map do |css_class|
+      classes.map do |css_class|
         next [] if css_class.blank?
 
-        css_class.instance_of?(String) ? css_class.split : css_class.to_s.underscore.dasherize
-      end.flatten
+        case css_class
+        when String then css_class.split
+        when Array then build_css_classes(*css_class)
+        else Bemer.css_class(css_class)
+        end
+      end.flatten.uniq
     end
 
     def build_tag(new_tag)

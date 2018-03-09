@@ -37,7 +37,7 @@ module Bemer
       return modifiers if @mods.blank? || @bem_class.blank?
 
       Array(@mods).each do |mods|
-        mods.instance_of?(Hash) ? mods.each { |attrs| add_modifier(attrs) } : add_modifier(mods)
+        mods.is_a?(Hash) ? mods.each { |attrs| add_modifier(attrs) } : add_modifier(mods)
       end
 
       modifiers
@@ -48,19 +48,20 @@ module Bemer
 
       return if name.blank? || value.blank?
 
-      modifiers[name] = modifiers.key?(name) ? [*modifiers[name], *value] : value
+      modifiers[name] = modifiers.key?(name) ? [*modifiers[name], *value].uniq : value
     end
 
     def normalize(name, value = true)
-      value =
-        case value
-        when String, Symbol
-          Bemer.css_class(value)
-        when Array
-          value.map { |val| Bemer.css_class(val) }
-        else
-          value
-        end
+      value = case value
+              when String, Symbol
+                Bemer.css_class(value)
+              when Array
+                return normalize(name, *value) if value.length.eql?(1)
+
+                value.map { |val| Bemer.css_class(val) }
+              else
+                value
+              end
 
       [Bemer.css_class(name), value]
     end
