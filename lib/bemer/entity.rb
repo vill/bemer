@@ -65,10 +65,14 @@ module Bemer
     end
 
     def build_css_classes(*classes)
-      classes.flatten.map do |css_class|
+      classes.map do |css_class|
         next [] if css_class.blank?
 
-        css_class.instance_of?(String) ? css_class.split : Bemer.css_class(css_class)
+        case css_class
+        when String then css_class.split
+        when Array then build_css_classes(*css_class)
+        else Bemer.css_class(css_class)
+        end
       end.flatten.uniq
     end
 
