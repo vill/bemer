@@ -37,8 +37,8 @@ module Bemer
 
           element.map { |elem| Bemer.bem_class(block, elem) }
         end
-      when Symbol
-        Bemer.bem_class(mixin)
+      when Symbol then Bemer.bem_class(mixin)
+      when Array then mixin.map { |mix| build_mixin(mix) }
       end
     end
   end
