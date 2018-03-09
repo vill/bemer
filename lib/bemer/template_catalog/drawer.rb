@@ -8,20 +8,12 @@ module Bemer
       alias cached? cached
 
       def initialize(cached = false, &block)
-        @cached    = cached
-        @templates = [block]
+        @block  = block
+        @cached = cached
       end
 
       def compiled_templates
-        @compiled_templates ||= compile_templates
-      end
-
-      protected
-
-      attr_reader :templates
-
-      def compile_templates
-        templates.flat_map do |block|
+        @compiled_templates ||= begin
           new_templates = []
           builder       = Builders::TemplateList.new(new_templates)
 
@@ -30,6 +22,10 @@ module Bemer
           new_templates
         end
       end
+
+      protected
+
+      attr_reader :block
     end
   end
 end
