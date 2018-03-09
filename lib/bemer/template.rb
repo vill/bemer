@@ -27,10 +27,7 @@ module Bemer
       case mode
       when Pipeline::REPLACE_MODE then replace(node)
       when Pipeline::CONTENT_MODE then capture_content(node)
-      else
-        duplicate = node.dup
-
-        duplicate.entity_builder.public_send(method, capture_body(duplicate))
+      else node.entity_builder.dup.public_send(method, capture_body(node))
       end
     end
 
