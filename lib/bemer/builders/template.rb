@@ -6,8 +6,7 @@ module Bemer
   module Builders
     class Template
       MULTI_ARGUMENT_METHODS = [Pipeline::ADD_CLS_MODE, Pipeline::ADD_MIX_MODE,
-                                Pipeline::ADD_MODS_MODE, Pipeline::CLS_MODE,
-                                Pipeline::MIX_MODE, Pipeline::MODS_MODE].freeze
+                                Pipeline::CLS_MODE, Pipeline::MIX_MODE].freeze
 
       private_constant :MULTI_ARGUMENT_METHODS
 
