@@ -4,36 +4,44 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class EntityBuilder < Entity
-    def cls
-      return @cls unless bem?
-
-      js_class = 'i-bem' if @js.present?
-
-      [bem_class, mix, mods, js_class, @cls].reject(&:blank?)
-    end
+    attr_writer :attrs, :bem, :content, :js
 
     def attrs
       bem? ? { **@attrs, **js } : @attrs
     end
 
-    def add_mods=(new_mods)
-      @mods.push(*ModifierList.new(block, element, new_mods).to_a)
-    end
-
-    def add_mix=(new_mix)
-      @mix.push(*MixinList.new(new_mix).to_a)
-    end
-
     def add_attrs=(new_attrs)
-      @attrs = @attrs.instance_of?(Hash) ? { **@attrs, **new_attrs } : new_attrs
+      @attrs.merge!(new_attrs)
     end
 
-    def add_js=(new_js)
-      @js = @js.instance_of?(Hash) ? { **@js, **new_js } : new_js
+    def bem
+      bem_via_option? ? @bem : true
     end
 
-    def add_cls=(classes)
-      @cls.push(*build_css_classes(classes))
+    def bem?
+      bem_enabled_via_option? || bem_cascade_enabled_via_option? || bem_enabled_fully?
+    end
+
+    def bem_cascade
+      bem_cascade_via_option? ? @bem_cascade : true
+    end
+
+    def cls
+      return super unless bem?
+
+      js_class = 'i-bem' if @js.present?
+
+      [bem_class, mix, mods, js_class, super].reject(&:blank?)
+    end
+
+    def add_cls=(new_cls)
+      old_cls = public_method(:cls).super_method.call
+
+      @cls = build_css_classes(*old_cls, *new_cls)
+    end
+
+    def cls=(new_cls)
+      @cls = build_css_classes(*new_cls)
     end
 
     def js
@@ -46,20 +54,42 @@ module Bemer
       js_attrs
     end
 
+    def add_js=(new_js)
+      return @js.merge!(new_js) if @js.instance_of?(Hash)
+
+      @js = new_js
+    end
+
+    def add_mix=(new_mix)
+      @mix = MixinList.new(*mix, *new_mix).to_a
+    end
+
+    def mix=(new_mix)
+      @mix = MixinList.new(*new_mix).to_a
+    end
+
+    def mods
+      modifiers.to_a
+    end
+
+    def add_mods=(new_mods)
+      @modifiers = ModifierList.new(block, element, [modifiers.to_h, *new_mods])
+
+      modifiers.to_h
+    end
+
+    def mods=(new_mods)
+      @modifiers = ModifierList.new(block, element, new_mods)
+
+      modifiers.to_h
+    end
+
     def tag
-      @tag.nil? ? default_tag : @tag
+      super.nil? ? default_tag : @tag
     end
 
-    def bem?
-      bem_enabled_via_option? || bem_cascade_enabled_via_option? || bem_enabled_fully?
-    end
-
-    def bem
-      bem_via_option? ? @bem : true
-    end
-
-    def bem_cascade
-      bem_cascade_via_option? ? @bem_cascade : true
+    def tag=(new_tag)
+      @tag = build_tag(new_tag)
     end
 
     protected
