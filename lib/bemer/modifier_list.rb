@@ -52,15 +52,16 @@ module Bemer
     end
 
     def normalize(name, value = true)
-      value =
-        case value
-        when String, Symbol
-          Bemer.css_class(value)
-        when Array
-          value.map { |val| Bemer.css_class(val) }
-        else
-          value
-        end
+      value = case value
+              when String, Symbol
+                Bemer.css_class(value)
+              when Array
+                return normalize(name, *value) if value.length.eql?(1)
+
+                value.map { |val| Bemer.css_class(val) }
+              else
+                value
+              end
 
       [Bemer.css_class(name), value]
     end
