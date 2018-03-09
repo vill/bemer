@@ -16,7 +16,7 @@ module Bemer
     end
 
     def match?(node)
-      predicate.match? build_context(node)
+      predicate.match?(self, node)
     end
 
     def name_match?(name)

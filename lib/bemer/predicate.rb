@@ -6,16 +6,16 @@ module Bemer
 
     def initialize(**options)
       @block     = options[:block]
-      @element   = options[:elem]
       @condition = options[:condition].nil? ? true : options[:condition]
-      @mixins    = MixinList.new(options[:mix]).to_a
-      @modifiers = options[:mods]
+      @element   = options[:elem]
+      @mixins    = MixinList.new(options[:mix])
+      @modifiers = ModifierList.new(:block, :elem, options[:mods])
       @name      = Bemer.entity_name(block, element)
       @mask      = build_mask
     end
 
-    def match?(context)
-      condition?(context) && mix?(context) && mods?(context)
+    def match?(template, node)
+      condition?(template, node) && mix?(node.mix) && mods?(node.mods)
     end
 
     def name_match?(name)
@@ -24,20 +24,30 @@ module Bemer
 
     protected
 
-    attr_reader :block, :element, :condition, :mask, :mixins, :modifiers
+    attr_reader :block, :element, :condition, :mask, :mixins
 
-    def condition?(context)
+    def condition?(template, node)
       return condition unless condition.respond_to?(:call)
 
-      condition.call(context)
+      condition.call Context.new(template, node)
     end
 
-    def mix?(context)
-      (mixins - context.mix).empty?
+    def mix?(mix)
+      (mixins.to_a - mix).empty?
     end
 
-    def mods?(context)
-      (ModifierList.new(context.block, context.elem, modifiers).to_a - context.mods).empty?
+    def mods?(mods)
+      return false if modifiers.keys.length > mods.keys.length
+
+      modifiers.all? do |name, value|
+        val = mods[name]
+
+        val.nil? ? false : (Array(value) - Array(val)).empty?
+      end
+    end
+
+    def modifiers
+      @modifiers.to_h
     end
 
     def build_mask
