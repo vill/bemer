@@ -14,10 +14,8 @@ module Bemer
       Bemer::MixinList.new(*mix).to_s
     end
 
-    def bem_mods(*block_and_element, mods)
-      block, element = *block_and_element
-
-      Bemer::ModifierList.new(block, element, mods).to_s
+    def bem_mods(block, element, *mods)
+      Bemer::ModifierList.new(block, element, *mods).to_s
     end
 
     def render_component(path, **options, &block)
