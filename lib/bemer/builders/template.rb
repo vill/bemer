@@ -19,7 +19,7 @@ module Bemer
 
       Pipeline::STRUCTURE_RELATED_MODES.each do |mode|
         define_method(mode) do |body = nil, &block|
-          body = block.respond_to?(:call) ? block : body
+          body = block if block.respond_to?(:call)
 
           templates.unshift Bemer::Template.new(mode, body, predicate)
         end
