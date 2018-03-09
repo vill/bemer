@@ -48,7 +48,7 @@ module Bemer
 
       return if name.blank? || value.blank?
 
-      modifiers[name] = modifiers.key?(name) ? [*modifiers[name], *value] : value
+      modifiers[name] = modifiers.key?(name) ? [*modifiers[name], *value].uniq : value
     end
 
     def normalize(name, value = true)
