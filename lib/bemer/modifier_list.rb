@@ -37,7 +37,7 @@ module Bemer
       return modifiers if @mods.blank? || @bem_class.blank?
 
       Array(@mods).each do |mods|
-        mods.instance_of?(Hash) ? mods.each { |attrs| add_modifier(attrs) } : add_modifier(mods)
+        mods.is_a?(Hash) ? mods.each { |attrs| add_modifier(attrs) } : add_modifier(mods)
       end
 
       modifiers
