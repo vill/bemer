@@ -5,10 +5,11 @@ require 'active_support/core_ext/hash/deep_merge'
 module Bemer
   module Builders
     class Template
+      ALL_METHODS            = [*Pipeline::MODES, *Pipeline::ADD_MODES].freeze
       MULTI_ARGUMENT_METHODS = [Pipeline::ADD_CLS_MODE, Pipeline::ADD_MIX_MODE,
                                 Pipeline::CLS_MODE, Pipeline::MIX_MODE].freeze
 
-      private_constant :MULTI_ARGUMENT_METHODS
+      private_constant :ALL_METHODS, :MULTI_ARGUMENT_METHODS
 
       def initialize(templates, **options)
         @options   = options
@@ -16,7 +17,7 @@ module Bemer
         @templates = templates
       end
 
-      (Pipeline::MODES - Pipeline::STRUCTURE_RELATED_MODES - MULTI_ARGUMENT_METHODS).each do |mode|
+      (ALL_METHODS - MULTI_ARGUMENT_METHODS - Pipeline::STRUCTURE_RELATED_MODES).each do |mode|
         define_method(mode) do |body|
           templates.unshift Bemer::Template.new(mode, body, predicate)
         end
