@@ -2,17 +2,16 @@
 
 module Bemer
   class Template < CommonTemplate
-    attr_reader :wildcard
-
-    alias wildcard? wildcard
-
     def initialize(mode, body, predicate)
       super(mode)
 
       @body      = body
       @method    = "#{mode}="
       @predicate = predicate
-      @wildcard  = predicate.name.include?('*')
+    end
+
+    def wildcard?
+      predicate.wildcard?
     end
 
     def match?(node)
