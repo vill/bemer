@@ -2,16 +2,14 @@
 
 module Bemer
   class Predicate
-    attr_reader :name
-
     def initialize(**options)
       @block     = options[:block]
       @condition = options[:condition].nil? ? true : options[:condition]
       @element   = options[:elem]
+      @mask      = build_mask(options[:block], options[:elem])
       @mixins    = MixinList.new(options[:mix])
       @modifiers = ModifierList.new(:block, :elem, options[:mods])
-      @name      = Bemer.entity_name(block, element)
-      @mask      = build_mask
+      @wildcard  = nil
     end
 
     def match?(template, node)
@@ -22,9 +20,15 @@ module Bemer
       Bemer.can_use_new_matcher? ? mask.match?(name) : mask =~ name
     end
 
+    def wildcard?
+      return wildcard unless wildcard.nil?
+
+      @wildcard = name.include?('*')
+    end
+
     protected
 
-    attr_reader :block, :element, :condition, :mask, :mixins
+    attr_reader :block, :element, :condition, :mask, :mixins, :name, :wildcard
 
     def condition?(template, node)
       return condition unless condition.respond_to?(:call)
@@ -50,7 +54,9 @@ module Bemer
       @modifiers.to_h
     end
 
-    def build_mask
+    def build_mask(block, element)
+      @name = Bemer.entity_name(block, element)
+
       return /^((?!#{Bemer.element_name_separator}).)*$/ if name.eql?('*')
 
       pattern = name.delete('*')
