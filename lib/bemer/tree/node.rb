@@ -127,7 +127,7 @@ module Bemer
         output   = ActiveSupport::SafeBuffer.new
 
         replace_parent_and_execute do
-          while position < children.count
+          while position < children.length
             node = children[position]
 
             tree.pipeline.run!(node)
