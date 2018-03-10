@@ -39,5 +39,5 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_development_dependency 'rubocop-rspec',    '~> 1.21'
   spec.add_development_dependency 'sqlite3',          '~> 1.3.13'
 
-  spec.add_runtime_dependency 'railties', '>= 3.2', '<= 5.2'
+  spec.add_runtime_dependency 'railties', '>= 3.2.22', '<= 5.2'
 end
