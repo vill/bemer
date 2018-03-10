@@ -31,7 +31,7 @@ module Bemer
 
         return yield(*builders) if block_given?
 
-        builders.count.odd? ? builders[0] : builders
+        builders.length.odd? ? builders[0] : builders
       end
 
       protected

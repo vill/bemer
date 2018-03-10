@@ -96,7 +96,7 @@ module Bemer
         templates.each do |template|
           next wildcard_container[template.mode].push(template) if template.wildcard?
 
-          priorities[template.mode][template.object_id] = container[template.mode].count
+          priorities[template.mode][template.object_id] = container[template.mode].length
 
           container[template.mode].push(template)
         end

@@ -37,7 +37,7 @@ module Bemer
       siblings = parent_node.nil? ? root_nodes : parent_node.children
       metadata = node_metadata.delete(node.object_id)
       position = metadata[:position]
-      offset   = position + node.replacers.count
+      offset   = position + node.replacers.length
 
       insert_metadata(position, metadata[:last], node.replacers)
       update_metadata(offset, siblings[position..-1])
@@ -87,7 +87,7 @@ module Bemer
       output   = ActiveSupport::SafeBuffer.new
       position = 0
 
-      while position < root_nodes.count
+      while position < root_nodes.length
         root_node = root_nodes[position]
 
         pipeline.run!(root_node)
@@ -108,14 +108,14 @@ module Bemer
 
       node_metadata[last_sibling.object_id][:last] = false if last_sibling
 
-      node_metadata[node_id] = { position: siblings.count + 1, last: true }
+      node_metadata[node_id] = { position: siblings.length + 1, last: true }
     end
 
     def insert_metadata(position, last, replacers)
-      last_position = replacers.count - 1
+      last_position = replacers.length - 1
       index         = 0
 
-      while index < replacers.count
+      while index < replacers.length
         data = { position: position + index, last: last && last_position.eql?(index) }
 
         node_metadata[replacers[index].object_id] = data
@@ -127,7 +127,7 @@ module Bemer
     def update_metadata(offset, siblings)
       index = 0
 
-      while index < siblings.count
+      while index < siblings.length
         sibling = siblings[index]
 
         node_metadata[sibling.object_id][:position] = offset + index
