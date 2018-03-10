@@ -15,9 +15,7 @@ module Bemer
       def apply!(mode, node)
         return if node.applied_modes[mode].present? || !allowable_mode?(mode)
 
-        template = find_template(mode, node)
-
-        apply_template!(template, mode, node)
+        apply_template!(mode, node)
       end
 
       def apply_next(current_template, node, **params)
@@ -60,12 +58,10 @@ module Bemer
         output
       end
 
-      def apply_template!(template, mode, node)
+      def apply_template!(mode, node)
         node.applied_modes[mode] = true
-
-        output = template ? template.apply!(node) : nil
-
-        return output unless [Pipeline::TAG_MODE, Pipeline::BEM_MODE].include?(mode)
+        template                 = find_template(mode, node)
+        output                   = template ? template.apply!(node) : nil
 
         disable_related_modes!(mode, node)
 
@@ -73,9 +69,13 @@ module Bemer
       end
 
       def disable_related_modes!(mode, node)
-        return disable_tag_related_modes!(node) if Pipeline::TAG_MODE.eql?(mode)
+        return unless [Pipeline::TAG_MODE, Pipeline::BEM_MODE].include?(mode)
 
-        disable_bem_related_modes!(node)
+        if Pipeline::TAG_MODE.eql?(mode)
+          disable_tag_related_modes!(node)
+        else
+          disable_bem_related_modes!(node)
+        end
       end
 
       def disable_tag_related_modes!(node)
