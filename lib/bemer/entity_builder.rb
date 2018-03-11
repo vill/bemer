@@ -47,11 +47,9 @@ module Bemer
     def js
       return {} if @js.blank?
 
-      js_attrs = { data: { bem: { name => {} } } }
+      attrs = @js.instance_of?(TrueClass) ? {} : super
 
-      js_attrs[:data][:bem][name] = @js unless @js.instance_of?(TrueClass)
-
-      js_attrs
+      { data: { bem: { name => attrs } } }
     end
 
     def add_js=(new_js)
