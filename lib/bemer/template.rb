@@ -5,6 +5,7 @@ module Bemer
     def initialize(mode, body, predicate)
       super(mode)
 
+      @add_mode  = !@mode.eql?(mode)
       @body      = body
       @method    = [@mode, '='].join.to_sym
       @predicate = predicate
@@ -40,7 +41,9 @@ module Bemer
 
     protected
 
-    attr_reader :body, :method, :predicate
+    attr_reader :add_mode, :body, :method, :predicate
+
+    alias add_mode? add_mode
 
     def capture_content(node)
       return body unless body.respond_to?(:call)
