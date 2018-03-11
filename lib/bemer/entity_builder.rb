@@ -7,7 +7,7 @@ module Bemer
     attr_writer :attrs, :bem, :content, :js
 
     def attrs
-      bem? ? { **@attrs, **js } : @attrs
+      bem? ? { **super, **js } : super
     end
 
     def add_attrs=(new_attrs)
@@ -15,7 +15,7 @@ module Bemer
     end
 
     def bem
-      bem_via_option? ? @bem : true
+      bem_via_option? ? super : true
     end
 
     def bem?
@@ -23,7 +23,7 @@ module Bemer
     end
 
     def bem_cascade
-      bem_cascade_via_option? ? @bem_cascade : true
+      bem_cascade_via_option? ? super : true
     end
 
     def cls
