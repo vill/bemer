@@ -6,7 +6,7 @@ module Bemer
       super(mode)
 
       @body      = body
-      @method    = "#{mode}="
+      @method    = [@mode, '='].join.to_sym
       @predicate = predicate
     end
 
