@@ -99,6 +99,14 @@ module Bemer
         end
       end
 
+      def apply_next(template, **params)
+        tree.pipeline.apply_next(template, self, params)
+      end
+
+      def apply(mode, template, **params)
+        tree.pipeline.apply(mode, template, self, params)
+      end
+
       protected
 
       attr_reader :renderer
