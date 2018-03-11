@@ -31,13 +31,7 @@ module Bemer
 
       js_class = 'i-bem' if @js.present?
 
-      [bem_class, mix, mods, js_class, super].reject(&:blank?)
-    end
-
-    def add_cls=(new_cls)
-      old_cls = public_method(:cls).super_method.call
-
-      @cls = build_css_classes(*old_cls, *new_cls)
+      [bem_class, mods, mix, super, js_class].reject(&:blank?)
     end
 
     def cls=(new_cls)
