@@ -4,14 +4,14 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class EntityBuilder < Entity
-    attr_writer :attrs, :bem, :content, :js
+    attr_writer :bem, :content, :js
 
     def attrs
       bem? ? { **super, **js } : super
     end
 
-    def add_attrs=(new_attrs)
-      @attrs.merge!(new_attrs)
+    def attrs=(new_attrs)
+      @attrs = build_attrs(new_attrs)
     end
 
     def bem
