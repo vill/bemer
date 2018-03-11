@@ -46,28 +46,12 @@ module Bemer
       { data: { bem: { name => attrs } } }
     end
 
-    def add_js=(new_js)
-      return @js.merge!(new_js) if @js.instance_of?(Hash)
-
-      @js = new_js
-    end
-
-    def add_mix=(new_mix)
-      @mix = MixinList.new(*mix, *new_mix).to_a
-    end
-
     def mix=(new_mix)
       @mix = MixinList.new(*new_mix).to_a
     end
 
     def mods
       modifiers.to_a
-    end
-
-    def add_mods=(new_mods)
-      @modifiers = ModifierList.new(block, element, [modifiers.to_h, *new_mods])
-
-      modifiers.to_h
     end
 
     def mods=(new_mods)
