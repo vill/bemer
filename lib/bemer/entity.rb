@@ -79,5 +79,13 @@ module Bemer
     def build_tag(new_tag)
       new_tag.instance_of?(String) ? new_tag.to_sym : new_tag
     end
+
+    def build_attrs(new_attrs)
+      case new_attrs
+      when Array then new_attrs.reject(&:blank?).to_h
+      when Hash then new_attrs
+      else {}
+      end
+    end
   end
 end
