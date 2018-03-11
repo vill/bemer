@@ -54,7 +54,11 @@ module Bemer
     end
 
     def capture_body(node)
-      body.respond_to?(:call) ? body.call(build_context(node)) : body
+      output = body.respond_to?(:call) ? body.call(build_context(node)) : body
+
+      return output unless add_mode?
+
+      [*node.apply(mode, self), *output]
     end
 
     def replace(node)
