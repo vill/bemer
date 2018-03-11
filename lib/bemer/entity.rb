@@ -5,7 +5,7 @@ require 'active_support/core_ext/object/blank'
 module Bemer
   class Entity
     attr_accessor :bem_cascade
-    attr_reader   :attrs, :bem, :bem_class, :block, :content, :elem, :js, :name
+    attr_reader   :bem, :bem_class, :block, :content, :elem, :js, :name
 
     alias element elem
 
@@ -17,6 +17,10 @@ module Bemer
       @name      = Bemer.entity_name(block, element)
 
       extract_options!(options)
+    end
+
+    def attrs
+      @attrs ||= build_attrs(html_attrs)
     end
 
     def block?
@@ -47,7 +51,7 @@ module Bemer
 
     protected
 
-    attr_reader :css_classes, :html_tag, :mixins, :modifiers
+    attr_reader :css_classes, :html_attrs, :html_tag, :mixins, :modifiers
 
     def extract_content(plain_text, &content)
       block_given? ? content : plain_text
@@ -61,7 +65,7 @@ module Bemer
       @js          = options.delete(:js)
       @mixins      = MixinList.new(options.delete(:mix))
       @modifiers   = ModifierList.new(block, element, options.delete(:mods))
-      @attrs       = options
+      @html_attrs  = options
     end
 
     def build_css_classes(*classes)
