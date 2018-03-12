@@ -26,7 +26,7 @@ module Bemer
 
     alias refine_component render_component
 
-    def define_templates(cached: false, &block)
+    def define_templates(cached: true, &block)
       Bemer::DefaultTemplateList.new(self, cached).compile(&block)
     end
 
