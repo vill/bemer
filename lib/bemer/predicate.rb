@@ -57,12 +57,7 @@ module Bemer
     def build_mask(block, element)
       @name = Bemer.entity_name(block, element)
 
-      return /^((?!#{Bemer.element_name_separator}).)*$/ if name.eql?('*')
-
-      pattern = name.delete('*')
-      mask    = name.sub(pattern, "(#{pattern})").gsub('*', '.*')
-
-      /^#{mask}$/
+      name.eql?('*') ? /^((?!#{Bemer.element_name_separator}).)*$/ : /^#{name.gsub('*', '.*')}$/
     end
   end
 end
