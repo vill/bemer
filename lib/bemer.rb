@@ -41,7 +41,6 @@ module Bemer
 
     # rubocop:disable Layout/AlignParameters
     def_delegators :config, :bem,
-                            :can_use_dig?,
                             :can_use_new_matcher?,
                             :default_block_tag,
                             :default_element_tag,
