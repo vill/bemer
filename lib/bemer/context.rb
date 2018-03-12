@@ -7,7 +7,7 @@ module Bemer
     extend Forwardable
 
     def_delegators :node, :attrs, :bem, :bem_cascade, :block, :cls, :elem,
-                   :first?, :js, :last?, :mix, :mods, :params, :position, :tag
+                   :first?, :js, :last?, :mix, :mods, :name, :params, :position, :tag
 
     def initialize(template, node)
       @node     = node

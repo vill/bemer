@@ -7,14 +7,18 @@ module Bemer
         @templates = templates
       end
 
-      def block(name = '*', **options)
-        builder = Builders::Template.new(templates, **options, block: name, elem: nil)
+      def block(name = '*', condition = true, **options)
+        params = { **options, condition: condition, block: name, elem: nil }
+
+        builder = Builders::Template.new(templates, params)
 
         block_given? ? yield(builder) : builder
       end
 
-      def elem(name = '*', block: '*', **options)
-        builder = Builders::Template.new(templates, **options, block: block || '*', elem: name)
+      def elem(name = '*', condition = true, block: '*', **options)
+        params = { **options, condition: condition, block: block || '*', elem: name }
+
+        builder = Builders::Template.new(templates, params)
 
         block_given? ? yield(builder) : builder
       end
