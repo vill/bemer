@@ -2,7 +2,7 @@
 
 module Bemer
   class DefaultTemplateList
-    def initialize(view, cached = false)
+    def initialize(view, cached = true)
       @path   = ''
       @view   = view
       @cached = cached
