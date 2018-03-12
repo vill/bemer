@@ -12,7 +12,6 @@ module Bemer
 
     ADD_ATTRS_MODE = :add_attrs
     ADD_CLS_MODE   = :add_cls
-    ADD_JS_MODE    = :add_js
     ADD_MIX_MODE   = :add_mix
     ADD_MODS_MODE  = :add_mods
     ATTRS_MODE     = :attrs
@@ -25,14 +24,11 @@ module Bemer
     REPLACE_MODE   = :replace
     TAG_MODE       = :tag
 
+    ADD_MODES               = [ADD_ATTRS_MODE, ADD_CLS_MODE, ADD_MIX_MODE, ADD_MODS_MODE].freeze
     STRUCTURE_RELATED_MODES = [REPLACE_MODE, CONTENT_MODE].freeze
-    # rubocop:disable Metrics/LineLength
-    ADD_MODES               = [ADD_ATTRS_MODE, ADD_CLS_MODE, ADD_JS_MODE, ADD_MIX_MODE, ADD_MODS_MODE].freeze
-    BEM_RELATED_MODES       = [JS_MODE, ADD_JS_MODE, MIX_MODE, ADD_MIX_MODE, MODS_MODE, ADD_MODS_MODE].freeze
-    TAG_RELATED_MODES       = [BEM_MODE, *BEM_RELATED_MODES, CLS_MODE, ADD_CLS_MODE, ATTRS_MODE, ADD_ATTRS_MODE].freeze
-    # rubocop:enable Metrics/LineLength
-    MODES                   = [REPLACE_MODE, TAG_MODE, BEM_MODE, JS_MODE,
-                               MIX_MODE, MODS_MODE, CLS_MODE, ATTRS_MODE, CONTENT_MODE].freeze
+    BEM_RELATED_MODES       = [JS_MODE, MIX_MODE, MODS_MODE].freeze
+    TAG_RELATED_MODES       = [BEM_MODE, *BEM_RELATED_MODES, CLS_MODE, ATTRS_MODE].freeze
+    MODES                   = [REPLACE_MODE, TAG_MODE, *TAG_RELATED_MODES, CONTENT_MODE].freeze
 
     def initialize(template_catalog)
       @handlers         = {}

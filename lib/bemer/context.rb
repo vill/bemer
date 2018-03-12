@@ -17,11 +17,11 @@ module Bemer
     end
 
     def apply_next(**params)
-      node.tree.pipeline.apply_next(template, node, params)
+      node.apply_next(template, params)
     end
 
     def apply(mode, **params)
-      node.tree.pipeline.apply(mode, template, node, params)
+      node.apply(mode, template, params)
     end
 
     protected

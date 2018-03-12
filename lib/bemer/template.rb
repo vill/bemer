@@ -5,8 +5,9 @@ module Bemer
     def initialize(mode, body, predicate)
       super(mode)
 
+      @add_mode  = !@mode.eql?(mode)
       @body      = body
-      @method    = "#{mode}="
+      @method    = [@mode, '='].join.to_sym
       @predicate = predicate
     end
 
@@ -26,7 +27,7 @@ module Bemer
       case mode
       when Pipeline::REPLACE_MODE then replace(node)
       when Pipeline::CONTENT_MODE then capture_content(node)
-      else node.entity_builder.dup.public_send(method, capture_body(node))
+      else node.entity_builder.public_send(method, capture_body(node), false)
       end
     end
 
@@ -40,7 +41,9 @@ module Bemer
 
     protected
 
-    attr_reader :body, :method, :predicate
+    attr_reader :add_mode, :body, :method, :predicate
+
+    alias add_mode? add_mode
 
     def capture_content(node)
       return body unless body.respond_to?(:call)
@@ -51,7 +54,13 @@ module Bemer
     end
 
     def capture_body(node)
-      body.respond_to?(:call) ? body.call(build_context(node)) : body
+      output = body.respond_to?(:call) ? body.call(build_context(node)) : body
+
+      return output unless add_mode?
+
+      normalized_output = node.entity_builder.public_send(method, output, false)
+
+      [*node.apply(mode, self), *normalized_output]
     end
 
     def replace(node)

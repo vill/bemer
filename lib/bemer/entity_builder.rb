@@ -4,18 +4,26 @@ require 'active_support/core_ext/object/blank'
 
 module Bemer
   class EntityBuilder < Entity
-    attr_writer :attrs, :bem, :content, :js
-
     def attrs
-      bem? ? { **@attrs, **js } : @attrs
+      bem? ? { **super, **js } : super
     end
 
-    def add_attrs=(new_attrs)
-      @attrs.merge!(new_attrs)
+    def attrs=(new_attrs, save = true)
+      new_attrs = build_attrs(new_attrs)
+
+      return new_attrs unless save
+
+      @attrs = new_attrs
     end
 
     def bem
-      bem_via_option? ? @bem : true
+      bem_via_option? ? super : true
+    end
+
+    def bem=(new_bem, save = true)
+      return new_bem unless save
+
+      @bem = new_bem
     end
 
     def bem?
@@ -23,7 +31,13 @@ module Bemer
     end
 
     def bem_cascade
-      bem_cascade_via_option? ? @bem_cascade : true
+      bem_cascade_via_option? ? super : true
+    end
+
+    def bem_cascade=(new_bem_cascade, save = true)
+      return new_bem_cascade unless save
+
+      @bem_cascade = new_bem_cascade
     end
 
     def cls
@@ -31,55 +45,55 @@ module Bemer
 
       js_class = 'i-bem' if @js.present?
 
-      [bem_class, mix, mods, js_class, super].reject(&:blank?)
+      [bem_class, mods, mix, super, js_class].reject(&:blank?)
     end
 
-    def add_cls=(new_cls)
-      old_cls = public_method(:cls).super_method.call
+    def cls=(new_cls, save = true)
+      new_cls = build_css_classes(*new_cls)
 
-      @cls = build_css_classes(*old_cls, *new_cls)
+      return new_cls unless save
+
+      @cls = new_cls
     end
 
-    def cls=(new_cls)
-      @cls = build_css_classes(*new_cls)
+    def content=(new_content, save = true)
+      return new_content unless save
+
+      @content = new_content
     end
 
     def js
       return {} if @js.blank?
 
-      js_attrs = { data: { bem: { name => {} } } }
+      attrs = @js.instance_of?(TrueClass) ? {} : super
 
-      js_attrs[:data][:bem][name] = @js unless @js.instance_of?(TrueClass)
-
-      js_attrs
+      { data: { bem: { name => attrs } } }
     end
 
-    def add_js=(new_js)
-      return @js.merge!(new_js) if @js.instance_of?(Hash)
+    def js=(new_js, save = true)
+      return new_js unless save
 
       @js = new_js
     end
 
-    def add_mix=(new_mix)
-      @mix = MixinList.new(*mix, *new_mix).to_a
-    end
+    def mix=(new_mix, save = true)
+      new_mix = MixinList.new(*new_mix).to_a
 
-    def mix=(new_mix)
-      @mix = MixinList.new(*new_mix).to_a
+      return new_mix unless save
+
+      @mix = new_mix
     end
 
     def mods
       modifiers.to_a
     end
 
-    def add_mods=(new_mods)
-      @modifiers = ModifierList.new(block, element, [modifiers.to_h, *new_mods])
+    def mods=(new_mods, save = true)
+      modifiers = ModifierList.new(block, element, new_mods)
 
-      modifiers.to_h
-    end
+      return modifiers.to_h unless save
 
-    def mods=(new_mods)
-      @modifiers = ModifierList.new(block, element, new_mods)
+      @modifiers = modifiers
 
       modifiers.to_h
     end
@@ -88,8 +102,12 @@ module Bemer
       super.nil? ? default_tag : @tag
     end
 
-    def tag=(new_tag)
-      @tag = build_tag(new_tag)
+    def tag=(new_tag, save = true)
+      new_tag = build_tag(new_tag)
+
+      return new_tag unless save
+
+      @tag = new_tag
     end
 
     protected
