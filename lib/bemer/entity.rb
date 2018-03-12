@@ -86,7 +86,7 @@ module Bemer
 
     def build_attrs(new_attrs)
       case new_attrs
-      when Array then new_attrs.reject(&:blank?).to_h
+      when Array then new_attrs.to_h
       when Hash then new_attrs
       else {}
       end

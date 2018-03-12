@@ -58,7 +58,9 @@ module Bemer
 
       return output unless add_mode?
 
-      [*node.apply(mode, self), *output]
+      normalized_output = node.entity_builder.public_send(method, output, false)
+
+      [*node.apply(mode, self), *normalized_output]
     end
 
     def replace(node)
