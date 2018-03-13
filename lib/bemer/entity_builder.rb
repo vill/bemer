@@ -11,9 +11,7 @@ module Bemer
     def attrs=(new_attrs, save = true)
       new_attrs = build_attrs(new_attrs)
 
-      return new_attrs unless save
-
-      @attrs = new_attrs
+      save ? @attrs = new_attrs : new_attrs
     end
 
     def bem
@@ -21,9 +19,7 @@ module Bemer
     end
 
     def bem=(new_bem, save = true)
-      return new_bem unless save
-
-      @bem = new_bem
+      save ? @bem = new_bem : new_bem
     end
 
     def bem?
@@ -35,9 +31,7 @@ module Bemer
     end
 
     def bem_cascade=(new_bem_cascade, save = true)
-      return new_bem_cascade unless save
-
-      @bem_cascade = new_bem_cascade
+      save ? @bem_cascade = new_bem_cascade : new_bem_cascade
     end
 
     def cls
@@ -51,15 +45,11 @@ module Bemer
     def cls=(new_cls, save = true)
       new_cls = build_css_classes(*new_cls)
 
-      return new_cls unless save
-
-      @cls = new_cls
+      save ? @cls = new_cls : new_cls
     end
 
     def content=(new_content, save = true)
-      return new_content unless save
-
-      @content = new_content
+      save ? @content = new_content : new_content
     end
 
     def js
@@ -71,17 +61,13 @@ module Bemer
     end
 
     def js=(new_js, save = true)
-      return new_js unless save
-
-      @js = new_js
+      save ? @js = new_js : new_js
     end
 
     def mix=(new_mix, save = true)
       new_mix = MixinList.new(*new_mix).to_a
 
-      return new_mix unless save
-
-      @mix = new_mix
+      save ? @mix = new_mix : new_mix
     end
 
     def mods
@@ -89,11 +75,8 @@ module Bemer
     end
 
     def mods=(new_mods, save = true)
-      modifiers = ModifierList.new(block, element, new_mods)
-
-      return modifiers.to_h unless save
-
-      @modifiers = modifiers
+      modifiers  = ModifierList.new(block, element, new_mods)
+      @modifiers = modifiers if save
 
       modifiers.to_h
     end
@@ -105,9 +88,7 @@ module Bemer
     def tag=(new_tag, save = true)
       new_tag = build_tag(new_tag)
 
-      return new_tag unless save
-
-      @tag = new_tag
+      save ? @tag = new_tag : new_tag
     end
 
     protected
