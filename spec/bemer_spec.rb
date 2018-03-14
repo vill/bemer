@@ -46,56 +46,6 @@ RSpec.describe Bemer do
     end
   end
 
-  describe '.compound_css_class' do
-    subject(:compound_css_class) { described_class.method(:compound_css_class) }
-
-    it 'creates an empty class from empty arguments', :aggregate_failures do
-      expect(compound_css_class.call).to eq empty_class
-      expect(compound_css_class.call(*empty_arguments)).to eq empty_class
-      expect(compound_css_class.call(*empty_arguments, [*empty_arguments])).to eq empty_class
-    end
-
-    it 'creates a class from arguments with whitespaces' do
-      expect(compound_css_class.call('  removes  ', :' all ', ' white  spaces ')).to eq 'removes-all-whitespaces'
-    end
-
-    context 'when transform_string_values is set to true' do
-      before do
-        described_class.config.transform_string_values = true
-      end
-
-      it 'creates a class from strings and symbols' do
-        expect(compound_css_class.call(:some, :Awesome, 'CSS', 'Class')).to eq 'some-awesome-css-class'
-      end
-
-      it 'creates a class from strings and symbols with custom separator' do
-        expect(compound_css_class.call(:some, :Awesome, 'CSS', 'Class', separator: '_')).to eq 'some_awesome_css_class'
-      end
-
-      it 'creates a class from nested strings and symbols' do
-        expect(compound_css_class.call(:Some, ['Awesome', [:CSS]], ['Class'])).to eq 'some-awesome-css-class'
-      end
-    end
-
-    context 'when transform_string_values is set to false' do
-      before do
-        described_class.config.transform_string_values = false
-      end
-
-      it 'creates a class from strings and symbols' do
-        expect(compound_css_class.call(:some, :Awesome, 'CSS', 'Class')).to eq 'some-awesome-CSS-Class'
-      end
-
-      it 'creates a class from strings and symbols with custom separator' do
-        expect(compound_css_class.call(:some, :Awesome, 'CSS', 'Class', separator: '_')).to eq 'some_awesome_CSS_Class'
-      end
-
-      it 'creates a class from nested strings and symbols' do
-        expect(compound_css_class.call(:Some, ['Awesome', [:CSS]], ['Class'])).to eq 'some-Awesome-css-Class'
-      end
-    end
-  end
-
   describe '.bem_class' do
     subject(:bem_class) { described_class.method(:bem_class) }
 
