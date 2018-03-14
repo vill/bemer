@@ -50,8 +50,7 @@ module Bemer
                             :modifier_value_separator,
                             :path,
                             :precompile,
-                            :prepend_assets_path,
-                            :transform_string_values
+                            :prepend_assets_path
     # rubocop:enable Layout/AlignParameters
 
     alias prepend_assets_path? prepend_assets_path
@@ -84,16 +83,12 @@ module Bemer
       names.map { |name| css_class(name) }.join(element_name_separator)
     end
 
-    def compound_css_class(*parts, separator: '-')
-      parts.flatten.reject(&:blank?).map { |part| css_class(part) }.join(separator)
-    end
-
     def css_class(name)
       name_without_whitespace = name.to_s.delete(' ')
 
-      return name_without_whitespace if name.instance_of?(String) && !transform_string_values
+      return name_without_whitespace if name.instance_of?(String)
 
-      name_without_whitespace.underscore.dasherize
+      name_without_whitespace.dasherize
     end
   end
 end
