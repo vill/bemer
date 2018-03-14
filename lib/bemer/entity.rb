@@ -5,7 +5,7 @@ require 'active_support/core_ext/object/blank'
 module Bemer
   class Entity
     attr_accessor :bem_cascade
-    attr_reader   :bem, :bem_class, :block, :content, :elem, :js, :name
+    attr_reader   :bem, :bem_class, :block, :content, :elem, :js, :name, :tag
 
     alias element elem
 
@@ -45,26 +45,22 @@ module Bemer
       @mods ||= modifiers.to_h
     end
 
-    def tag
-      @tag ||= build_tag(html_tag)
-    end
-
     protected
 
-    attr_reader :css_classes, :html_attrs, :html_tag, :mixins, :modifiers
+    attr_reader :css_classes, :html_attrs, :mixins, :modifiers
 
     def extract_content(plain_text, &content)
       block_given? ? content : plain_text
     end
 
-    def extract_options!(options)
+    def extract_options!(options) # rubocop:disable Metrics/AbcSize
       @bem         = options.delete(:bem)
       @bem_cascade = options.delete(:bem_cascade)
       @css_classes = [options.delete(:class), options.delete(:cls)]
-      @html_tag    = options.delete(:tag)
       @js          = options.delete(:js)
       @mixins      = MixinList.new(options.delete(:mix))
       @modifiers   = ModifierList.new(block, element, options.delete(:mods))
+      @tag         = build_tag(options.delete(:tag))
       @html_attrs  = options
     end
 
