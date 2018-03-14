@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Bemer::ModifierList, focus: true do
+RSpec.describe Bemer::ModifierList do
   shared_examples 'modifier_list' do
     describe 'modifiers from an empty params' do
       subject(:modifier_list) { described_class.new(:block, nil, [nil, '', {}, enabled: false]) }
