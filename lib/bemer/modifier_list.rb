@@ -12,11 +12,7 @@ module Bemer
     end
 
     def to_a
-      @mods_as_array ||= begin
-        to_h.flat_map do |name, value|
-          Array(value).map { |val| build_css_class(name, val) }
-        end
-      end
+      @mods_as_array ||= to_h.map { |name, value| build_css_class(name, value) }
     end
 
     def to_s
@@ -46,24 +42,17 @@ module Bemer
     end
 
     def add_modifier(attrs)
-      name, value = normalize(*attrs)
+      name, value = normalize(attrs)
 
       return if name.blank? || value.blank?
 
-      modifiers[name] = modifiers.key?(name) ? [*modifiers[name], *value].uniq : value
+      modifiers[name] = value
     end
 
-    def normalize(name, value = true)
-      value = case value
-              when String, Symbol
-                Bemer.css_class(value)
-              when Array
-                return normalize(name, *value) if value.length.eql?(1)
+    def normalize(attrs)
+      name, value = *attrs, true
 
-                value.map { |val| Bemer.css_class(val) }
-              else
-                value
-              end
+      value = Bemer.css_class(value) unless [TrueClass, FalseClass, NilClass].include?(value.class)
 
       [Bemer.css_class(name), value]
     end
