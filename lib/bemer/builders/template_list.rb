@@ -33,7 +33,7 @@ module Bemer
           Builders::Template.new(templates, **options, condition: condition, **entity)
         end
 
-        return yield(*builders) if block_given?
+        return yield(builders[0], builders[1]) if block_given?
 
         builders.length.odd? ? builders[0] : builders
       end

@@ -74,7 +74,7 @@ module Bemer
 
         case css_class
         when String then css_class.split
-        when Array then build_css_classes(*css_class)
+        when Array then css_class.map { |css_cls| build_css_classes(css_cls) }
         else Bemer.css_class(css_class)
         end
       end.flatten.uniq
