@@ -39,8 +39,9 @@ module Bemer
         end
       end
 
-      def specify(**new_options)
-        builder = Builders::Template.new(templates, new_options.deep_merge(options))
+      def specify(condition = options[:condition], **new_options)
+        params  = { **options, condition: condition }
+        builder = Builders::Template.new(templates, new_options.deep_merge(params))
 
         block_given? ? yield(builder) : builder
       end
