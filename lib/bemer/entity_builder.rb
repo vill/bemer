@@ -43,7 +43,7 @@ module Bemer
     end
 
     def cls=(new_cls, save = true)
-      new_cls = build_css_classes(*new_cls)
+      new_cls = build_css_classes(new_cls)
 
       save ? @cls = new_cls : new_cls
     end
@@ -65,7 +65,7 @@ module Bemer
     end
 
     def mix=(new_mix, save = true)
-      new_mix = MixinList.new(*new_mix).to_a
+      new_mix = MixinList.new(new_mix).to_a
 
       save ? @mix = new_mix : new_mix
     end
