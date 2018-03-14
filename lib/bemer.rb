@@ -91,7 +91,7 @@ module Bemer
     def css_class(name)
       name_without_whitespace = name.to_s.delete(' ')
 
-      return name_without_whitespace if !transform_string_values && name.instance_of?(String)
+      return name_without_whitespace if name.instance_of?(String) && !transform_string_values
 
       name_without_whitespace.underscore.dasherize
     end
