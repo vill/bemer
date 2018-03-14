@@ -15,10 +15,8 @@ module Bemer
 
     initializer_name =
       case Rails::VERSION::MAJOR
-      when 5
-        :append_assets_path
-      when 3..4
-        :load_config_initializers
+      when 5    then :append_assets_path
+      when 3..4 then :load_config_initializers
       end
 
     initializer 'bemer.prepend_assets_path', group: :all, after: initializer_name do |app|

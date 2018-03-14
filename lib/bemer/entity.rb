@@ -70,7 +70,7 @@ module Bemer
 
         case css_class
         when String then css_class.split
-        when Array then css_class.map { |css_cls| build_css_classes(css_cls) }
+        when Array  then css_class.map { |css_cls| build_css_classes(css_cls) }
         else Bemer.css_class(css_class)
         end
       end.flatten.uniq
@@ -83,7 +83,7 @@ module Bemer
     def build_attrs(new_attrs)
       case new_attrs
       when Array then new_attrs.to_h
-      when Hash then new_attrs
+      when Hash  then new_attrs
       else {}
       end
     end
