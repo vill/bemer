@@ -37,7 +37,7 @@ module Bemer
     def cls
       return super unless bem?
 
-      js_class = 'i-bem' if @js.present?
+      js_class = 'i-bem' if @js.present? && bem_class.present?
 
       [bem_class, mods, mix, super, js_class].reject(&:blank?)
     end
@@ -53,7 +53,7 @@ module Bemer
     end
 
     def js
-      return {} if @js.blank?
+      return {} if @js.blank? || bem_class.blank?
 
       attrs = @js.instance_of?(TrueClass) ? {} : super
 
