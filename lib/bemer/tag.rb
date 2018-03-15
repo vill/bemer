@@ -6,8 +6,8 @@ module Bemer
   class Tag
     extend Forwardable
 
-    def initialize(block = '', element = nil, bem_cascade: nil, **options, &content)
-      @bem_cascade    = bem_cascade
+    def initialize(block = '', element = nil, **options, &content)
+      @bem_cascade    = options[:bem_cascade]
       @entity_builder = EntityBuilder.new(block, element, options, &content)
       @renderer       = Renderer.new
     end
