@@ -26,7 +26,7 @@ module Bemer
     end
 
     initializer 'bemer.assets_precompile', group: :all, after: :load_config_initializers do |app|
-      next if !defined?(::Sprockets) || Bemer.precompile.empty?
+      next unless defined?(::Sprockets)
 
       Bemer.loose_app_assets = app.config.assets.precompile.shift
 
@@ -41,7 +41,7 @@ module Bemer
       end
 
       app.config.assets.precompile.unshift(matcher)
-      app.config.assets.precompile << Bemer.precompile
+      app.config.assets.precompile << Bemer.precompile unless Bemer.precompile.empty?
     end
   end
 end
