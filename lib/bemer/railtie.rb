@@ -41,7 +41,7 @@ module Bemer
       end
 
       app.config.assets.precompile.unshift(matcher)
-      app.config.assets.precompile << Bemer.precompile
+      app.config.assets.precompile << Bemer.precompile unless Bemer.precompile.empty?
     end
   end
 end
