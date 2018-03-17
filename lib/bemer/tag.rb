@@ -7,22 +7,22 @@ module Bemer
     extend Forwardable
 
     def initialize(block = '', element = nil, **options, &content)
-      @bem_cascade    = options[:bem_cascade]
-      @entity_builder = EntityBuilder.new(block, element, options, &content)
-      @renderer       = Renderer.new
+      @bem_cascade = options[:bem_cascade]
+      @tag_builder = TagBuilder.new(block, element, options, &content)
+      @renderer    = Renderer.new
     end
 
     def render
-      entity_builder.content = capture_content
+      tag_builder.content = capture_content
 
-      renderer.render(entity_builder)
+      renderer.render(tag_builder)
     end
 
     protected
 
-    attr_reader :bem_cascade, :entity_builder, :renderer
+    attr_reader :bem_cascade, :renderer, :tag_builder
 
-    def_delegators :entity_builder, :block, :block?, :content
+    def_delegators :tag_builder, :block, :block?, :content
 
     def capture_content
       return content unless content.respond_to?(:call)

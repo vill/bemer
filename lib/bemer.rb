@@ -25,6 +25,7 @@ module Bemer
   autoload :Predicate
   autoload :Renderer
   autoload :Tag
+  autoload :TagBuilder
   autoload :Template
   autoload :TemplateList
   autoload :Tree
