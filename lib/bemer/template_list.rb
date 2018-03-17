@@ -50,7 +50,7 @@ module Bemer
     def default_path_prefix(path)
       return Bemer.default_path_prefix.to_s unless Bemer.default_path_prefix.respond_to?(:call)
 
-      Bemer.default_path_prefix.call(path, view)
+      Bemer.default_path_prefix.call(path.to_s, view)
     end
 
     def remove_template_catalog!
