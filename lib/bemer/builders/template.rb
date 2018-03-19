@@ -9,9 +9,12 @@ module Bemer
 
       private_constant :ALL_METHODS, :MULTI_ARGUMENT_METHODS
 
-      def initialize(templates, **options)
+      def initialize(templates, block: '*', elem: nil, condition: true, **options)
+        @block     = block
+        @element   = elem
+        @condition = condition
         @options   = options
-        @predicate = Bemer::Predicate.new(options)
+        @predicate = Bemer::Predicate.new(block: block, elem: elem, condition: condition, **options)
         @templates = templates
       end
 
@@ -37,9 +40,11 @@ module Bemer
         end
       end
 
-      def specify(condition = options[:condition], **new_options)
-        params  = { **options, condition: condition }
-        builder = Builders::Template.new(templates, new_options.deep_merge(params))
+      def specify(condition = @condition, block: @block, elem: @element, **new_options)
+        block   = @block.eql?('*') ? block : @block
+        elem    = @element.nil? || @element.eql?('*') ? elem : @element
+        params  = { **new_options, **options, condition: condition, block: block, elem: elem }
+        builder = Builders::Template.new(templates, params)
 
         block_given? ? yield(builder) : builder
       end
