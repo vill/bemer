@@ -66,10 +66,10 @@ module Bemer
       nil
     end
 
-    def add_text_node(content = nil, bem_cascade: nil, &callback)
+    def add_text_node(content: nil, bem_cascade: nil, &callback)
       bem_cascade = inherited_bem_cascade if bem_cascade.nil?
 
-      add TextNode.new(self, content, bem_cascade: bem_cascade, &callback)
+      add TextNode.new(self, content: content, bem_cascade: bem_cascade, &callback)
 
       nil
     end

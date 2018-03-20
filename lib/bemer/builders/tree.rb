@@ -24,7 +24,7 @@ module Bemer
       end
 
       def text(content = nil, bem_cascade: nil, &callback)
-        tree.add_text_node(content, bem_cascade: bem_cascade, &callback)
+        tree.add_text_node(content: content, bem_cascade: bem_cascade, &callback)
       end
 
       protected
