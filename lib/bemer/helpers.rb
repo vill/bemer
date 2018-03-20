@@ -34,8 +34,8 @@ module Bemer
       Bemer::Component.new(self).render(options, &block)
     end
 
-    def component_pack(collection = [], &block)
-      Bemer::ComponentPack.new(self, collection).render(&block)
+    def component_pack(&block)
+      Bemer::ComponentPack.new(self).render(&block)
     end
   end
 end
