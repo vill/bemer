@@ -2,17 +2,16 @@
 
 module Bemer
   class ComponentPack
-    def initialize(view, collection = [])
-      @collection = collection
-      @view       = view
+    def initialize(view)
+      @view = view
     end
 
     def render
-      return unless block_given? && collection.is_a?(Enumerable)
+      return unless block_given?
 
       create_template_catalog!
 
-      collection.each { |item| yield item }
+      yield
 
       remove_template_catalog!
 
@@ -21,7 +20,7 @@ module Bemer
 
     protected
 
-    attr_reader :collection, :view
+    attr_reader :view
 
     def create_template_catalog!
       return unless view.instance_variable_get(:@bemer_template_catalog).nil?
