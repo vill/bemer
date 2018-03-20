@@ -66,11 +66,10 @@ module Bemer
       nil
     end
 
-    def add_text_node(content = nil, **options, &callback)
-      bem_cascade = parent_node.nil? ? params[:bem_cascade] : parent_node.bem_cascade
-      new_options = { **params, bem_cascade: bem_cascade, **options }
+    def add_text_node(content = nil, bem_cascade: nil, &callback)
+      bem_cascade = inherited_bem_cascade if bem_cascade.nil?
 
-      add TextNode.new(self, content, new_options, &callback)
+      add TextNode.new(self, content, bem_cascade: bem_cascade, &callback)
 
       nil
     end
@@ -78,6 +77,10 @@ module Bemer
     protected
 
     attr_reader :root_nodes, :params
+
+    def inherited_bem_cascade
+      parent_node.nil? ? params[:bem_cascade] : parent_node.bem_cascade
+    end
 
     def need_replace_parent_node?
       !parent_node.nil? && parent_node.need_replace?
