@@ -1,33 +1,25 @@
 # frozen_string_literal: true
 
-require 'forwardable'
 require 'active_support/core_ext/string/output_safety'
 
 module Bemer
   class Tree
-    class Node # rubocop:disable Metrics/ClassLength
-      extend Forwardable
-
+    class Node < BaseNode # rubocop:disable Metrics/ClassLength
       attr_accessor :content_replaced, :need_replace, :params
-      attr_reader   :applied_modes, :children, :entity, :entity_builder, :replacers, :tree
+      attr_reader   :applied_modes, :children, :replacers
 
       alias content_replaced? content_replaced
       alias need_replace?     need_replace
 
-      def_delegators :entity, :bem, :bem_cascade, :block, :block?,
-                     :content, :elem, :elem?, :element?, :name, :tag
-
       def initialize(tree, block = '', element = nil, **options, &content)
-        @applied_modes     = Pipeline::MODES.map { |mode| [mode, false] }.to_h
-        @children          = []
-        @content_replaced  = false
-        @entity            = Entity.new(block, element, options, &content)
-        @entity_builder    = EntityBuilder.new(block, element, options, &content)
-        @need_replace      = false
-        @params            = {}
-        @renderer          = Renderer.new
-        @replacers         = []
-        @tree              = tree
+        super(tree, block, element, options, &content)
+
+        @applied_modes    = Pipeline::MODES.map { |mode| [mode, false] }.to_h
+        @children         = []
+        @content_replaced = false
+        @need_replace     = false
+        @params           = {}
+        @replacers        = []
       end
 
       def attrs
@@ -48,12 +40,6 @@ module Bemer
 
       def mods
         @mods ||= entity.mods.freeze
-      end
-
-      def render
-        entity_builder.content = capture_content
-
-        renderer.render(entity_builder)
       end
 
       def last?
@@ -90,9 +76,7 @@ module Bemer
       end
 
       def print(level = 0)
-        prefix = '   ' * level
-
-        puts [prefix, name, "(#{object_id})"].join
+        super(level)
 
         children.each do |node|
           node.print(level + 1)
@@ -108,8 +92,6 @@ module Bemer
       end
 
       protected
-
-      attr_reader :renderer
 
       def capture_content
         output     = ActiveSupport::SafeBuffer.new
