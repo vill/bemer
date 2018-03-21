@@ -8,6 +8,7 @@ module Bemer
     extend ActiveSupport::Autoload
 
     eager_autoload do
+      autoload :BaseNode
       autoload :Node
       autoload :TextNode
     end
