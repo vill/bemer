@@ -23,8 +23,8 @@ module Bemer
         tree.add_node(block, name, options, &content)
       end
 
-      def text(content = nil, bem_cascade: nil, &callback)
-        tree.add_text_node(content: content, bem_cascade: bem_cascade, &callback)
+      def text(content = nil, &callback)
+        tree.add_text_node(content, &callback)
       end
 
       protected

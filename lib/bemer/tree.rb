@@ -50,11 +50,15 @@ module Bemer
     end
 
     def add(node)
-      return parent_node.replacers << node if need_replace_parent_node?
+      if need_replace_parent_node?
+        parent_node.replacers << node
+      else
+        add_metadata(node.object_id)
 
-      add_metadata(node.object_id)
+        parent_node.nil? ? root_nodes << node : parent_node.children << node
+      end
 
-      parent_node.nil? ? root_nodes << node : parent_node.children << node
+      nil
     end
 
     def add_node(block = '', element = nil, bem_cascade: nil, **options, &content)
@@ -62,16 +66,10 @@ module Bemer
       new_options = { **params, bem_cascade: bem_cascade, **options }
 
       add Node.new(self, block, element, new_options, &content)
-
-      nil
     end
 
-    def add_text_node(content: nil, bem_cascade: nil, &callback)
-      bem_cascade = inherited_bem_cascade if bem_cascade.nil?
-
-      add TextNode.new(self, content: content, bem_cascade: bem_cascade, &callback)
-
-      nil
+    def add_text_node(content = nil, &callback)
+      add TextNode.new(self, content, &callback)
     end
 
     protected
