@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
+require 'forwardable'
+
 module Bemer
   class Template < CommonTemplate
+    extend Forwardable
+
+    def_delegators :predicate, :wildcard?, :match?, :name_match?
+
     def initialize(mode, body, predicate)
       super(mode)
 
@@ -9,18 +15,6 @@ module Bemer
       @body      = body
       @method    = [@mode, '='].join.to_sym
       @predicate = predicate
-    end
-
-    def wildcard?
-      predicate.wildcard?
-    end
-
-    def match?(node)
-      predicate.match?(self, node)
-    end
-
-    def name_match?(name)
-      predicate.name_match?(name)
     end
 
     def apply(node)
