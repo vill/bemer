@@ -12,8 +12,8 @@ module Bemer
       @wildcard  = nil
     end
 
-    def match?(template, node)
-      condition?(template, node) && mix?(node.mix) && mods?(node.mods)
+    def match?(node)
+      condition?(node) && mix?(node.mix) && mods?(node.mods)
     end
 
     def name_match?(name)
@@ -30,10 +30,10 @@ module Bemer
 
     attr_reader :block, :element, :condition, :mask, :mixins, :name, :wildcard
 
-    def condition?(template, node)
+    def condition?(node)
       return condition unless condition.respond_to?(:call)
 
-      condition.call Context.new(template, node)
+      condition.call Context.new(node)
     end
 
     def mix?(mix)
