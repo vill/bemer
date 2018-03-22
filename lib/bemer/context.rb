@@ -14,14 +14,6 @@ module Bemer
       @template = template
     end
 
-    def apply_next(**params)
-      node.apply_next(template, params)
-    end
-
-    def apply(mode, **params)
-      node.apply(mode, template, params)
-    end
-
     protected
 
     attr_reader :template, :node
