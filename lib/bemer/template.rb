@@ -80,15 +80,11 @@ module Bemer
     end
 
     def build_context(node)
-      context = Context.new(node, self)
-
-      context.class.public_send(:include, ContextExtentions::Template)
+      context = Context.new(node, self).extend(ContextExtentions::Template)
 
       return context unless Pipeline::STRUCTURE_RELATED_MODES.include?(mode)
 
-      context.class.public_send(:include, ContextExtentions::Structure)
-
-      context
+      context.extend(ContextExtentions::Structure)
     end
   end
 end
