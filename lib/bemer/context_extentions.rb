@@ -7,5 +7,6 @@ module Bemer
     extend ActiveSupport::Autoload
 
     autoload :Structure
+    autoload :Template
   end
 end
