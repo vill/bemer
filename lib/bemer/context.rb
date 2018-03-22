@@ -12,8 +12,6 @@ module Bemer
     def initialize(template, node)
       @node     = node
       @template = template
-
-      include_extention!(template.mode)
     end
 
     def apply_next(**params)
@@ -25,12 +23,6 @@ module Bemer
     end
 
     protected
-
-    def include_extention!(mode)
-      return unless Pipeline::STRUCTURE_RELATED_MODES.include?(mode)
-
-      self.class.public_send :include, ContextExtentions::Structure
-    end
 
     attr_reader :template, :node
   end
