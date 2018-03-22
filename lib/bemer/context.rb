@@ -9,7 +9,7 @@ module Bemer
     def_delegators :node, :attrs, :bem, :bem_cascade, :block, :cls, :elem,
                    :first?, :js, :last?, :mix, :mods, :name, :params, :position, :tag
 
-    def initialize(template, node)
+    def initialize(node, template = nil)
       @node     = node
       @template = template
     end

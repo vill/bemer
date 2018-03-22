@@ -86,7 +86,7 @@ module Bemer
     end
 
     def build_context(node)
-      context = Context.new(self, node)
+      context = Context.new(node, self)
 
       context.class.public_send(:include, ContextExtentions::Template)
 

@@ -33,7 +33,7 @@ module Bemer
     def condition?(template, node)
       return condition unless condition.respond_to?(:call)
 
-      condition.call Context.new(template, node)
+      condition.call Context.new(node)
     end
 
     def mix?(mix)
