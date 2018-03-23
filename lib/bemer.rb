@@ -41,7 +41,8 @@ module Bemer
     attr_accessor :loose_app_assets
 
     # rubocop:disable Layout/AlignParameters
-    def_delegators :config, :bem,
+    def_delegators :config, :asset_paths,
+                            :bem,
                             :can_use_new_matcher?,
                             :default_block_tag,
                             :default_element_tag,
@@ -50,6 +51,7 @@ module Bemer
                             :modifier_name_separator,
                             :modifier_value_separator,
                             :path,
+                            :paths,
                             :prepend_asset_paths
     # rubocop:enable Layout/AlignParameters
 
