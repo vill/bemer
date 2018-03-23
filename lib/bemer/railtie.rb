@@ -5,8 +5,8 @@ module Bemer
     config.eager_load_namespaces << Bemer if config.respond_to?(:eager_load_namespaces)
 
     config.after_initialize do
-      ActionController::Base.prepend_view_path(Bemer.path)
-      ActionMailer::Base.prepend_view_path(Bemer.path)
+      ActionController::Base.prepend_view_path([Bemer.path, *Bemer.paths])
+      ActionMailer::Base.prepend_view_path([Bemer.path, *Bemer.paths])
     end
 
     initializer 'bemer.helpers' do
