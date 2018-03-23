@@ -14,15 +14,15 @@ module Bemer
     end
 
     initializer_name =
-      case Rails::VERSION::MAJOR
+      case ::Rails::VERSION::MAJOR
       when 5    then :append_assets_path
       when 3..4 then :load_config_initializers
       end
 
-    initializer 'bemer.prepend_assets_path', group: :all, after: initializer_name do |app|
-      next unless defined?(::Sprockets) && Bemer.prepend_assets_path?
+    initializer 'bemer.prepend_asset_paths', group: :all, after: initializer_name do |app|
+      next unless defined?(::Sprockets) && Bemer.prepend_asset_paths?
 
-      app.config.assets.paths.unshift(Bemer.path.to_s)
+      app.config.assets.paths.unshift(Bemer.path.to_s, *Bemer.asset_paths)
     end
 
     initializer 'bemer.assets_precompile', group: :all, after: :load_config_initializers do |app|
