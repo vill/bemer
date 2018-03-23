@@ -50,10 +50,10 @@ module Bemer
                             :modifier_name_separator,
                             :modifier_value_separator,
                             :path,
-                            :prepend_assets_path
+                            :prepend_asset_paths
     # rubocop:enable Layout/AlignParameters
 
-    alias prepend_assets_path? prepend_assets_path
+    alias prepend_asset_paths? prepend_asset_paths
 
     def config
       Configuration.instance

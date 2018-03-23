@@ -24,7 +24,7 @@ module Bemer
       @modifier_name_separator  = '_'
       @modifier_value_separator = '_'
       @path                     = 'app/bemer_components'
-      @prepend_assets_path      = true
+      @prepend_asset_paths      = true
     end
 
     def path
