@@ -9,6 +9,7 @@ require 'active_support/core_ext/string/inflections'
 module Bemer
   extend ActiveSupport::Autoload
 
+  autoload :AssetMatcher
   autoload :Builders
   autoload :CommonTemplate
   autoload :Component
@@ -37,8 +38,6 @@ module Bemer
 
   class << self
     extend Forwardable
-
-    attr_accessor :loose_app_assets
 
     # rubocop:disable Layout/AlignParameters
     def_delegators :config, :asset_paths,
