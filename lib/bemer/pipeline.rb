@@ -26,9 +26,9 @@ module Bemer
 
     ADD_MODES               = [ADD_ATTRS_MODE, ADD_CLS_MODE, ADD_MIX_MODE, ADD_MODS_MODE].freeze
     STRUCTURE_RELATED_MODES = [REPLACE_MODE, CONTENT_MODE].freeze
-    BEM_RELATED_MODES       = [JS_MODE, MIX_MODE, MODS_MODE].freeze
-    TAG_RELATED_MODES       = [BEM_MODE, *BEM_RELATED_MODES, CLS_MODE, ATTRS_MODE].freeze
-    MODES                   = [REPLACE_MODE, TAG_MODE, *TAG_RELATED_MODES, CONTENT_MODE].freeze
+    BEM_RELATED_MODES       = [MODS_MODE, MIX_MODE, JS_MODE].freeze
+    TAG_RELATED_MODES       = [CLS_MODE, ATTRS_MODE, BEM_MODE, *BEM_RELATED_MODES].freeze
+    MODES                   = [REPLACE_MODE, CONTENT_MODE, TAG_MODE, *TAG_RELATED_MODES].freeze
 
     def initialize(template_catalog)
       @handlers         = {}
@@ -39,11 +39,9 @@ module Bemer
       return node if node.instance_of?(Tree::TextNode)
 
       MODES.each do |mode|
-        next if node.applied_modes[mode]
-
         handler_by(node.name).apply!(mode, node)
 
-        return node if REPLACE_MODE.eql?(mode) && node.need_replace?
+        break if processing_completed?(mode, node)
       end
 
       node
@@ -60,6 +58,17 @@ module Bemer
     protected
 
     attr_reader :handlers, :template_catalog
+
+    def processing_completed?(mode, node)
+      return true if JS_MODE.eql?(mode)
+
+      case mode
+      when REPLACE_MODE then node.need_replace?
+      when TAG_MODE then node.entity_builder.tag.blank?
+      when BEM_MODE then !node.entity_builder.bem?
+      else false
+      end
+    end
 
     def handler_by(name)
       return handlers[name] if handlers.key?(name)
