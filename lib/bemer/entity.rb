@@ -77,7 +77,9 @@ module Bemer
     end
 
     def build_tag(new_tag)
-      new_tag.instance_of?(String) ? new_tag.to_sym : new_tag
+      return new_tag if new_tag.nil? || new_tag.instance_of?(Symbol)
+
+      new_tag.blank? ? '' : new_tag.to_sym
     end
 
     def build_attrs(new_attrs)
