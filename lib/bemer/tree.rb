@@ -114,10 +114,11 @@ module Bemer
     end
 
     def insert_metadata(position, last, replacers)
-      last_position = replacers.length - 1
       index         = 0
+      length        = replacers.length
+      last_position = length - 1
 
-      while index < replacers.length
+      while index < length
         data = { position: position + index, last: last && last_position.eql?(index) }
 
         node_metadata[replacers[index].object_id] = data
@@ -127,9 +128,10 @@ module Bemer
     end
 
     def update_metadata(offset, siblings)
-      index = 0
+      index  = 0
+      length = siblings.length
 
-      while index < siblings.length
+      while index < length
         sibling = siblings[index]
 
         node_metadata[sibling.object_id][:position] = offset + index
