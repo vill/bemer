@@ -79,7 +79,7 @@ module Bemer
       end
 
       def disable_tag_related_modes!(node)
-        return if node.entity_builder.tag.nil? || node.entity_builder.tag.present?
+        return if node.entity_builder.tag.present?
 
         Pipeline::TAG_RELATED_MODES.each { |mode| node.applied_modes[mode] = true }
       end
