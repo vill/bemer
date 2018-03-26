@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/hash/deep_merge'
 
 module Bemer
   class EntityBuilder < Entity
@@ -10,7 +11,7 @@ module Bemer
 
       return attributes unless bem?
 
-      attributes.merge!(js)
+      attributes.deep_merge!(js)
     end
 
     def attrs=(new_attrs, save = true)
