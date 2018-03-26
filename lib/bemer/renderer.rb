@@ -9,7 +9,7 @@ module Bemer
     def render(builder)
       return builder.content if builder.tag.blank?
 
-      content_tag(builder.tag, builder.content, **builder.attrs, class: builder.cls)
+      content_tag(builder.tag, builder.content, builder.attrs)
     end
   end
 end

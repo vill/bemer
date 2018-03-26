@@ -5,7 +5,12 @@ require 'active_support/core_ext/object/blank'
 module Bemer
   class EntityBuilder < Entity
     def attrs
-      bem? ? { **super, **js } : super
+      attributes         = Hash[super]
+      attributes[:class] = cls
+
+      return attributes unless bem?
+
+      attributes.merge!(js)
     end
 
     def attrs=(new_attrs, save = true)
