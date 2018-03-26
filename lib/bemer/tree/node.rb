@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/string/output_safety'
+require 'active_support/ordered_options'
 
 module Bemer
   class Tree
@@ -18,7 +19,7 @@ module Bemer
         @children         = []
         @content_replaced = false
         @need_replace     = false
-        @params           = {}
+        @params           = ActiveSupport::OrderedOptions.new
         @replacers        = []
       end
 
@@ -141,6 +142,7 @@ module Bemer
         @entity_builder         = original.entity_builder.dup
         @entity_builder.content = @entity.content
         @need_replace           = false
+        @params                 = ActiveSupport::OrderedOptions[original.params]
         @replacers              = []
       end
     end
