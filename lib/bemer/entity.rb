@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/hash/keys'
 
 module Bemer
   class Entity
@@ -84,8 +85,8 @@ module Bemer
 
     def build_attrs(new_attrs)
       case new_attrs
-      when Array then new_attrs.to_h
-      when Hash  then new_attrs
+      when Array then new_attrs.to_h.symbolize_keys
+      when Hash  then new_attrs.symbolize_keys
       else {}
       end
     end
