@@ -49,9 +49,11 @@ module Bemer
       end
 
       def apply_template(mode, node, position = 0, **params)
-        template    = find_template(mode, node, position)
-        old_params  = node.params
-        node.params = params
+        template   = find_template(mode, node, position)
+        old_params = Hash[node.params]
+
+        node.params.merge!(params)
+
         output      = template.nil? ? CommonTemplate.new(mode).apply!(node) : template.apply(node)
         node.params = old_params
 
