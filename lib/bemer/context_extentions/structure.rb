@@ -4,9 +4,12 @@ module Bemer
   module ContextExtentions
     module Structure
       def content(**options)
-        node.child_params = options
+        old_params  = Hash[node.params]
+        node.params = options
+        output      = node.add_child_nodes
+        node.params = old_params
 
-        node.add_child_nodes
+        output
       end
 
       def ctx(**options)
