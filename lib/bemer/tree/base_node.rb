@@ -9,8 +9,8 @@ module Bemer
 
       attr_reader :entity, :entity_builder, :tree
 
-      def_delegators :entity, :bem, :bem_cascade, :block, :block?,
-                     :content, :elem, :elem?, :element?, :name, :tag
+      def_delegators :entity, :attrs, :bem, :bem_cascade, :block, :block?, :cls,
+                     :content, :elem, :elem?, :element?, :js, :mix, :mods, :name, :tag
 
       def initialize(tree, block = '', element = nil, **options, &content)
         @entity         = Entity.new(block, element, options, &content)

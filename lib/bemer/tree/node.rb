@@ -4,7 +4,7 @@ require 'active_support/core_ext/string/output_safety'
 
 module Bemer
   class Tree
-    class Node < BaseNode # rubocop:disable Metrics/ClassLength
+    class Node < BaseNode
       attr_accessor :content_replaced, :need_replace, :params, :child_params
       attr_reader   :applied_modes, :children, :replacers
 
@@ -21,26 +21,6 @@ module Bemer
         @need_replace     = false
         @params           = {}
         @replacers        = []
-      end
-
-      def attrs
-        @attrs ||= entity.attrs.freeze
-      end
-
-      def cls
-        @cls ||= entity.cls.freeze
-      end
-
-      def js
-        @js ||= entity.js.freeze
-      end
-
-      def mix
-        @mix ||= entity.mix.freeze
-      end
-
-      def mods
-        @mods ||= entity.mods.freeze
       end
 
       def last?
