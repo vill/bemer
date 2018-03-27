@@ -10,10 +10,6 @@ module Bemer
       def apply(mode, **options)
         node.apply(mode, template, options)
       end
-
-      def params
-        @params ||= Hash[node.params]
-      end
     end
   end
 end

@@ -14,6 +14,10 @@ module Bemer
       @template = template
     end
 
+    def params
+      @params ||= Hash[node.params]
+    end
+
     protected
 
     attr_reader :template, :node
