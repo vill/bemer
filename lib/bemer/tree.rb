@@ -64,13 +64,9 @@ module Bemer
 
     def add_node(block = '', element = nil, bem_cascade: nil, **options, &content)
       bem_cascade = inherited_bem_cascade if bem_cascade.nil?
-
       new_options = { **params, bem_cascade: bem_cascade, **options }
-      node        = Node.new(self, block, element, new_options, &content)
 
-      node.params = Hash[parent_node.params] unless parent_node.nil?
-
-      add(node)
+      add Node.new(self, block, element, new_options, &content)
     end
 
     def add_text_node(content = nil, &callback)

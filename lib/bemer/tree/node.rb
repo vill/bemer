@@ -18,7 +18,7 @@ module Bemer
         @children         = []
         @content_replaced = false
         @need_replace     = false
-        @params           = {}
+        @params           = tree.parent_node.nil? ? {} : Hash[tree.parent_node.params]
         @replacers        = []
       end
 
