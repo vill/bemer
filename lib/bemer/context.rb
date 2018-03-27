@@ -14,10 +14,6 @@ module Bemer
       @template = template
     end
 
-    def params
-      node.params
-    end
-
     protected
 
     attr_reader :template, :node
