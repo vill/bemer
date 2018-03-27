@@ -6,8 +6,7 @@ module Bemer
   class Context
     extend Forwardable
 
-    def_delegators :node, :attrs, :bem, :bem_cascade, :block, :cls, :elem,
-                   :first?, :js, :last?, :mix, :mods, :name, :position, :tag
+    def_delegators :node, :bem, :bem_cascade, :block, :elem, :first?, :last?, :name, :position, :tag
 
     def initialize(node, template = nil)
       @node     = node
@@ -15,7 +14,27 @@ module Bemer
     end
 
     def params
-      node.params
+      @params ||= Hash[node.params]
+    end
+
+    def attrs
+      @attrs ||= Hash[node.attrs]
+    end
+
+    def cls
+      @cls ||= node.cls.dup
+    end
+
+    def js
+      @js ||= node.js.dup
+    end
+
+    def mix
+      @mix ||= node.mix.dup
+    end
+
+    def mods
+      @mods ||= ActiveSupport::HashWithIndifferentAccess[node.mods]
     end
 
     protected

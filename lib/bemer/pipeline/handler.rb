@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/object/blank'
-require 'active_support/ordered_options'
 
 module Bemer
   class Pipeline
@@ -51,7 +50,7 @@ module Bemer
 
       def apply_template(mode, node, position = 0, **params)
         template   = find_template(mode, node, position)
-        old_params = ActiveSupport::OrderedOptions[node.params]
+        old_params = Hash[node.params]
 
         node.params.merge!(params)
 

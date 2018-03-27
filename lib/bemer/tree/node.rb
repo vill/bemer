@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/string/output_safety'
-require 'active_support/ordered_options'
 
 module Bemer
   class Tree
-    class Node < BaseNode # rubocop:disable Metrics/ClassLength
-      attr_accessor :content_replaced, :need_replace, :params
+    class Node < BaseNode
+      attr_accessor :content_replaced, :need_replace, :params, :child_params
       attr_reader   :applied_modes, :children, :replacers
 
       alias content_replaced? content_replaced
@@ -16,31 +15,12 @@ module Bemer
         super(tree, block, element, options, &content)
 
         @applied_modes    = Pipeline::MODES.map { |mode| [mode, false] }.to_h
+        @child_params     = {}
         @children         = []
         @content_replaced = false
         @need_replace     = false
-        @params           = ActiveSupport::OrderedOptions.new
+        @params           = {}
         @replacers        = []
-      end
-
-      def attrs
-        @attrs ||= entity.attrs.freeze
-      end
-
-      def cls
-        @cls ||= entity.cls.freeze
-      end
-
-      def js
-        @js ||= entity.js.freeze
-      end
-
-      def mix
-        @mix ||= entity.mix.freeze
-      end
-
-      def mods
-        @mods ||= entity.mods.freeze
       end
 
       def last?
@@ -136,13 +116,14 @@ module Bemer
 
       def initialize_copy(original)
         @applied_modes          = Hash[original.applied_modes]
+        @child_params           = Hash[original.child_params]
         @children               = []
         @content_replaced       = false
         @entity                 = original.entity.dup
         @entity_builder         = original.entity_builder.dup
         @entity_builder.content = @entity.content
         @need_replace           = false
-        @params                 = ActiveSupport::OrderedOptions[original.params]
+        @params                 = Hash[original.params]
         @replacers              = []
       end
     end
