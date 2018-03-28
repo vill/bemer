@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    bemer (0.0.0)
+    bemer (0.1.0)
       railties (>= 3.2.22, <= 5.2)
 
 GEM
