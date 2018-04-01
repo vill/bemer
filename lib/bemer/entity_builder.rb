@@ -61,9 +61,9 @@ module Bemer
     def js
       return {} if @js.blank? || bem_class.blank?
 
-      attrs = @js.instance_of?(TrueClass) ? {} : super
+      js_attrs = @js.instance_of?(TrueClass) ? {} : super
 
-      { data: { bem: { name => attrs } } }
+      { 'data-bem': { name => js_attrs } }
     end
 
     def js=(new_js, save = true)
