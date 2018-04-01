@@ -35,10 +35,6 @@ module Bemer
       bem_cascade_via_option? ? super : true
     end
 
-    def bem_cascade=(new_bem_cascade, save = true)
-      save ? @bem_cascade = new_bem_cascade : new_bem_cascade
-    end
-
     def cls
       return super unless bem?
 
