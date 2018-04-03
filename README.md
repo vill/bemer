@@ -5,6 +5,10 @@
 1. Позволяет создавать переиспользуемые UI компоненты для приложений на Ruby on Rails.
 1. Предоставляет функционал для разработки приложений на Ruby on Rails с использованием методологии БЭМ.
 
+## Дополнительно
+
+1. [bemer-bootstrap](https://github.com/vill/bemer-bootstrap) - переиспользуемые компоненты Bootstrap v3.
+1. [Пример приложения](https://github.com/vill/bemer-example) с использованием `bemer` и [bemer-bootstrap](https://github.com/vill/bemer-bootstrap).
 
 ## Установка
 
