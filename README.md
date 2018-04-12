@@ -7,6 +7,7 @@
 
 ## Дополнительно
 
+1. Статья на Хабре - [Переиспользуемые UI компоненты в приложениях на Ruby on Rails](https://habrahabr.ru/post/352938/).
 1. [bemer-bootstrap](https://github.com/vill/bemer-bootstrap) - переиспользуемые компоненты Bootstrap v3.
 1. [Пример приложения](https://github.com/vill/bemer-example) с использованием `bemer` и [bemer-bootstrap](https://github.com/vill/bemer-bootstrap).
 
