@@ -41,5 +41,9 @@ module Bemer
     def component_asset_path(name)
       Bemer::PathResolver.new(self).resolve(name)
     end
+
+    def component_partial_path(name)
+      Bemer::PathResolver.new(self).resolve(name, true)
+    end
   end
 end
