@@ -22,6 +22,7 @@ module Bemer
   autoload :EntityBuilder
   autoload :MixinList
   autoload :ModifierList
+  autoload :PathResolver
   autoload :Pipeline
   autoload :Predicate
   autoload :Renderer
