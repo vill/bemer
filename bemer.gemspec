@@ -20,7 +20,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.require_paths = ['lib']
   spec.test_files    = `git ls-files -z -- spec/*`.split("\x0")
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^spec/|^Gemfile.lock$})
+    f.match(%r{^spec/|^docs/|^Gemfile.lock$})
   end
 
   spec.required_ruby_version     = '>= 2.2.0'
