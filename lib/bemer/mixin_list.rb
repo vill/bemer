@@ -14,7 +14,7 @@ module Bemer
     end
 
     def to_s
-      @mix_as_string ||= to_a.join(' ')
+      @to_s ||= to_a.join(' ')
     end
 
     protected

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
@@ -26,17 +26,17 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.required_ruby_version     = '>= 2.2.0'
   spec.required_rubygems_version = '>= 2.2.0'
 
-  spec.add_development_dependency 'bundler',          '~> 1.15'
+  spec.add_development_dependency 'bundler',          '~> 1.16.2'
   spec.add_development_dependency 'bundler-audit',    '~> 0.6.0'
-  spec.add_development_dependency 'fasterer',         '~> 0.3.2'
-  spec.add_development_dependency 'overcommit',       '~> 0.41.0'
+  spec.add_development_dependency 'fasterer',         '~> 0.4.1'
+  spec.add_development_dependency 'overcommit',       '~> 0.45.0'
   spec.add_development_dependency 'rails',            '~> 5.1.4'
   spec.add_development_dependency 'rake',             '~> 12.3.0'
   spec.add_development_dependency 'require_reloader', '~> 0.2.1'
   spec.add_development_dependency 'rspec',            '~> 3.7.0'
   spec.add_development_dependency 'rspec-rails',      '~> 3.7.2'
-  spec.add_development_dependency 'rubocop',          '~> 0.52.1'
-  spec.add_development_dependency 'rubocop-rspec',    '~> 1.21'
+  spec.add_development_dependency 'rubocop',          '~> 0.58.1'
+  spec.add_development_dependency 'rubocop-rspec',    '~> 1.27.0'
   spec.add_development_dependency 'sqlite3',          '~> 1.3.13'
 
   spec.add_runtime_dependency 'railties', '>= 3.2.22', '<= 5.2'

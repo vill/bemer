@@ -12,11 +12,11 @@ module Bemer
     end
 
     def to_a
-      @mods_as_array ||= to_h.map { |name, value| build_css_class(name, value) }
+      @to_a ||= to_h.map { |name, value| build_css_class(name, value) }
     end
 
     def to_s
-      @mods_as_string ||= to_a.join(' ')
+      @to_s ||= to_a.join(' ')
     end
 
     def to_h
