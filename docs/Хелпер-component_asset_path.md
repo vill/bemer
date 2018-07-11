@@ -12,7 +12,7 @@ app/
   |     ├── image_gallery/
   |     |     ├── images/
   |     |     |     ├── placeholder.jpg
-  |     |     |     └── ...  
+  |     |     |     └── ...
   |     |     ├── _image.html.slim
   |     |     ├── index.html.slim
   |     |     ├── index.js
