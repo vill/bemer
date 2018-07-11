@@ -47,5 +47,5 @@ Rails.application.configure do
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   RequireReloader.watch :bemer, path: Rails.root.join('..', '..').to_s,
-                                callback: proc { load Rails.root.join('config', 'initializers', 'bemer.rb') } # rubocop:disable Metrics/LineLength
+                                callback: proc { load Rails.root.join('config', 'initializers', 'bemer.rb') }
 end
