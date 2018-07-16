@@ -5,14 +5,4 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in bemer.gemspec
 gemspec
 
-gem 'rails-html-sanitizer', '~> 1.0.4'
-
-gem 'nokogiri', '~> 1.8', '>= 1.8.3'
-
-gem 'sprockets', '~> 3.7', '>= 3.7.2'
-
-group :development do
-  # Auto-reload require files or local gems without restarting server during Rails development.
-  gem 'require_reloader', '~> 0.2.1', git: 'https://github.com/vill/require_reloader.git',
-                                      branch: 'bugfix/delete-watchable-gems'
-end
+gem 'railties', '~> 4.2.10'

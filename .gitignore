@@ -15,3 +15,7 @@ spec/dummy/tmp/
 *.swp
 *.swo
 *~
+
+# Appraisal
+vendor/bundle
+gemfiles/*.gemfile.lock

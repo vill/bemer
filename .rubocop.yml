@@ -5,6 +5,10 @@ require: rubocop-rspec
 AllCops:
   TargetRubyVersion: 2.2
   DisplayCopNames: true
+  Exclude:
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'gemfiles/**/*'
 
 Metrics/LineLength:
   Max: 100
