@@ -1,0 +1,41 @@
+.default_script: &default_script
+  script:
+    - ruby -v
+    - bundle exec rubocop --config .rubocop.yml
+    - bundle exec rake wwtd:local
+
+cache:
+  untracked: true
+  paths:
+    - .bundle/
+    - vendor/bundle/
+
+before_script:
+  - 'apt-get update -y -qq && apt-get install -y -qq locales'
+  - echo "en_US UTF-8" > /etc/locale.gen
+  - locale-gen en_US.UTF-8
+  - export LANG=en_US.UTF-8
+  - export LANGUAGE=en_US:en
+  - export LC_ALL=en_US.UTF-8
+  - gem install bundler --no-ri --no-rdoc
+  - 'bundle install --path vendor/bundle --jobs $(nproc) "${FLAGS[@]}"'
+
+test:ruby-2.2.0:
+  image: ruby:2.2.0
+  <<: *default_script
+
+test:ruby-2.2-latest:
+  image: ruby:2.2
+  <<: *default_script
+
+test:ruby-2.3-latest:
+  image: ruby:2.3
+  <<: *default_script
+
+test:ruby-2.4-latest:
+  image: ruby:2.4
+  <<: *default_script
+
+test:ruby-2.5-latest:
+  image: ruby:2.5
+  <<: *default_script
