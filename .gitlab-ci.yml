@@ -20,22 +20,22 @@ before_script:
   - gem install bundler --no-ri --no-rdoc
   - 'bundle install --path vendor/bundle --jobs $(nproc) "${FLAGS[@]}"'
 
-test:ruby-2.2.0:
+ruby-2.2.0:
   image: ruby:2.2.0
   <<: *default_script
 
-test:ruby-2.2-latest:
-  image: ruby:2.2
+ruby-2.2.10:
+  image: ruby:2.2.10
   <<: *default_script
 
-test:ruby-2.3-latest:
-  image: ruby:2.3
+ruby-2.3.7:
+  image: ruby:2.3.7
   <<: *default_script
 
-test:ruby-2.4-latest:
-  image: ruby:2.4
+ruby-2.4.4:
+  image: ruby:2.4.4
   <<: *default_script
 
-test:ruby-2.5-latest:
-  image: ruby:2.5
+ruby-2.5.1:
+  image: ruby:2.5.1
   <<: *default_script

@@ -3,5 +3,10 @@
 %w[3.2.22 4.0.13 4.1.16 4.2.10 5.0.7 5.1.6 5.2.0].each do |version|
   appraise version[0..2] do
     gem 'railties', "~> #{version}"
+
+    next if version[0].to_i > 3
+
+    gem 'tzinfo'
+    gem 'test-unit'
   end
 end

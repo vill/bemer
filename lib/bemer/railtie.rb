@@ -6,6 +6,9 @@ module Bemer
 
     config.after_initialize do
       ActionController::Base.prepend_view_path([Bemer.path, *Bemer.paths])
+
+      next unless defined?(ActionMailer::Base)
+
       ActionMailer::Base.prepend_view_path([Bemer.path, *Bemer.paths])
     end
 
