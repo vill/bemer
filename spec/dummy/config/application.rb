@@ -2,26 +2,39 @@
 
 require_relative 'boot'
 
-# Pick the frameworks you want:
-require 'active_record/railtie'
 require 'action_controller/railtie'
 require 'action_view/railtie'
-require 'action_mailer/railtie'
-require 'active_job/railtie'
-# require "action_cable/engine"
-# require "rails/test_unit/railtie"
-# require "sprockets/railtie"
+# require 'action_mailer/railtie'
 
 Bundler.require(*Rails.groups)
+
 require 'bemer'
 
 module Dummy
-  class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+  class Application < ::Rails::Application
+    config.cache_classes = true
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    # Do not eager load code on boot. This avoids loading your whole application
+    # just for the purpose of running a single test. If you are using a tool that
+    # preloads Rails for running tests, you may have to set it to true.
+    config.eager_load = false
+
+    # Show full error reports and disable caching.
+    config.consider_all_requests_local       = true
+    config.action_controller.perform_caching = false
+
+    # Raise exceptions instead of rendering exception templates.
+    config.action_dispatch.show_exceptions = false
+
+    # Disable request forgery protection in test environment.
+    config.action_controller.allow_forgery_protection = false
+
+    # Print deprecation notices to the stderr.
+    config.active_support.deprecation = :stderr
+
+    unless ENV['RAILS_ENABLE_TEST_LOG']
+      config.logger    = Logger.new(nil)
+      config.log_level = :fatal
+    end
   end
 end
