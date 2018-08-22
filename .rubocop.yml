@@ -23,3 +23,7 @@ Metrics/BlockLength:
 
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
+
+Style/Encoding:
+  Exclude:
+    - 'bemer.gemspec'
