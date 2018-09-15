@@ -50,8 +50,8 @@ module Bemer
 
     attr_reader :css_classes, :html_attrs, :mixins, :modifiers
 
-    def extract_content(plain_text, &content)
-      block_given? ? content : plain_text
+    def extract_content(plain_content, &block)
+      block_given? ? block : plain_content.to_s
     end
 
     def extract_options!(options) # rubocop:disable Metrics/AbcSize
