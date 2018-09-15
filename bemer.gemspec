@@ -34,7 +34,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_development_dependency 'rake',          '~> 12.3.0'
   spec.add_development_dependency 'rspec',         '~> 3.7.0'
   spec.add_development_dependency 'rspec-rails',   '~> 3.7.2'
-  spec.add_development_dependency 'rubocop',       '~> 0.58.1'
+  spec.add_development_dependency 'rubocop',       '~> 0.59.1'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.27.0'
   spec.add_development_dependency 'wwtd',          '~> 1.3'
 
