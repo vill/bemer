@@ -110,8 +110,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
-    rubocop-rspec (1.27.0)
-      rubocop (>= 0.56.0)
+    rubocop-rspec (1.29.1)
+      rubocop (>= 0.58.0)
     ruby-progressbar (1.10.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
@@ -138,7 +138,7 @@ DEPENDENCIES
   rspec (~> 3.7.0)
   rspec-rails (~> 3.7.2)
   rubocop (~> 0.59.1)
-  rubocop-rspec (~> 1.27.0)
+  rubocop-rspec (~> 1.29.1)
   wwtd (~> 1.3)
 
 BUNDLED WITH
