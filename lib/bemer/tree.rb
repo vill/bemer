@@ -28,7 +28,7 @@ module Bemer
       return unless block_given?
 
       builder = Builders::Tree.new(self)
-      output  = ActiveSupport::SafeBuffer.new
+      output  = ::ActionView::OutputBuffer.new
 
       output << block.binding.receiver.capture(builder, &block)
       output << render_root_nodes
@@ -86,7 +86,7 @@ module Bemer
     end
 
     def render_root_nodes
-      output   = ActiveSupport::SafeBuffer.new
+      output   = ::ActionView::OutputBuffer.new
       position = 0
 
       while position < root_nodes.length
