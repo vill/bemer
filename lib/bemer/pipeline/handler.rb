@@ -54,20 +54,18 @@ module Bemer
 
         node.params.merge!(params)
 
-        output      = template.nil? ? CommonTemplate.new(mode).apply!(node) : template.apply(node)
+        template.nil? ? CommonTemplate.new(mode).apply!(node) : template.apply(node)
+      ensure
         node.params = old_params
-
-        output
       end
 
       def apply_template!(mode, node)
         node.applied_modes[mode] = true
         template                 = find_template(mode, node)
-        output                   = template ? template.apply!(node) : nil
 
+        template ? template.apply!(node) : nil
+      ensure
         disable_related_modes!(mode, node)
-
-        output
       end
 
       def disable_related_modes!(mode, node)

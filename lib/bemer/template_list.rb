@@ -16,11 +16,9 @@ module Bemer
 
       add_default_templates
 
-      output = view.render(template: template, locals: { **options })
-
+      view.render(template: template, locals: { **options })
+    ensure
       remove_template_catalog!
-
-      output
     end
 
     protected
