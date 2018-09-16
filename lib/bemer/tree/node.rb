@@ -48,11 +48,9 @@ module Bemer
         old_parent_node  = tree.parent_node
         tree.parent_node = self
 
-        output = yield
-
+        yield
+      ensure
         tree.parent_node = old_parent_node
-
-        output
       end
 
       def print(level = 0)

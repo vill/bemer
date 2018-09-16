@@ -8,10 +8,9 @@ module Bemer
 
         node.params.merge!(options)
 
-        output      = node.add_child_nodes
+        node.add_child_nodes
+      ensure
         node.params = old_params
-
-        output
       end
 
       def ctx(**options)
