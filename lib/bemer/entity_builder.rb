@@ -50,8 +50,6 @@ module Bemer
     end
 
     def content=(new_content, save = true)
-      new_content = new_content.to_s unless new_content.respond_to?(:call)
-
       save ? @content = new_content : new_content
     end
 

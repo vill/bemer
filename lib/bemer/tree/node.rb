@@ -74,7 +74,7 @@ module Bemer
       protected
 
       def capture_content
-        output     = ActiveSupport::SafeBuffer.new
+        output     = ::ActionView::OutputBuffer.new
         plain_text = replace_parent_and_execute { add_child_nodes } if need_add_child_nodes?
 
         output << entity_builder.content if need_include_builder_content?
@@ -94,7 +94,7 @@ module Bemer
         return if children.empty?
 
         position = 0
-        output   = ActiveSupport::SafeBuffer.new
+        output   = ::ActionView::OutputBuffer.new
 
         replace_parent_and_execute do
           while position < children.length
