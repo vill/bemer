@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/string/output_safety'
+require 'action_view/buffers'
 
 module Bemer
   class Tree
