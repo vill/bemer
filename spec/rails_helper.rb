@@ -6,6 +6,7 @@ require_relative 'dummy/config/environment'
 
 require 'rspec/rails'
 require 'spec_helper'
+require 'fuubar'
 
 RSpec.configure do |config|
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -27,4 +28,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.fuubar_progress_bar_options = { format: "Rails: #{::Rails::VERSION::STRING}  %c/%C |%w>%i| %e " }
 end

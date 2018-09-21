@@ -15,27 +15,144 @@ rvm:
   - 2.5.1
 
 gemfile:
-  - gemfiles/3.2.gemfile
-  - gemfiles/4.0.gemfile
-  - gemfiles/4.1.gemfile
-  - gemfiles/4.2.gemfile
-  - gemfiles/5.0.gemfile
-  - gemfiles/5.1.gemfile
-  - gemfiles/5.2.gemfile
+  - gemfiles/rails3.2.x.gemfile
+  - gemfiles/rails4.0.x.gemfile
+  - gemfiles/rails4.0.x_sprockets_rails2.0.x.gemfile
+  - gemfiles/rails4.0.x_sprockets_rails2.1.x.gemfile
+  - gemfiles/rails4.0.x_sprockets_rails2.2.x.gemfile
+  - gemfiles/rails4.0.x_sprockets_rails2.3.x.gemfile
+  - gemfiles/rails4.0.x_sprockets_rails3.0.x.gemfile
+  - gemfiles/rails4.0.x_sprockets_rails3.1.x.gemfile
+  - gemfiles/rails4.0.x_sprockets_rails3.2.x.gemfile
+  - gemfiles/rails4.1.x.gemfile
+  - gemfiles/rails4.1.x_sprockets_rails2.0.x.gemfile
+  - gemfiles/rails4.1.x_sprockets_rails2.1.x.gemfile
+  - gemfiles/rails4.1.x_sprockets_rails2.2.x.gemfile
+  - gemfiles/rails4.1.x_sprockets_rails2.3.x.gemfile
+  - gemfiles/rails4.1.x_sprockets_rails3.0.x.gemfile
+  - gemfiles/rails4.1.x_sprockets_rails3.1.x.gemfile
+  - gemfiles/rails4.1.x_sprockets_rails3.2.x.gemfile
+  - gemfiles/rails4.2.x.gemfile
+  - gemfiles/rails4.2.x_sprockets_rails2.0.x.gemfile
+  - gemfiles/rails4.2.x_sprockets_rails2.1.x.gemfile
+  - gemfiles/rails4.2.x_sprockets_rails2.2.x.gemfile
+  - gemfiles/rails4.2.x_sprockets_rails2.3.x.gemfile
+  - gemfiles/rails4.2.x_sprockets_rails3.0.x.gemfile
+  - gemfiles/rails4.2.x_sprockets_rails3.1.x.gemfile
+  - gemfiles/rails4.2.x_sprockets_rails3.2.x.gemfile
+  - gemfiles/rails5.0.x.gemfile
+  - gemfiles/rails5.0.x_sprockets_rails3.0.x.gemfile
+  - gemfiles/rails5.0.x_sprockets_rails3.1.x.gemfile
+  - gemfiles/rails5.0.x_sprockets_rails3.2.x.gemfile
+  - gemfiles/rails5.1.x.gemfile
+  - gemfiles/rails5.1.x_sprockets_rails3.0.x.gemfile
+  - gemfiles/rails5.1.x_sprockets_rails3.1.x.gemfile
+  - gemfiles/rails5.1.x_sprockets_rails3.2.x.gemfile
+  - gemfiles/rails5.2.x.gemfile
+  - gemfiles/rails5.2.x_sprockets_rails3.0.x.gemfile
+  - gemfiles/rails5.2.x_sprockets_rails3.1.x.gemfile
+  - gemfiles/rails5.2.x_sprockets_rails3.2.x.gemfile
 
 matrix:
   exclude:
+    # Rails 5.0.x
     - rvm: 2.2.0
-      gemfile: gemfiles/5.0.gemfile
+      gemfile: gemfiles/rails5.0.x.gemfile
     - rvm: 2.2.0
-      gemfile: gemfiles/5.1.gemfile
+      gemfile: gemfiles/rails5.0.x_sprockets_rails3.0.x.gemfile
     - rvm: 2.2.0
-      gemfile: gemfiles/5.2.gemfile
+      gemfile: gemfiles/rails5.0.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails5.0.x_sprockets_rails3.2.x.gemfile
+
+    # Rails 5.1.x
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails5.1.x.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails5.1.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails5.1.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails5.1.x_sprockets_rails3.2.x.gemfile
+
+    # Rails 5.2.x
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails5.2.x.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails5.2.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails5.2.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.2.0
+      gemfile: gemfiles/rails5.2.x_sprockets_rails3.2.x.gemfile
+
+    # Rails 4.0.x
     - rvm: 2.4.4
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/rails4.0.x.gemfile
     - rvm: 2.4.4
-      gemfile: gemfiles/4.1.gemfile
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.0.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.1.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.2.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.3.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.0.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.0.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.0.x_sprockets_rails3.2.x.gemfile
+
+    # Rails 4.1.x
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.1.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.0.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.1.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.2.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.3.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.1.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.1.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails4.1.x_sprockets_rails3.2.x.gemfile
+
+    # Rails 4.0.x
     - rvm: 2.5.1
-      gemfile: gemfiles/4.0.gemfile
+      gemfile: gemfiles/rails4.0.x.gemfile
     - rvm: 2.5.1
-      gemfile: gemfiles/4.1.gemfile
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.0.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.1.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.2.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.3.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.0.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.0.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.0.x_sprockets_rails3.2.x.gemfile
+
+    # Rails 4.1.x
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.1.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.0.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.1.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.2.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.3.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.1.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.1.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails4.1.x_sprockets_rails3.2.x.gemfile
