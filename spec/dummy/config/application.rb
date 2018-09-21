@@ -4,7 +4,12 @@ require_relative 'boot'
 
 require 'action_controller/railtie'
 require 'action_view/railtie'
-# require 'action_mailer/railtie'
+require 'action_mailer/railtie'
+
+begin
+  require 'sprockets/railtie'
+rescue LoadError # rubocop:disable Lint/HandleExceptions
+end
 
 Bundler.require(*Rails.groups)
 

@@ -1,4 +1,3 @@
 --color
 --require rails_helper
---format progress
---warnings
+--format Fuubar

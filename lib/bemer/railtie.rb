@@ -1,28 +1,38 @@
 # frozen_string_literal: true
 
+require 'rails/railtie'
+require 'rails/version'
+require 'active_support/lazy_load_hooks'
+require 'action_controller/railtie'
+
 module Bemer
   class Railtie < ::Rails::Railtie
+    class << self
+      def assets_path_initializer
+        case ::Rails::VERSION::MAJOR
+        when 5    then :append_assets_path
+        when 3..4 then :load_config_initializers
+        end
+      end
+    end
+
     config.eager_load_namespaces << Bemer if config.respond_to?(:eager_load_namespaces)
 
     config.after_initialize do
-      ActionController::Base.prepend_view_path([Bemer.path, *Bemer.paths])
+      paths = [Bemer.path, *Bemer.paths]
+
+      ActionController::Base.prepend_view_path(paths)
 
       next unless defined?(ActionMailer::Base)
 
-      ActionMailer::Base.prepend_view_path([Bemer.path, *Bemer.paths])
+      ActionMailer::Base.prepend_view_path(paths)
     end
 
     initializer 'bemer.helpers' do
       ActiveSupport.on_load(:action_view) { include Bemer::Helpers }
     end
 
-    initializer_name =
-      case ::Rails::VERSION::MAJOR
-      when 5    then :append_assets_path
-      when 3..4 then :load_config_initializers
-      end
-
-    initializer 'bemer.prepend_asset_paths', group: :all, after: initializer_name do |app|
+    initializer 'bemer.prepend_asset_paths', group: :all, after: assets_path_initializer do |app|
       next unless defined?(::Sprockets) && Bemer.prepend_asset_paths?
 
       app.config.assets.paths.unshift(Bemer.path.to_s, *Bemer.asset_paths)
