@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'singleton'
+require 'rails'
 
 module Bemer
   class Configuration
@@ -30,7 +31,7 @@ module Bemer
     end
 
     def path
-      Rails.root.join(@path)
+      Rails.root ? Rails.root.join(@path) : @path
     end
   end
 end
