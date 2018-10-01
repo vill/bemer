@@ -58,7 +58,7 @@ module Bemer
 
       js_attrs = @js.instance_of?(TrueClass) ? {} : super
 
-      { 'data-bem': { name => js_attrs } }
+      { 'data-bem': { name => js_attrs }.to_json }
     end
 
     def js=(new_js, save = true)
