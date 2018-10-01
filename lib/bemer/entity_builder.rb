@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/string/filters'
 
 module Bemer
   class EntityBuilder < Entity
@@ -40,7 +41,7 @@ module Bemer
 
       js_class = 'i-bem' if @js.present? && bem_class.present?
 
-      [bem_class, mods, mix, super, js_class].reject(&:blank?)
+      [bem_class, mods, mix, super, js_class].join(' ').squish
     end
 
     def cls=(new_cls, save = true)
