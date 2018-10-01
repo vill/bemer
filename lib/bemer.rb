@@ -58,7 +58,7 @@ module Bemer
     alias prepend_asset_paths? prepend_asset_paths
 
     def config
-      Configuration.instance
+      Bemer::Configuration.instance
     end
 
     def setup

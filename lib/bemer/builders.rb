@@ -12,6 +12,14 @@ module Bemer
       autoload :Tree
     end
 
+    class Tree
+      extend ActiveSupport::Autoload
+
+      eager_autoload do
+        autoload :Element
+      end
+    end
+
     module Tag
       extend ActiveSupport::Autoload
 
