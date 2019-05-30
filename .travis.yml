@@ -125,3 +125,39 @@ matrix:
       gemfile: gemfiles/rails4.1.x_sprockets_rails3.1.x.gemfile
     - rvm: 2.5.1
       gemfile: gemfiles/rails4.1.x_sprockets_rails3.2.x.gemfile
+
+    # Rails 4.0.x
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.0.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.0.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.1.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.2.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.0.x_sprockets_rails2.3.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.0.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.0.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.0.x_sprockets_rails3.2.x.gemfile
+
+    # Rails 4.1.x
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.1.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.0.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.1.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.2.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.1.x_sprockets_rails2.3.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.1.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.1.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails4.1.x_sprockets_rails3.2.x.gemfile
