@@ -1,8 +1,8 @@
 .default_script: &default_script
   script:
     - ruby -v
-    - bundle exec rubocop --config .rubocop.yml
-    - bundle exec rake wwtd:local
+    - bundle _1.16.2_ exec rubocop --config .rubocop.yml
+    - bundle _1.16.2_ exec rake wwtd:local
 
 cache:
   untracked: true
@@ -22,16 +22,8 @@ before_script:
   - export LANG=en_US.UTF-8
   - export LANGUAGE=en_US:en
   - export LC_ALL=en_US.UTF-8
-  - gem install bundler -v 1.17.3 --no-ri --no-rdoc
-  - 'bundle install --path vendor/bundle --jobs $(nproc) "${FLAGS[@]}"'
-
-ruby-2.2.0:
-  image: ruby:2.2.0
-  <<: *default_script
-
-ruby-2.2.10:
-  image: ruby:2.2.10
-  <<: *default_script
+  - gem install bundler -v 1.16.2 --wrappers --no-document
+  - 'bundle _1.16.2_ install --path vendor/bundle --jobs $(nproc) "${FLAGS[@]}"'
 
 ruby-2.3.7:
   image: ruby:2.3.7
@@ -43,4 +35,8 @@ ruby-2.4.4:
 
 ruby-2.5.1:
   image: ruby:2.5.1
+  <<: *default_script
+
+ruby-2.6.3:
+  image: ruby:2.6.3
   <<: *default_script
