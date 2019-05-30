@@ -25,14 +25,6 @@ before_script:
   - gem install bundler -v 1.17.3 --no-ri --no-rdoc
   - 'bundle install --path vendor/bundle --jobs $(nproc) "${FLAGS[@]}"'
 
-ruby-2.2.0:
-  image: ruby:2.2.0
-  <<: *default_script
-
-ruby-2.2.10:
-  image: ruby:2.2.10
-  <<: *default_script
-
 ruby-2.3.7:
   image: ruby:2.3.7
   <<: *default_script
@@ -43,4 +35,8 @@ ruby-2.4.4:
 
 ruby-2.5.1:
   image: ruby:2.5.1
+  <<: *default_script
+
+ruby-2.6.3:
+  image: ruby:2.6.3
   <<: *default_script
