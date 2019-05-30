@@ -22,7 +22,7 @@ before_script:
   - export LANG=en_US.UTF-8
   - export LANGUAGE=en_US:en
   - export LC_ALL=en_US.UTF-8
-  - gem install bundler --no-ri --no-rdoc
+  - gem install bundler -v 1.17.3 --no-ri --no-rdoc
   - 'bundle install --path vendor/bundle --jobs $(nproc) "${FLAGS[@]}"'
 
 ruby-2.2.0:
