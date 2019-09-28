@@ -9,7 +9,7 @@ RSpec.describe Bemer::Railtie do
     described_class.initializers.find { |initializer| initializer.name.eql?(name) }
   end
 
-  let(:assets_path_initializer_name) { ::Rails::VERSION::MAJOR.eql?(5) ? :append_assets_path : :load_config_initializers }
+  let(:assets_path_initializer_name) { ::Rails::VERSION::MAJOR >= 5 ? :append_assets_path : :load_config_initializers }
 
   describe '.assets_path_initializer' do
     it { expect(described_class.assets_path_initializer).to be(assets_path_initializer_name) }
