@@ -10,7 +10,7 @@ module Bemer
     class << self
       def assets_path_initializer
         case ::Rails::VERSION::MAJOR
-        when 5    then :append_assets_path
+        when 5..6 then :append_assets_path
         when 3..4 then :load_config_initializers
         end
       end
