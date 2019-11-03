@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Bemer::MixinList, focus: true do
+RSpec.describe Bemer::MixinList do
   describe 'mixins from an empty params' do
     subject(:mixin_list) { described_class.new([nil, '', {}]) }
 
