@@ -33,7 +33,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
 
   spec.add_development_dependency 'appraisal',     '~> 2.2.0'
   spec.add_development_dependency 'bundler',       '~> 1.16'
-  spec.add_development_dependency 'bundler-audit', '~> 0.6.0'
+  spec.add_development_dependency 'bundler-audit', '~> 0.6.1'
   spec.add_development_dependency 'fasterer',      '~> 0.4.1'
   spec.add_development_dependency 'fuubar',        '~> 2.3'
   spec.add_development_dependency 'overcommit',    '~> 0.46.0'
