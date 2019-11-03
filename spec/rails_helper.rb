@@ -30,4 +30,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.fuubar_progress_bar_options = { format: "Rails: #{::Rails::VERSION::STRING}  %c/%C |%w>%i| %e " }
+
+  config.define_derived_metadata(file_path: %r{/spec/action_view/}) do |metadata|
+    metadata[:type] = :view
+  end
 end
