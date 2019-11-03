@@ -61,10 +61,11 @@ RSpec.describe Bemer::Railtie do
 
     let(:asset_paths) do
       assets_root      = Rails.root.join('app', 'assets')
+      config_path      = assets_root.join('config').to_s
       javascripts_path = assets_root.join('javascripts').to_s
       stylesheets_path = assets_root.join('stylesheets').to_s
 
-      [Bemer.path.to_s, *Bemer.asset_paths, javascripts_path, stylesheets_path]
+      [Bemer.path.to_s, *Bemer.asset_paths, config_path, javascripts_path, stylesheets_path]
     end
 
     it { expect(initializer.after).to eql(assets_path_initializer_name) }
