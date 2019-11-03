@@ -27,3 +27,7 @@ Style/FrozenStringLiteralComment:
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/action_view/**/*'

@@ -37,6 +37,8 @@ module Dummy
     # Print deprecation notices to the stderr.
     config.active_support.deprecation = :stderr
 
+    config.secret_key_base = 'secret_key_base'
+
     unless ENV['RAILS_ENABLE_TEST_LOG']
       config.logger    = Logger.new(nil)
       config.log_level = :fatal
