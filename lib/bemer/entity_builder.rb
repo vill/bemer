@@ -7,7 +7,7 @@ module Bemer
   class EntityBuilder < Entity
     def attrs
       attributes         = Hash[super]
-      attributes[:class] = cls
+      attributes[:class] = cls if cls.present?
 
       return attributes unless bem?
 
