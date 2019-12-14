@@ -32,6 +32,10 @@ module Bemer
   autoload :TemplateList
   autoload :Tree
 
+  module Test
+    autoload :ConfigurationHelpers, 'bemer/test/configuration_helpers'
+  end
+
   eager_autoload do
     autoload :Helpers
     autoload :TemplateCatalog
