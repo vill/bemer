@@ -35,5 +35,5 @@ RSpec.configure do |config|
     metadata[:type] = :view
   end
 
-  config.include Helpers::BemerConfigurationHelper
+  config.include Bemer::Test::ConfigurationHelpers
 end
