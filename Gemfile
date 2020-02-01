@@ -11,3 +11,6 @@ gem 'sprockets-rails', '~> 2.0.0' unless ENV['WITHOUT_SPROCKETS_RAILS_FROM_GEMFI
 
 # Fix Loofah XSS Vulnerability. See: https://github.com/flavorjones/loofah/issues/171
 gem 'loofah', '~> 2.3.1'
+
+# Fix Possible Information Leak / Session Hijack Vulnerability. See: https://github.com/rack/rack/security/advisories/GHSA-hrqr-hxpp-chr3
+gem 'rack', '>= 1.6.12'
