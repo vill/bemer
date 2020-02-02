@@ -81,7 +81,7 @@ block_tag :block, cls: ['cls_1', :cls_2], bem: false # => <div class="cls_1 cls-
 Добавляет содержимое для блока.
 
 ```ruby
-block_tag :block, content: 'Block content' # => <div>Block content</div>
+block_tag :block, content: 'Block content' # => <div class="block">Block content</div>
 ```
 Если передан `Ruby &block`, тогда параметр `content` игнорируется:
 
@@ -192,7 +192,7 @@ block_tag :block, mods: { size: :small }, bem: true
 
 ```ruby
 block_tag :block, tag: :span, content: 'Block content'
-# => <span>Block content</span>
+# => <span class="block">Block content</span>
 
 block_tag :block, tag: '', content: 'Block content'
 # => 'Block content'
@@ -202,7 +202,7 @@ block_tag :block, tag: false, content: 'Block content'
 
 # Будет использован default_block_tag из конфига
 block_tag :block, tag: nil, content: 'Block content'
-# => <div>Block content</div>
+# => <div class="block">Block content</div>
 ```
 
 ### Атрибуты
