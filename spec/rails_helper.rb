@@ -7,6 +7,7 @@ require_relative 'dummy/config/environment'
 require 'rspec/rails'
 require 'spec_helper'
 require 'fuubar'
+require 'rspec-html-matchers'
 
 RSpec.configure do |config|
   # RSpec Rails can automatically mix in different behaviours to your tests
@@ -36,4 +37,5 @@ RSpec.configure do |config|
   end
 
   config.include Bemer::Test::ConfigurationHelpers
+  config.include RSpecHtmlMatchers
 end
