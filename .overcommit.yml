@@ -56,4 +56,4 @@ PreCommit:
 
 PrePush:
   RSpec:
-    enabled: true
+    enabled: false
