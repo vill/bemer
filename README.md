@@ -8,6 +8,7 @@
 ## Дополнительно
 
 1. Статья на Хабре - [Переиспользуемые UI компоненты в приложениях на Ruby on Rails](https://habrahabr.ru/post/352938/).
+1. [bemer-simple_form](https://github.com/vill/bemer-simple_form) - Использование соглашений из БЭМ методологии в формах `Simple Form`
 1. [bemer-bootstrap](https://github.com/vill/bemer-bootstrap) - переиспользуемые компоненты Bootstrap v3.
 1. [Пример приложения](https://github.com/vill/bemer-example) с использованием `bemer` и [bemer-bootstrap](https://github.com/vill/bemer-bootstrap).
 
@@ -49,9 +50,10 @@ gem 'bemer'
 
 ## Ссылки
 
-1. https://ru.bem.info/methodology/
-1. https://github.com/bem/bem-xjst
-1. https://github.com/bem-site/bem-forum-content-ru/issues
+1. BEM methodology - https://bem.info/methodology/
+1. Minimal stack for coding client-side JavaScript and templating - https://github.com/bem/bem-core
+1. Declarative template engine for the browser and server with regular JS syntax - https://github.com/bem/bem-xjst
+1. BEM Forum - https://bem.info/forum/
 
 ## Лицензия
 
