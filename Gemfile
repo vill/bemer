@@ -9,7 +9,7 @@ gem 'actionmailer', '~> 4.2.11'
 gem 'railties',     '~> 4.2.11'
 
 unless ENV['APPRAISAL']
-  gem 'sprockets-rails', '~> 2.0.0'
+  gem 'sprockets-rails', '~> 3.2.1'
 
   # Fix Loofah XSS Vulnerability. See: https://github.com/flavorjones/loofah/issues/171
   gem 'loofah', '~> 2.3.1'
