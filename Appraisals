@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ENV['WITHOUT_SPROCKETS_RAILS_FROM_GEMFILE'] = 'true'
+ENV['APPRAISAL'] = 'true'
 
 SUPPORTED_RAILS_VERSIONS           = %w[3.2.0 4.0.0 4.1.0 4.2.0 5.0.0 5.1.0 5.2.0 6.0.0].freeze
 SUPPORTED_SPROCKETS_RAILS_VERSIONS = %w[2.0.0 2.1.0 2.2.0 2.3.0 3.0.0 3.1.0 3.2.0].freeze
