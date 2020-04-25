@@ -12,8 +12,8 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.author           = 'Alexander Grigorev'
   spec.email            = 'vill@rubyinventory.org'
   # rubocop:disable Metrics/LineLength
-  spec.summary          = 'Build reusable UI components for Rails applications using the BEM methodology.'
-  spec.description      = 'Build reusable UI components for Rails applications using the BEM methodology.'
+  spec.summary          = 'Build reusable UI components for Rails applications with the ability to use the BEM methodology.'
+  spec.description      = 'Build reusable UI components for Rails applications with the ability to use the BEM methodology.'
   # rubocop:enable Metrics/LineLength
   spec.license          = 'MIT'
   spec.require_paths    = ['lib']
