@@ -4,6 +4,9 @@
     - bundle exec rubocop --config .rubocop.yml
     - bundle exec rake wwtd:local
 
+variables:
+  CI: 'true'
+
 cache:
   untracked: true
   paths:
