@@ -5,10 +5,9 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in bemer.gemspec
 gemspec
 
-gem 'actionmailer', '~> 6.0.2'
-gem 'railties',     '~> 6.0.2'
-
-unless ENV['APPRAISAL']
+unless ENV['CI'] || ENV['APPRAISAL']
+  gem 'actionmailer',    '~> 6.0.2'
   gem 'bundler',         '~> 1.16'
+  gem 'railties',        '~> 6.0.2'
   gem 'sprockets-rails', '~> 3.2.1'
 end
