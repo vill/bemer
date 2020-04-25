@@ -8,9 +8,9 @@
 ## Дополнительно
 
 1. Статья на Хабре - [Переиспользуемые UI компоненты в приложениях на Ruby on Rails](https://habrahabr.ru/post/352938/).
-1. [bemer-simple_form](https://github.com/vill/bemer-simple_form) - Использование соглашений из БЭМ методологии в формах `Simple Form`
-1. [bemer-bootstrap](https://github.com/vill/bemer-bootstrap) - переиспользуемые компоненты Bootstrap v3.
-1. [Пример приложения](https://github.com/vill/bemer-example) с использованием `bemer` и [bemer-bootstrap](https://github.com/vill/bemer-bootstrap).
+1. [`bemer-simple_form`](https://github.com/vill/bemer-simple_form) - Использование соглашений из БЭМ методологии в формах `SimpleForm`.
+1. [`bemer-bootstrap`](https://github.com/vill/bemer-bootstrap) - переиспользуемые компоненты Bootstrap v3.
+1. [Пример приложения](https://github.com/vill/bemer-example) с использованием `bemer` и [`bemer-bootstrap`](https://github.com/vill/bemer-bootstrap).
 
 ## Установка
 
@@ -25,6 +25,8 @@ gem 'bemer'
     $ bundle
 
 ## Использование
+
+### Конфигурация
 
 [Конфигурация](docs/%D0%9A%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F.md) для `Bemer`:
 
@@ -41,7 +43,7 @@ Bemer.setup do |config|
 end
 ```
 
-Если используется [Webpacker](https://github.com/rails/webpacker):
+Если используется [`Webpacker`](https://github.com/rails/webpacker):
 
 ```yml
 # config/webpacker.yml
@@ -65,7 +67,9 @@ production:
   # ...
 ```
 
-Пример файловой структуры при использовании [Sprockets](https://github.com/rails/sprockets-rails).
+### Файловая структура
+
+Пример [файловой структуры](docs/%D0%A4%D0%B0%D0%B8%CC%86%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0.md) при использовании [`Sprockets`](https://github.com/rails/sprockets-rails):
 ```
 app/
   ├── assets/
@@ -111,8 +115,7 @@ app/
   |     └── ...
   └── ...
 ```
-
-Пример файловой структуры при использовании [Webpacker](https://github.com/rails/webpacker).
+Пример [файловой структуры](docs/%D0%A4%D0%B0%D0%B8%CC%86%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0.md) при использовании [`Webpacker`](https://github.com/rails/webpacker):
 ```
 app/
   ├── frontend/
@@ -145,7 +148,37 @@ app/
   |     └── ...
   └── ...
 ```
-Структура [компонента Сarousel из Bootstrap](https://getbootstrap.com/docs/4.3/components/carousel/#with-indicators):
+### Создание `HTML` структуры компонента
+
+#### Простой компонент
+Структура компонента [Сarousel из Bootstrap](https://getbootstrap.com/docs/4.3/components/carousel/#with-indicators):
+
+```slim
+/ app/frontend/components/common/carousel/index.slim
+
+.carousel.slide data-ride="carousel" class=local_assigns[:cls]
+  ol.carousel-indicators
+    - image_urls.size.times do |i|
+      li data-target=".carousel" class=(:active if i.zero?) data-slide-to=i
+  .carousel-inner
+    - image_urls.each_with_index do |image_url, i|
+      .carousel-item class=(:active if i.zero?)
+        = image_tag image_url, class: 'd-block w-100'
+  a.carousel-control-prev data-slide="prev" data-target='.carousel' role="button"
+    span.carousel-control-prev-icon aria-hidden="true"
+    span.sr-only Предыдущий
+  a.carousel-control-next data-slide="next" data-target='.carousel' role="button"
+    span.carousel-control-next-icon aria-hidden="true"
+    span.sr-only Следующий
+```
+[Вызов компонента](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-render_component.md) `carousel` в любом представлении или в [других компонентах](docs/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-UI-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82.md):
+```slim
+= render_component :carousel, prefix: :common, image_urls: image_urls, cls: 'carousel-fade'
+```
+
+#### Компонент к которому можно применять `BEMHTML` шаблоны
+
+Структура компонента [Сarousel из Bootstrap](https://getbootstrap.com/docs/4.3/components/carousel/#with-indicators):
 
 ```slim
 / app/frontend/components/common/carousel/index.slim
@@ -175,7 +208,7 @@ app/
   = template.elem(mods: :active).add_cls :active
 ```
 
-[Вызов компонента](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-render_component.md) `carousel` в любом представлении или в других компонентах:
+[Вызов компонента](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-render_component.md) `carousel` в любом представлении или в [других компонентах](docs/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-UI-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82.md) с применением [`BEMHTML`](docs/BEMHTML.md) [шаблонов](docs/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B.md):
 ```slim
 = render_component :carousel, prefix: :common, image_urls: image_urls do |template|
   = template.block(:carousel).add_mix :carousel_fade
