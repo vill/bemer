@@ -26,6 +26,163 @@ gem 'bemer'
 
 ## Использование
 
+[Конфигурация](docs/%D0%9A%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F.md) для `Bemer`:
+
+```ruby
+# config/initializers/bemer.rb
+
+Bemer.setup do |config|
+  config.bem                     = true
+  config.modifier_name_separator = '--'
+  config.path                    = 'app/frontend/components' # или Webpacker.config.source_path
+  # config.default_path_prefix     = lambda { |path, view|
+  #   view.controller.class.name.split('::')[0].underscore
+  # }
+end
+```
+
+Если используется [Webpacker](https://github.com/rails/webpacker):
+
+```yml
+# config/webpacker.yml
+
+default: &default
+  source_path: app/frontend/components
+  source_entry_path: ../packs
+  public_output_path: frontend/assets
+  # ...
+
+development:
+  <<: *default
+  # ...
+
+test:
+  <<: *default
+  # ...
+
+production:
+  <<: *default
+  # ...
+```
+
+Пример файловой структуры при использовании [Sprockets](https://github.com/rails/sprockets-rails).
+```
+app/
+  ├── assets/
+  |     ├── javascripts/
+  |     |     ├── admin_panel/
+  |     |     |     ├── application.js
+  |     |     |     └── ...
+  |     |     ├── landing/
+  |     |     |     ├── application.js
+  |     |     |     └── ...
+  |     |     ├── user_panel/
+  |     |     |     ├── application.js
+  |     |     |     └── ...
+  |     |     └── ...
+  |     ├── stylesheets/
+  |     |     ├── admin_panel/
+  |     |     |     ├── application.scss
+  |     |     |     └── ...
+  |     |     ├── landing/
+  |     |     |     ├── application.scss
+  |     |     |     └── ...
+  |     |     ├── user_panel/
+  |     |     |     ├── application.scss
+  |     |     |     └── ...
+  |     |     └── ...
+  |     └── ...
+  ├── frontend/
+  |     ├── components/
+  |     |     ├── common/
+  |     |     |     ├── carousel/
+  |     |     |     |     ├── index.slim
+  |     |     |     |     ├── index.bemhtml.slim
+  |     |     |     |     ├── index.js
+  |     |     |     |     └── index.scss
+  |     |     |     └── ...
+  |     |     ├── admin_panel/
+  |     |     |     └── ...
+  |     |     ├── landing/
+  |     |     |     └── ...
+  |     |     ├── user_panel/
+  |     |     |     └── ...
+  |     |     └── ...
+  |     └── ...
+  └── ...
+```
+
+Пример файловой структуры при использовании [Webpacker](https://github.com/rails/webpacker).
+```
+app/
+  ├── frontend/
+  |     ├── components/
+  |     |     ├── common/
+  |     |     |     ├── carousel/
+  |     |     |     |     ├── index.slim
+  |     |     |     |     ├── index.bemhtml.slim
+  |     |     |     |     ├── index.js
+  |     |     |     |     └── index.scss
+  |     |     |     └── ...
+  |     |     ├── admin_panel/
+  |     |     |     └── ...
+  |     |     ├── landing/
+  |     |     |     └── ...
+  |     |     ├── user_panel/
+  |     |     |     └── ...
+  |     |     └── ...
+  |     ├── packs/
+  |     |     ├── admin_panel/
+  |     |     |     ├── application.js
+  |     |     |     └── ...
+  |     |     ├── landing/
+  |     |     |     ├── application.js
+  |     |     |     └── ...
+  |     |     ├── user_panel/
+  |     |     |     ├── application.js
+  |     |     |     └── ...
+  |     |     └── ...
+  |     └── ...
+  └── ...
+```
+Структура [компонента Сarousel из Bootstrap](https://getbootstrap.com/docs/4.3/components/carousel/#with-indicators):
+
+```slim
+/ app/frontend/components/common/carousel/index.slim
+
+= define_component do |component|
+  = component.block :carousel, 'data-ride': :carousel, 'data-interval': false, cls: :slide do |carousel|
+    = carousel.elem :indicators, tag: :ol, cls: 'carousel-indicators'
+      - image_urls.size.times do |i|
+        = carousel.elem :indicator, tag: :li, 'data-slide-to': i, mods: (:active if i.zero?), 'data-target': '.carousel'
+    = carousel.elem :inner, cls: 'carousel-inner'
+      - image_urls.each_with_index do |image_url, i|
+        = carousel.elem :item, cls: 'carousel-item', mods: (:active if i.zero?)
+          = carousel.elem :image, tag: :img, cls: 'd-block w-100', src: image_url
+    = carousel.elem :control_prev, tag: :a, cls: 'carousel-control-prev', 'data-slide': :prev, role: :button, 'data-target': '.carousel'
+      span.carousel-control-prev-icon aria-hidden="true"
+      span.sr-only Предыдущий
+    = carousel.elem :control_next, tag: :a, cls: 'carousel-control-next', 'data-slide': :next, role: :button, 'data-target': '.carousel'
+      span.carousel-control-next-icon aria-hidden="true"
+      span.sr-only Следующий
+```
+
+[Шаблон по умолчанию](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-define_templates.md):
+```slim
+/ app/frontend/components/common/carousel/index.bemhtml.slim
+
+= define_templates do |template|
+  = template.elem(mods: :active).add_cls :active
+```
+
+[Вызов компонента](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-render_component.md) `carousel` в любом представлении или в других компонентах:
+```slim
+= render_component :carousel, prefix: :common, image_urls: image_urls do |template|
+  = template.block(:carousel).add_mix :carousel_fade
+```
+
+## Документация
+
 1. [Файловая структура](docs/%D0%A4%D0%B0%D0%B8%CC%86%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0.md)
 1. [Конфигурация](docs/%D0%9A%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F.md)
 1. [Создание и использование UI компонент](docs/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-UI-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82.md)
