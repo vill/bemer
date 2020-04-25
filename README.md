@@ -103,7 +103,22 @@ app/
   |     |     |     |     ├── index.slim
   |     |     |     |     ├── index.bemhtml.slim
   |     |     |     |     ├── index.js
-  |     |     |     |     └── index.scss
+  |     |     |     |     ├── index.scss
+  |     |     |     |     └── ...
+  |     |     |     ├── form/
+  |     |     |     |     ├── error_messages_elem/
+  |     |     |     |     |     ├── index.slim
+  |     |     |     |     |     ├── index.js
+  |     |     |     |     |     ├── index.scss
+  |     |     |     |     |     └── ...
+  |     |     |     |     ├── locales/
+  |     |     |     |     |     ├── en.yml
+  |     |     |     |     |     └── ...
+  |     |     |     |     ├── index.slim
+  |     |     |     |     ├── base.rb
+  |     |     |     |     ├── index.js
+  |     |     |     |     ├── index.scss
+  |     |     |     |     └── ...
   |     |     |     └── ...
   |     |     ├── admin_panel/
   |     |     |     └── ...
@@ -125,7 +140,22 @@ app/
   |     |     |     |     ├── index.slim
   |     |     |     |     ├── index.bemhtml.slim
   |     |     |     |     ├── index.js
-  |     |     |     |     └── index.scss
+  |     |     |     |     ├── index.scss
+  |     |     |     |     └── ...
+  |     |     |     ├── form/
+  |     |     |     |     ├── error_messages_elem/
+  |     |     |     |     |     ├── index.slim
+  |     |     |     |     |     ├── index.js
+  |     |     |     |     |     ├── index.scss
+  |     |     |     |     |     └── ...
+  |     |     |     |     ├── locales/
+  |     |     |     |     |     ├── en.yml
+  |     |     |     |     |     └── ...
+  |     |     |     |     ├── index.slim
+  |     |     |     |     ├── base.rb
+  |     |     |     |     ├── index.js
+  |     |     |     |     ├── index.scss
+  |     |     |     |     └── ...
   |     |     |     └── ...
   |     |     ├── admin_panel/
   |     |     |     └── ...
