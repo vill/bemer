@@ -14,3 +14,6 @@ gem 'loofah', '~> 2.3.1'
 
 # Fix Possible Information Leak / Session Hijack Vulnerability. See: https://github.com/rack/rack/security/advisories/GHSA-hrqr-hxpp-chr3
 gem 'rack', '>= 1.6.12'
+
+# Fix CVE-2020-7595. See: https://github.com/sparklemotion/nokogiri/issues/1992
+gem 'nokogiri', '~> 1.10.9'
