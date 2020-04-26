@@ -6,9 +6,6 @@
     - bundle exec rubocop --config .rubocop.yml
     - bundle exec rake wwtd:local
 
-variables:
-  CI: 'true'
-
 cache:
   untracked: true
   paths:
@@ -28,7 +25,7 @@ before_script:
   - export LANGUAGE=en_US:en
   - export LC_ALL=en_US.UTF-8
   - rm Gemfile.lock
-  - gem install bundler --wrappers --no-document
+  - CI=true gem install bundler --wrappers --no-document
   - 'bundle install --path vendor/bundle --jobs $(nproc) "${FLAGS[@]}"'
 
 ruby-2.3.7:
