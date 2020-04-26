@@ -24,6 +24,7 @@ before_script:
   - export LANG=en_US.UTF-8
   - export LANGUAGE=en_US:en
   - export LC_ALL=en_US.UTF-8
+  - rm Gemfile.lock
   - gem install bundler --wrappers --no-document
   - bundle config --local path vendor/bundle
   - 'CI=true bundle install --jobs $(nproc) "${FLAGS[@]}"'
