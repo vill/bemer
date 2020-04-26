@@ -26,7 +26,7 @@ before_script:
   - export LC_ALL=en_US.UTF-8
   - rm Gemfile.lock
   - gem update --system 3.0.0
-  - gem install bundler _2.1.4_ --wrappers --no-document
+  - gem install bundler:2.1.4 --wrappers --no-document
   - bundle _2.1.4_ config --local path vendor/bundle
   - 'CI=true bundle _2.1.4_ install --jobs $(nproc) "${FLAGS[@]}"'
 
