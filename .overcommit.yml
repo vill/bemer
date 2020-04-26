@@ -34,8 +34,6 @@ PreCommit:
 
   ExecutePermissions:
     enabled: true
-    exclude:
-      - 'spec/dummy/bin/*'
 
   Fasterer:
     enabled: true
@@ -53,7 +51,3 @@ PreCommit:
 
   TrailingWhitespace:
     enabled: true
-
-PrePush:
-  RSpec:
-    enabled: false
