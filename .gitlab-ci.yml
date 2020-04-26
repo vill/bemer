@@ -26,7 +26,8 @@ before_script:
   - export LC_ALL=en_US.UTF-8
   - rm Gemfile.lock
   - gem install bundler --wrappers --no-document
-  - 'CI=true bundle install --path vendor/bundle --jobs $(nproc) "${FLAGS[@]}"'
+  - bundle config --local path vendor/bundle
+  - 'CI=true bundle install --jobs $(nproc) "${FLAGS[@]}"'
 
 ruby-2.3.7:
   image: ruby:2.3.7
