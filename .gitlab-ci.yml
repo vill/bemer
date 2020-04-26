@@ -3,8 +3,8 @@
   allow_failure: false
   script:
     - ruby -v
-    - bundle _2.1.4_ exec rubocop --config .rubocop.yml
-    - bundle _2.1.4_ exec rake wwtd:local
+    - bundle exec rubocop --config .rubocop.yml
+    - CI=true bundle exec rake wwtd:local
 
 cache:
   untracked: true
@@ -26,9 +26,9 @@ before_script:
   - export LC_ALL=en_US.UTF-8
   - rm Gemfile.lock
   - gem update --system 3.0.0
-  - gem install bundler:2.1.4 --wrappers --no-document
-  - bundle _2.1.4_ config --local path vendor/bundle
-  - 'CI=true bundle _2.1.4_ install --jobs $(nproc) "${FLAGS[@]}"'
+  - gem install bundler --wrappers --no-document --default
+  - bundle config --local path vendor/bundle
+  - 'CI=true bundle install --jobs $(nproc) "${FLAGS[@]}"'
 
 ruby-2.3.7:
   image: ruby:2.3.7
