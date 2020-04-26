@@ -1,4 +1,6 @@
 .default_script: &default_script
+  when: manual
+  allow_failure: false
   script:
     - ruby -v
     - bundle exec rubocop --config .rubocop.yml
