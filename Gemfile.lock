@@ -158,7 +158,7 @@ DEPENDENCIES
   actionmailer (~> 6.0.2)
   appraisal (~> 2.2.0)
   bemer!
-  bundler (~> 1.16)
+  bundler (~> 2.1.4)
   bundler-audit (~> 0.6.1)
   fasterer (~> 0.7.1)
   fuubar (~> 2.5.0)
@@ -175,4 +175,4 @@ DEPENDENCIES
   wwtd (~> 1.4.0)
 
 BUNDLED WITH
-   1.16.2
+   2.1.4
