@@ -44,7 +44,7 @@ module Bemer
   class << self
     extend Forwardable
 
-    # rubocop:disable Layout/AlignParameters
+    # rubocop:disable Layout/AlignArguments
     def_delegators :config, :asset_paths,
                             :bem,
                             :can_use_new_matcher?,
@@ -57,7 +57,7 @@ module Bemer
                             :path,
                             :paths,
                             :prepend_asset_paths
-    # rubocop:enable Layout/AlignParameters
+    # rubocop:enable Layout/AlignArguments
 
     alias prepend_asset_paths? prepend_asset_paths
 
