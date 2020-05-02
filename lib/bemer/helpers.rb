@@ -49,5 +49,7 @@ module Bemer
     def bemer_html_attrs_for(block = '', element = nil, **options)
       Bemer::EntityBuilder.new(block, element, options.merge(bem: true)).attrs
     end
+
+    alias html_attrs_for bemer_html_attrs_for
   end
 end
