@@ -45,5 +45,11 @@ module Bemer
     def component_partial_path(name)
       Bemer::PathResolver.new(self).resolve(name, true)
     end
+
+    def data_bem_for(block = '', element = nil, **options)
+      js = options[:js].nil? ? true : options.delete(:js)
+
+      Bemer::EntityBuilder.new(block, element, options.merge(bem: true, js: js)).attrs
+    end
   end
 end
