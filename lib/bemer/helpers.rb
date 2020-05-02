@@ -45,5 +45,9 @@ module Bemer
     def component_partial_path(name)
       Bemer::PathResolver.new(self).resolve(name, true)
     end
+
+    def bemer_html_attrs_for(block = '', element = nil, **options)
+      Bemer::EntityBuilder.new(block, element, options.merge(bem: true)).attrs
+    end
   end
 end
