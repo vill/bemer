@@ -105,6 +105,14 @@ RSpec.describe 'elem_tag helper' do
         it { expect(elem_tag(:block, :elem, mix: :css_mixin)).to have_empty_tag(:div, with: { class: 'block__elem css-mixin' }, count: 1) }
         it { expect(elem_tag(:block, :elem, mix: ['css_mixin', :block_name, block2: :elem])).to have_empty_tag(:div, with: { class: 'block__elem css_mixin block-name block2__elem' }, count: 1) }
         it { expect(elem_tag(:block, :elem, mix: { block_name: :elem })).to have_empty_tag(:div, with: { class: 'block__elem block-name__elem' }, count: 1) }
+        it { expect(elem_tag(:block, :elem, mix: { block_name: :elem, js: true })).to have_empty_tag(:div, with: { class: 'block__elem block-name__elem i-bem', 'data-bem': '{"block-name__elem":{}}' }, count: 1) }
+        it { expect(elem_tag(:block, :elem, js: true, mix: { block_1: :elem, js: { key: :val } })).to have_empty_tag(:div, with: { class: 'block__elem block-1__elem i-bem', 'data-bem': '{"block__elem":{},"block-1__elem":{"key":"val"}}' }, count: 1) }
+        it { expect(elem_tag(:block, :elem, js: true, mix: { block: :elem, js: { key: :val } })).to have_empty_tag(:div, with: { class: 'block__elem i-bem', 'data-bem': '{"block__elem":{"key":"val"}}' }, count: 1) }
+        it { expect(elem_tag(:block, :elem, mix: { block_name: :elem, mods: :enabled })).to have_empty_tag(:div, with: { class: 'block__elem block-name__elem block-name__elem_enabled' }, count: 1) }
+        it { expect(elem_tag(:block, :elem, mix: [:mix, block_name: :elem, js: true])).to have_empty_tag(:div, with: { class: 'block__elem mix block-name__elem i-bem', 'data-bem': '{"block-name__elem":{}}' }, count: 1) }
+        it { expect(elem_tag(:block, :elem, mix: [{ block_1: nil, mods: :enabled, js: { key: :val } }, { block_name: :elem, js: true }])).to have_empty_tag(:div, with: { class: 'block__elem block-1 block-1_enabled block-name__elem i-bem', 'data-bem': '{"block-1":{"key":"val"},"block-name__elem":{}}' }, count: 1) }
+        it { expect(elem_tag(:block, :elem, mix: [:block_1, block2: %i[elem1 elem2], js: true])).to have_empty_tag(:div, with: { class: 'block__elem block-1 block2__elem1 block2__elem2 i-bem', 'data-bem': '{"block2__elem1":{},"block2__elem2":{}}' }, count: 1) }
+        it { expect(elem_tag(:block, :elem, mix: { block2: %i[elem1 elem2], js: true })).to have_empty_tag(:div, with: { class: 'block__elem block2__elem1 block2__elem2 i-bem', 'data-bem': '{"block2__elem1":{},"block2__elem2":{}}' }, count: 1) }
 
         # mods parameter
         it { expect(elem_tag(:block, :elem, mods: :enabled)).to have_empty_tag(:div, with: { class: 'block__elem block__elem_enabled' }, count: 1) }
