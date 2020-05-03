@@ -11,7 +11,7 @@ module Bemer
     end
 
     def bem_mix(*mix)
-      Bemer::MixinList.new(mix).to_s
+      Bemer::Mixes.new(mix).to_s
     end
 
     def bem_mods(*block_and_element, mods)

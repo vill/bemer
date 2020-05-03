@@ -59,7 +59,7 @@ module Bemer
       @bem_cascade = options.delete(:bem_cascade)
       @css_classes = [options.delete(:class), options.delete(:cls)]
       @js          = options.delete(:js)
-      @mixins      = MixinList.new(options.delete(:mix))
+      @mixins      = Mixes.new(options.delete(:mix))
       @modifiers   = ModifierList.new(block, element, options.delete(:mods))
       @tag         = build_tag(options.delete(:tag))
       @html_attrs  = options

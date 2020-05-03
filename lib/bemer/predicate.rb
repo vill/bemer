@@ -7,7 +7,7 @@ module Bemer
       @condition = options[:condition].nil? ? true : options[:condition]
       @element   = options[:elem]
       @mask      = build_mask(options[:block], options[:elem])
-      @mixins    = MixinList.new(options[:mix])
+      @mixins    = Mixes.new(options[:mix])
       @modifiers = ModifierList.new(:block, :elem, options[:mods])
       @wildcard  = nil
     end
