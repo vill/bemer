@@ -69,9 +69,9 @@ module Bemer
       if !need_data_bem && need_mixed_data_bem
         mixed_data_bem
       else
-        js_attrs = @js.instance_of?(TrueClass) ? {} : super
+        data_bem = @js.instance_of?(TrueClass) ? {} : super
 
-        { DATA_BEM_KEY => { name => js_attrs }.merge!(mixed_data_bem[DATA_BEM_KEY]) }
+        { DATA_BEM_KEY => { name => data_bem }.merge!(mixed_data_bem[DATA_BEM_KEY]) }
       end
     end
 
