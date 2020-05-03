@@ -1,6 +1,6 @@
-# Хелпер data_bem_for
+# Хелпер bem_attrs_for
 
-Хелпер `data_bem_for` генерирует `class` и `data-bem` атрибуты для указанной сущности.
+Хелпер `bem_attrs_for` генерирует `class` и `data-bem` атрибуты для указанной сущности.
 
 ## Допустимые параметры
 
@@ -10,18 +10,18 @@
 ## Использование
 
 ```slim
-= data_bem_for :block, :element
+= bem_attrs_for :block, :element
 / => { class: "block__element i-bem", "data-bem": "{\"block__element\":{}}" }
 ```
 
 ```slim
-= data_bem_for :block, :element, js: { some: :value }
+= bem_attrs_for :block, :element, js: { some: :value }
 / => { class: "block__element i-bem", "data-bem": "{\"block__element\":{\"some\":\"value\"}}" }
 ```
 
 ```slim
 = simple_form_for :form, url: '#' do |f|
-  = f.input :numbers, collection: (1..5).map { |n| [n, n, data_bem_for(:form, :number, js: { value: n })] }
+  = f.input :numbers, collection: (1..5).map { |n| [n, n, bem_attrs_for(:form, :number, js: { value: n })] }
   = f.button :submit
 / =>
 / <form novalidate="novalidate" class="form" action="#" accept-charset="UTF-8" method="post">
@@ -40,7 +40,7 @@
 
 ```slim
 = simple_form_for :form, url: '#' do |f|
-  = f.input :numbers, collection: (1..5).map { |n| [n, n, data_bem_for(:form, :number, js: false)] }
+  = f.input :numbers, collection: (1..5).map { |n| [n, n, bem_attrs_for(:form, :number, js: false)] }
   = f.button :submit
 / =>
 / <form novalidate="novalidate" class="form" action="#" accept-charset="UTF-8" method="post">

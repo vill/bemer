@@ -258,7 +258,7 @@ app/
     1. [`component_asset_path`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-component_asset_path.md)
     1. [`component_partial_path`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-component_partial_path.md)
 1. Дополнительные хелперы для БЭМ методологии
-    1. [`data_bem_for`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-data_bem_for.md)
+    1. [`bem_attrs_for`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-bem_attrs_for.md)
     1. [`bem_mix`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-bem_mix.md)
     1. [`bem_mods`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-bem_mods.md)
     1. [`block_tag`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-block_tag.md)
