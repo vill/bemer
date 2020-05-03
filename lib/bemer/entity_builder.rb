@@ -124,7 +124,6 @@ module Bemer
 
     def mixed_data_bem
       mixins.entities.each_with_object(DATA_BEM_KEY => {}) do |entity, data_bem|
-        # next if entity.name.eql?(name) || !entity.need_data_bem?
         next unless entity.need_data_bem?
 
         data_bem[DATA_BEM_KEY][entity.name] = entity.js[DATA_BEM_KEY][entity.name]
