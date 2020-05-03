@@ -7,7 +7,6 @@ require 'active_support/core_ext/hash/slice'
 module Bemer
   class Mixes
     def initialize(*mixes)
-      @bem   = bem
       @mixes = Array.wrap(mixes).flatten
     end
 
@@ -39,6 +38,6 @@ module Bemer
 
     protected
 
-    attr_reader :mixes, :bem
+    attr_reader :mixes
   end
 end
