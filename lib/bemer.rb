@@ -20,7 +20,6 @@ module Bemer
   autoload :DefaultTemplateList
   autoload :Entity
   autoload :EntityBuilder
-  autoload :MixinList
   autoload :Mixes
   autoload :ModifierList
   autoload :PathResolver
