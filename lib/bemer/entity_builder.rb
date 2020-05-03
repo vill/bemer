@@ -4,14 +4,20 @@ require 'active_support/core_ext/object/blank'
 require 'active_support/core_ext/string/filters'
 
 module Bemer
-  class EntityBuilder < Entity
+  class EntityBuilder < Entity # rubocop:disable Metrics/ClassLength
+    DATA_BEM_KEY = :'data-bem'
+
     def attrs
       attributes         = Hash[super]
       attributes[:class] = cls if cls.present?
 
       return attributes unless bem?
 
-      attributes.merge!(js)
+      data_bem = js
+
+      data_bem[DATA_BEM_KEY] = data_bem[DATA_BEM_KEY].to_json if data_bem.key?(DATA_BEM_KEY)
+
+      attributes.merge!(data_bem)
     end
 
     def attrs=(new_attrs, save = true)
@@ -39,9 +45,9 @@ module Bemer
     def cls
       return super unless bem?
 
-      js_class = 'i-bem' if @js.present? && bem_class.present?
+      i_bem = 'i-bem' if need_data_bem? || need_mixed_data_bem?
 
-      [bem_class, mods, mix, super, js_class].join(' ').squish
+      [bem_class, mods, mix, super, i_bem].flatten.reject(&:blank?).uniq.join(' ')
     end
 
     def cls=(new_cls, save = true)
@@ -55,11 +61,18 @@ module Bemer
     end
 
     def js
-      return {} if @js.blank? || bem_class.blank?
+      need_data_bem       = need_data_bem?
+      need_mixed_data_bem = need_mixed_data_bem?
 
-      js_attrs = @js.instance_of?(TrueClass) ? {} : super
+      return {} unless need_data_bem || need_mixed_data_bem
 
-      { 'data-bem': { name => js_attrs }.to_json }
+      if !need_data_bem && need_mixed_data_bem
+        mixed_data_bem
+      else
+        js_attrs = @js.instance_of?(TrueClass) ? {} : super
+
+        { DATA_BEM_KEY => { name => js_attrs }.merge!(mixed_data_bem[DATA_BEM_KEY]) }
+      end
     end
 
     def js=(new_js, save = true)
@@ -67,9 +80,15 @@ module Bemer
     end
 
     def mix=(new_mix, save = true)
-      new_mix = MixinList.new(new_mix).to_a
+      new_mixes = Mixes.new(new_mix)
+      new_mix   = new_mixes.to_a
 
-      save ? @mix = new_mix : new_mix
+      if save
+        @mixins = new_mixes
+        @mix    = new_mix
+      else
+        new_mix
+      end
     end
 
     def mods
@@ -93,7 +112,24 @@ module Bemer
       save ? @tag = new_tag : new_tag
     end
 
+    def need_data_bem?
+      bem? && @js.present? && bem_class.present?
+    end
+
+    def need_mixed_data_bem?
+      bem? && mixins.entities.any?(&:need_data_bem?)
+    end
+
     protected
+
+    def mixed_data_bem
+      mixins.entities.each_with_object(DATA_BEM_KEY => {}) do |entity, data_bem|
+        # next if entity.name.eql?(name) || !entity.need_data_bem?
+        next unless entity.need_data_bem?
+
+        data_bem[DATA_BEM_KEY][entity.name] = entity.js[DATA_BEM_KEY][entity.name]
+      end
+    end
 
     def bem_via_option?
       !@bem.nil?
