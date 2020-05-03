@@ -169,6 +169,12 @@ block_tag :block, mix: [:mix_1, block_1: :elem], bem: true
 
 block_tag :block, mix: { block_1: :elem }, bem: true
 # => <div class="block block-1__elem"></div>
+
+block_tag :block, mix: { block_1: :elem, mods: :enabled }
+# => <div class="block block-1__elem block-1__elem--enabled"></div>
+
+block_tag :block, js: true, mix: { block_1: :elem, js: { key: :value } }
+# => <div class="block block-1__elem i-bem" data-bem="{"block":{},"block-1__elem":{"key":"value"}}"></div>
 ```
 
 ### Параметр `mods`

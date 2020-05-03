@@ -50,12 +50,6 @@ bem_mix 'block_name' => 'elem_name' # => 'block_name__elem_name'
 bem_mix 'block_name', 'block_name__elem' # => 'block_name block_name__elem'
 ```
 
-эквивалентная запись:
-
-```ruby
-bem_mix 'block_name block_name__elem' # => 'block_name block_name__elem'
-```
-
 Пустые аргументы возвращают пустую строку
 ```ruby
 bem_mix nil, '', {} # => ''
