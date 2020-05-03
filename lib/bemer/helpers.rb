@@ -46,7 +46,7 @@ module Bemer
       Bemer::PathResolver.new(self).resolve(name, true)
     end
 
-    def data_bem_for(block = '', element = nil, **options)
+    def bem_attrs_for(block = '', element = nil, **options)
       js = options[:js].nil? ? true : options.delete(:js)
 
       Bemer::EntityBuilder.new(block, element, options.merge(bem: true, js: js)).attrs
