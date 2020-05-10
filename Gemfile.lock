@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bemer (0.3.0)
+    bemer (0.4.0)
       railties (>= 3.2.22)
 
 GEM
