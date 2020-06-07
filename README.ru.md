@@ -1,35 +1,34 @@
 # Bemer
 
-1. Build reusable UI components for Ruby on Rails applications.
-1. Develop Ruby on Rails applications using the `BEM` methodology.
+**ВАЖНО**. *Для работы с UI компонентами не обязательно использовать методологию БЭМ.*
 
-**IMPORTANT**. *Using the `BEM` methodology is optional.*
+1. Позволяет создавать переиспользуемые UI компоненты для приложений на Ruby on Rails.
+1. Предоставляет функционал для разработки приложений на Ruby on Rails с использованием методологии БЭМ.
 
-Additional resources:
+## Дополнительно
 
-1. Habr article in Russian - [Переиспользуемые UI компоненты в приложениях на Ruby on Rails](https://habrahabr.ru/post/352938/).
-1. [`bemer-simple_form`](https://github.com/vill/bemer-simple_form) - Add the `BEM` methodology to your `SimpleForm` forms.
-1. [`bemer-bootstrap`](https://github.com/vill/bemer-bootstrap) - Reusable UI components of `Bootstrap`.
-1. [Ruby on Rails application](https://github.com/vill/bemer-example) using `bemer` and [`bemer-bootstrap`](https://github.com/vill/bemer-bootstrap).
+1. Статья на Хабре - [Переиспользуемые UI компоненты в приложениях на Ruby on Rails](https://habrahabr.ru/post/352938/).
+1. [`bemer-simple_form`](https://github.com/vill/bemer-simple_form) - Использование соглашений из БЭМ методологии в формах `SimpleForm`.
+1. [`bemer-bootstrap`](https://github.com/vill/bemer-bootstrap) - переиспользуемые компоненты Bootstrap v3.
+1. [Пример приложения](https://github.com/vill/bemer-example) с использованием `bemer` и [`bemer-bootstrap`](https://github.com/vill/bemer-bootstrap).
 
-*Please refer to the [README.ru.md](README.ru.md) file for instructions in Russian.*
+## Установка
 
-
-## Installation
-
-Add it to your Gemfile:
+Добавить в `Gemfile`:
 
 ```ruby
 gem 'bemer'
 ```
 
-Run the following command to install it:
+Выполнить в терминале команду:
 
     $ bundle
 
-## Configuration
+## Использование
 
-See [configuration documentation](docs/%D0%9A%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F.md) for details.
+### Конфигурация
+
+[Конфигурация](docs/%D0%9A%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F.md) для `Bemer`:
 
 ```ruby
 # config/initializers/bemer.rb
@@ -37,15 +36,14 @@ See [configuration documentation](docs/%D0%9A%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%8
 Bemer.setup do |config|
   config.bem                     = true
   config.modifier_name_separator = '--'
-  config.path                    = 'app/frontend/components' # or Webpacker.config.source_path
+  config.path                    = 'app/frontend/components' # или Webpacker.config.source_path
   # config.default_path_prefix     = lambda { |path, view|
   #   view.controller.class.name.split('::')[0].underscore
   # }
 end
 ```
 
-## Integrations
-### Webpacker
+Если используется [`Webpacker`](https://github.com/rails/webpacker):
 
 ```yml
 # config/webpacker.yml
@@ -68,72 +66,10 @@ production:
   <<: *default
   # ...
 ```
-#### File naming and folder structure
-See [file naming and folder structure documentation](docs/%D0%A4%D0%B0%D0%B8%CC%86%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0.md) for details.
 
-```
-app/
-  ├── frontend/
-  |     ├── components/
-  |     |     ├── common/
-  |     |     |     ├── carousel/
-  |     |     |     |     ├── index.slim
-  |     |     |     |     ├── index.bemhtml.slim
-  |     |     |     |     ├── index.js
-  |     |     |     |     ├── index.scss
-  |     |     |     |     └── ...
-  |     |     |     ├── form/
-  |     |     |     |     ├── error_messages_elem/
-  |     |     |     |     |     ├── index.slim
-  |     |     |     |     |     ├── index.js
-  |     |     |     |     |     ├── index.scss
-  |     |     |     |     |     └── ...
-  |     |     |     |     ├── locales/
-  |     |     |     |     |     ├── en.yml
-  |     |     |     |     |     └── ...
-  |     |     |     |     ├── index.slim
-  |     |     |     |     ├── base.rb
-  |     |     |     |     ├── index.js
-  |     |     |     |     ├── index.scss
-  |     |     |     |     └── ...
-  |     |     |     └── ...
-  |     |     ├── admin_panel/
-  |     |     |     └── ...
-  |     |     ├── landing/
-  |     |     |     └── ...
-  |     |     ├── user_panel/
-  |     |     |     └── ...
-  |     |     └── ...
-  |     ├── packs/
-  |     |     ├── admin_panel/
-  |     |     |     ├── application.js
-  |     |     |     └── ...
-  |     |     ├── landing/
-  |     |     |     ├── application.js
-  |     |     |     └── ...
-  |     |     ├── user_panel/
-  |     |     |     ├── application.js
-  |     |     |     └── ...
-  |     |     └── ...
-  |     └── ...
-  └── ...
-```
+### Файловая структура
 
-### Sprockets
-
-You do not need to do anything, but add additional assets to the asset load path if necessary:
-
-```ruby
-# config/initializers/bemer.rb
-
-Bemer.setup do |config|
-  config.asset_paths << Rails.root.join('some/asset/path')
-end
-```
-
-### File naming and folder structure
-See [file naming and folder structure documentation](docs/%D0%A4%D0%B0%D0%B8%CC%86%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0.md) for details.
-
+Пример [файловой структуры](docs/%D0%A4%D0%B0%D0%B8%CC%86%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0.md) при использовании [`Sprockets`](https://github.com/rails/sprockets-rails):
 ```
 app/
   ├── assets/
@@ -194,12 +130,58 @@ app/
   |     └── ...
   └── ...
 ```
+Пример [файловой структуры](docs/%D0%A4%D0%B0%D0%B8%CC%86%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0.md) при использовании [`Webpacker`](https://github.com/rails/webpacker):
+```
+app/
+  ├── frontend/
+  |     ├── components/
+  |     |     ├── common/
+  |     |     |     ├── carousel/
+  |     |     |     |     ├── index.slim
+  |     |     |     |     ├── index.bemhtml.slim
+  |     |     |     |     ├── index.js
+  |     |     |     |     ├── index.scss
+  |     |     |     |     └── ...
+  |     |     |     ├── form/
+  |     |     |     |     ├── error_messages_elem/
+  |     |     |     |     |     ├── index.slim
+  |     |     |     |     |     ├── index.js
+  |     |     |     |     |     ├── index.scss
+  |     |     |     |     |     └── ...
+  |     |     |     |     ├── locales/
+  |     |     |     |     |     ├── en.yml
+  |     |     |     |     |     └── ...
+  |     |     |     |     ├── index.slim
+  |     |     |     |     ├── base.rb
+  |     |     |     |     ├── index.js
+  |     |     |     |     ├── index.scss
+  |     |     |     |     └── ...
+  |     |     |     └── ...
+  |     |     ├── admin_panel/
+  |     |     |     └── ...
+  |     |     ├── landing/
+  |     |     |     └── ...
+  |     |     ├── user_panel/
+  |     |     |     └── ...
+  |     |     └── ...
+  |     ├── packs/
+  |     |     ├── admin_panel/
+  |     |     |     ├── application.js
+  |     |     |     └── ...
+  |     |     ├── landing/
+  |     |     |     ├── application.js
+  |     |     |     └── ...
+  |     |     ├── user_panel/
+  |     |     |     ├── application.js
+  |     |     |     └── ...
+  |     |     └── ...
+  |     └── ...
+  └── ...
+```
+### Создание `HTML` структуры компонента
 
-## Usage
-
-### Component to which `BEMHTML` templates cannot be applied
-
-HTML structure of the [Carousel component from Bootstrap](https://getbootstrap.com/docs/4.3/components/carousel/#with-indicators):
+#### Простой компонент
+Структура компонента [Сarousel из Bootstrap](https://getbootstrap.com/docs/4.3/components/carousel/#with-indicators):
 
 ```slim
 / app/frontend/components/common/carousel/index.slim
@@ -214,19 +196,19 @@ HTML structure of the [Carousel component from Bootstrap](https://getbootstrap.c
         = image_tag image_url, class: 'd-block w-100'
   a.carousel-control-prev data-slide="prev" data-target='.carousel' role="button"
     span.carousel-control-prev-icon aria-hidden="true"
-    span.sr-only Previous
+    span.sr-only Предыдущий
   a.carousel-control-next data-slide="next" data-target='.carousel' role="button"
     span.carousel-control-next-icon aria-hidden="true"
-    span.sr-only Next
+    span.sr-only Следующий
 ```
-[Rendering](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-render_component.md) the `carousel` component in any view or [other UI components](docs/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-UI-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82.md):
+[Вызов компонента](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-render_component.md) `carousel` в любом представлении или в [других компонентах](docs/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-UI-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82.md):
 ```slim
 = render_component :carousel, prefix: :common, image_urls: image_urls, cls: 'carousel-fade'
 ```
 
-### Component to which `BEMHTML` templates can be applied
+#### Компонент к которому можно применять `BEMHTML` шаблоны
 
-Tree structure of the [Carousel component from Bootstrap](https://getbootstrap.com/docs/4.3/components/carousel/#with-indicators):
+Структура компонента [Сarousel из Bootstrap](https://getbootstrap.com/docs/4.3/components/carousel/#with-indicators):
 
 ```slim
 / app/frontend/components/common/carousel/index.slim
@@ -242,13 +224,13 @@ Tree structure of the [Carousel component from Bootstrap](https://getbootstrap.c
           = carousel.elem :image, tag: :img, cls: 'd-block w-100', src: image_url
     = carousel.elem :control_prev, tag: :a, cls: 'carousel-control-prev', 'data-slide': :prev, role: :button, 'data-target': '.carousel'
       span.carousel-control-prev-icon aria-hidden="true"
-      span.sr-only Previous
+      span.sr-only Предыдущий
     = carousel.elem :control_next, tag: :a, cls: 'carousel-control-next', 'data-slide': :next, role: :button, 'data-target': '.carousel'
       span.carousel-control-next-icon aria-hidden="true"
-      span.sr-only Next
+      span.sr-only Следующий
 ```
 
-[Default template](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-define_templates.md):
+[Шаблон по умолчанию](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-define_templates.md):
 ```slim
 / app/frontend/components/common/carousel/index.bemhtml.slim
 
@@ -256,18 +238,18 @@ Tree structure of the [Carousel component from Bootstrap](https://getbootstrap.c
   = template.elem(mods: :active).add_cls :active
 ```
 
-[Rendering](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-render_component.md) the `carousel` component in any view or [other UI components](docs/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-UI-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82.md) using [`BEMHTML`](docs/BEMHTML.md) [templates](docs/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B.md):
+[Вызов компонента](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-render_component.md) `carousel` в любом представлении или в [других компонентах](docs/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-UI-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82.md) с применением [`BEMHTML`](docs/BEMHTML.md) [шаблонов](docs/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B.md):
 ```slim
 = render_component :carousel, prefix: :common, image_urls: image_urls do |template|
   = template.block(:carousel).add_mix :carousel_fade
 ```
 
-## Documentation in Russian
+## Документация
 
-1. [File naming and folder structure](docs/%D0%A4%D0%B0%D0%B8%CC%86%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0.md)
-1. [Configuration](docs/%D0%9A%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F.md)
-1. [Creating and using UI components](docs/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-UI-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82.md)
-1. Helpers for UI components
+1. [Файловая структура](docs/%D0%A4%D0%B0%D0%B8%CC%86%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0.md)
+1. [Конфигурация](docs/%D0%9A%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F.md)
+1. [Создание и использование UI компонент](docs/%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-UI-%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82.md)
+1. Хелперы для работы с компонентами
     1. [`define_component`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-define_component.md)
     1. [`define_templates`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-define_templates.md)
     1. [`render_component`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-render_component.md)
@@ -275,25 +257,25 @@ Tree structure of the [Carousel component from Bootstrap](https://getbootstrap.c
     1. [`component_pack`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-component_pack.md)
     1. [`component_asset_path`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-component_asset_path.md)
     1. [`component_partial_path`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-component_partial_path.md)
-1. Additional helpers for the BEM methodology
+1. Дополнительные хелперы для БЭМ методологии
     1. [`bem_attrs_for`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-bem_attrs_for.md)
     1. [`bem_mix`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-bem_mix.md)
     1. [`bem_mods`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-bem_mods.md)
     1. [`block_tag`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-block_tag.md)
     1. [`elem_tag`](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-elem_tag.md)
 1. [BEMHTML](docs/BEMHTML.md)
-    1. [Templates](docs/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B.md)
-    1. [Node](docs/%D0%9A%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82-%D1%83%D0%B7%D0%BB%D0%B0.md)
-    1. [Predicates](docs/%D0%9F%D1%80%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D1%82%D1%8B.md)
-    1. [Modes](docs/%D0%A0%D0%B5%D0%B6%D0%B8%D0%BC%D1%8B.md)
+    1. [Шаблоны](docs/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD%D1%8B.md)
+    1. [Контекст узла](docs/%D0%9A%D0%BE%D0%BD%D1%82%D0%B5%D0%BA%D1%81%D1%82-%D1%83%D0%B7%D0%BB%D0%B0.md)
+    1. [Предикаты](docs/%D0%9F%D1%80%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D1%82%D1%8B.md)
+    1. [Режимы](docs/%D0%A0%D0%B5%D0%B6%D0%B8%D0%BC%D1%8B.md)
 
-## Links
+## Ссылки
 
 1. BEM methodology - https://bem.info/methodology/
 1. Minimal stack for coding client-side JavaScript and templating - https://github.com/bem/bem-core
 1. Declarative template engine for the browser and server with regular JS syntax - https://github.com/bem/bem-xjst
 1. BEM Forum - https://bem.info/forum/
 
-## License
+## Лицензия
 
-Copyright (c) 2017-2020 Alexander Grigorev. See [LICENSE.txt](LICENSE.txt) for further details.
+Copyright (c) 2017 - 2020 Александр Григорьев. Более подробную информацию о лицензии можно получить в файле [LICENSE.txt](LICENSE.txt).
