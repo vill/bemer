@@ -13,7 +13,7 @@ SUPPORTED_VERSIONS = {
   '6.0.0' => %w[3.0.0 3.1.0 3.2.0 3.3.0 3.4.0],
   '6.1.0' => %w[3.0.0 3.1.0 3.2.0 3.3.0 3.4.0],
   '7.0.0' => %w[3.0.0 3.1.0 3.2.0 3.3.0 3.4.0]
-}
+}.freeze
 
 def build_appraise(name, rails_version, sprockets_rails_version = nil)
   appraise name do
