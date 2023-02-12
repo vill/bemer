@@ -9,10 +9,7 @@ module Bemer
   class Railtie < ::Rails::Railtie
     class << self
       def assets_path_initializer
-        case ::Rails::VERSION::MAJOR
-        when 5..6 then :append_assets_path
-        when 3..4 then :load_config_initializers
-        end
+        ::Rails::VERSION::MAJOR < 5 ? :load_config_initializers : :append_assets_path
       end
     end
 
