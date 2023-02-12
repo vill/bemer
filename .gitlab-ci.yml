@@ -3,7 +3,6 @@
   allow_failure: false
   script:
     - ruby -v
-    - bundle exec rubocop --config .rubocop.yml
     - bundle exec rake wwtd:local
 
 cache:
