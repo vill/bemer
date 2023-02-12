@@ -27,6 +27,7 @@ before_script:
   - gem update --system 3.3.26
   - gem install bundler --wrappers --no-document --default
   - bundle config --local path vendor/bundle
+  - bundle config --local without development
   - 'CI=true bundle install --jobs $(nproc) "${FLAGS[@]}"'
 
 ruby-2.3.7:
