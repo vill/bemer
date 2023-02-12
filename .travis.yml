@@ -85,6 +85,12 @@ matrix:
     # Ruby 2.3.7
     ###########################################################
 
+    # Rails 5.2.x
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails5.2.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails5.2.x_sprockets_rails3.4.x.gemfile
+
     # Rails 6.0.x
     - rvm: 2.3.7
       gemfile: gemfiles/rails6.0.x.gemfile
@@ -94,6 +100,38 @@ matrix:
       gemfile: gemfiles/rails6.0.x_sprockets_rails3.1.x.gemfile
     - rvm: 2.3.7
       gemfile: gemfiles/rails6.0.x_sprockets_rails3.2.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails6.0.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails6.0.x_sprockets_rails3.4.x.gemfile
+
+    # Rails 6.1.x
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails6.1.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.2.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.4.x.gemfile
+
+    # Rails 7.0.x
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails7.0.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.2.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.3.7
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.4.x.gemfile
 
     ###########################################################
     # Ruby 2.4.4
@@ -135,6 +173,12 @@ matrix:
     - rvm: 2.4.4
       gemfile: gemfiles/rails4.1.x_sprockets_rails3.2.x.gemfile
 
+    # Rails 5.2.x
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails5.2.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails5.2.x_sprockets_rails3.4.x.gemfile
+
     # Rails 6.0.x
     - rvm: 2.4.4
       gemfile: gemfiles/rails6.0.x.gemfile
@@ -144,6 +188,38 @@ matrix:
       gemfile: gemfiles/rails6.0.x_sprockets_rails3.1.x.gemfile
     - rvm: 2.4.4
       gemfile: gemfiles/rails6.0.x_sprockets_rails3.2.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails6.0.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails6.0.x_sprockets_rails3.4.x.gemfile
+
+    # Rails 6.1.x
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails6.1.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.2.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails6.1.x_sprockets_rails3.4.x.gemfile
+
+    # Rails 7.0.x
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails7.0.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.2.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.4.4
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.4.x.gemfile
 
     ###########################################################
     # Ruby 2.5.1
@@ -185,6 +261,20 @@ matrix:
     - rvm: 2.5.1
       gemfile: gemfiles/rails4.1.x_sprockets_rails3.2.x.gemfile
 
+    # Rails 7.0.x
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails7.0.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.2.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.5.1
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.4.x.gemfile
+
     ###########################################################
     # Ruby 2.6.3
     ###########################################################
@@ -224,6 +314,20 @@ matrix:
       gemfile: gemfiles/rails4.1.x_sprockets_rails3.1.x.gemfile
     - rvm: 2.6.3
       gemfile: gemfiles/rails4.1.x_sprockets_rails3.2.x.gemfile
+
+    # Rails 7.0.x
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails7.0.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.0.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.1.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.2.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.3.x.gemfile
+    - rvm: 2.6.3
+      gemfile: gemfiles/rails7.0.x_sprockets_rails3.4.x.gemfile
 
     ###########################################################
     # Ruby 2.7.0
