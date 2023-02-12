@@ -296,4 +296,4 @@ Tree structure of the [Carousel component from Bootstrap](https://getbootstrap.c
 
 ## License
 
-Copyright (c) 2017-2020 Alexander Grigorev. See [LICENSE.txt](LICENSE.txt) for further details.
+Copyright (c) 2017-2023 Alexander Grigorev. See [LICENSE.txt](LICENSE.txt) for further details.
