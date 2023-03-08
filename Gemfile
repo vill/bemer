@@ -7,7 +7,7 @@ gemspec
 
 unless ENV['CI'] || ENV['APPRAISAL']
   gem 'actionmailer',        '~> 6.0.2'
-  gem 'appraisal',           '~> 2.2.0'
+  gem 'appraisal',           '~> 2.4.1'
   gem 'bundler',             '~> 2.1.4'
   gem 'bundler-audit',       '~> 0.6.1'
   gem 'fasterer',            '~> 0.7.1'

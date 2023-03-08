@@ -35,7 +35,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
-    appraisal (2.2.0)
+    appraisal (2.4.1)
       bundler
       rake
       thor (>= 0.14.0)
@@ -156,7 +156,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionmailer (~> 6.0.2)
-  appraisal (~> 2.2.0)
+  appraisal (~> 2.4.1)
   bemer!
   bundler (~> 2.1.4)
   bundler-audit (~> 0.6.1)
