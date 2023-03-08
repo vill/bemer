@@ -6,14 +6,14 @@ source 'https://rubygems.org'
 gemspec
 
 unless ENV['CI'] || ENV['APPRAISAL']
-  gem 'actionmailer',        '~> 6.0.2'
+  gem 'actionmailer',        '~> 7.0.4.2'
   gem 'appraisal',           '~> 2.4.1'
   gem 'bundler',             '~> 2.1.4'
-  gem 'bundler-audit',       '~> 0.6.1'
+  gem 'bundler-audit',       '~> 0.9.1'
   gem 'fasterer',            '~> 0.7.1'
   gem 'fuubar',              '~> 2.5.0'
   gem 'overcommit',          '~> 0.47.0'
-  gem 'railties',            '~> 6.0.2'
+  gem 'railties',            '~> 7.0.4.2'
   gem 'rake',                '~> 12.3.3'
   gem 'rspec',               '~> 3.9.0'
   gem 'rspec-html-matchers', '~> 0.9.2'
