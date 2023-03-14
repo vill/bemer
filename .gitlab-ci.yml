@@ -25,14 +25,13 @@ before_script:
   - export LC_ALL=en_US.UTF-8
   - rm Gemfile.lock
   - gem list bundler
+  - gem uninstall bundler
   - gem update --system 3.3.26
   - gem list bundler
   - bundle config --local path vendor/bundle
   - bundle config --local without development
   - 'CI=true bundle install --quiet --jobs $(nproc) "${FLAGS[@]}"'
   - 'CI=true bundle update --bundler --quiet --jobs $(nproc) "${FLAGS[@]}"'
-  - gem uninstall bundler
-  - gem list bundler
 
 ruby-2.3.7:
   image: ruby:2.3.7
