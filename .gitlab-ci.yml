@@ -29,8 +29,8 @@ before_script:
   - gem list bundler
   - bundle config --local path vendor/bundle
   - bundle config --local without development
-  - 'CI=true bundle update --bundler --quiet --jobs $(nproc) "${FLAGS[@]}"'
   - 'CI=true bundle install --quiet --jobs $(nproc) "${FLAGS[@]}"'
+  - 'CI=true bundle update --bundler --quiet --jobs $(nproc) "${FLAGS[@]}"'
 
 ruby-2.3.7:
   image: ruby:2.3.7
