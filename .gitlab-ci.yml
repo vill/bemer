@@ -33,24 +33,24 @@ before_script:
   - 'CI=true bundle install --quiet --jobs $(nproc) "${FLAGS[@]}"'
   - 'CI=true bundle update --bundler --quiet --jobs $(nproc) "${FLAGS[@]}"'
 
-ruby-2.3.7:
-  image: ruby:2.3.7
+ruby-2.3.8:
+  image: ruby:2.3.8
   <<: *default_script
 
-ruby-2.4.4:
-  image: ruby:2.4.4
+ruby-2.4.10:
+  image: ruby:2.4.10
   <<: *default_script
 
-ruby-2.5.1:
-  image: ruby:2.5.1
+ruby-2.5.9:
+  image: ruby:2.5.9
   <<: *default_script
 
-ruby-2.6.3:
-  image: ruby:2.6.3
+ruby-2.6.10:
+  image: ruby:2.6.10
   <<: *default_script
 
-ruby-2.7.0:
-  image: ruby:2.7.0
+ruby-2.7.7:
+  image: ruby:2.7.7
   <<: *default_script
 
 ruby-3.0.5:
