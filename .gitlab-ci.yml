@@ -27,10 +27,9 @@ before_script:
   - gem list bundler
   - gem update --system 3.3.26
   - gem list bundler
-  - gem install bundler --wrappers --no-document --default
-  - gem list bundler
   - bundle config --local path vendor/bundle
   - bundle config --local without development
+  - 'CI=true bundle update --bundler --quiet --jobs $(nproc) "${FLAGS[@]}"'
   - 'CI=true bundle install --quiet --jobs $(nproc) "${FLAGS[@]}"'
 
 ruby-2.3.7:
