@@ -30,7 +30,11 @@ before_script:
   - bundle config --local path vendor/bundle
   - bundle config --local without development
   - 'CI=true bundle install --quiet --jobs $(nproc) "${FLAGS[@]}"'
+  - less Gemfile.lock
   - 'CI=true bundle update --bundler --quiet --jobs $(nproc) "${FLAGS[@]}"'
+  - less Gemfile.lock
+  - gem uninstall bundler
+  - gem list bundler
 
 ruby-2.3.7:
   image: ruby:2.3.7
