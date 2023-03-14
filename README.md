@@ -12,9 +12,6 @@ Additional resources:
 1. [`bemer-bootstrap`](https://github.com/vill/bemer-bootstrap) - Reusable UI components of `Bootstrap`.
 1. [Ruby on Rails application](https://github.com/vill/bemer-example) using `bemer` and [`bemer-bootstrap`](https://github.com/vill/bemer-bootstrap).
 
-*Please refer to the [README.ru.md](README.ru.md) file for instructions in Russian.*
-
-
 ## Installation
 
 Add it to your Gemfile:
