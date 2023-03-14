@@ -38,7 +38,7 @@ RSpec.describe Bemer::Railtie do
   describe 'bemer.helpers initializer' do
     subject(:initializer) { find_initializer('bemer.helpers') }
 
-    let(:action_view) { ActionView::Base.new }
+    let(:action_view) { ActionView::Base.respond_to?(:empty) ? ActionView::Base.empty : ActionView::Base.new }
 
     helper_methods = %i[
       block_tag elem_tag bem_mix bem_mods render_component

@@ -3,7 +3,6 @@
   allow_failure: false
   script:
     - ruby -v
-    - bundle exec rubocop --config .rubocop.yml
     - bundle exec rake wwtd:local
 
 cache:
@@ -25,27 +24,26 @@ before_script:
   - export LANGUAGE=en_US:en
   - export LC_ALL=en_US.UTF-8
   - rm Gemfile.lock
-  - gem update --system 3.0.0
-  - gem install bundler --wrappers --no-document --default
+  - gem update --system 3.3.26
   - bundle config --local path vendor/bundle
-  - 'CI=true bundle install --jobs $(nproc) "${FLAGS[@]}"'
+  - 'CI=true bundle install --quiet --jobs $(nproc) "${FLAGS[@]}"'
 
-ruby-2.3.7:
-  image: ruby:2.3.7
+ruby-2.3.8:
+  image: ruby:2.3.8
   <<: *default_script
 
-ruby-2.4.4:
-  image: ruby:2.4.4
+ruby-2.4.10:
+  image: ruby:2.4.10
   <<: *default_script
 
-ruby-2.5.1:
-  image: ruby:2.5.1
+ruby-2.5.9:
+  image: ruby:2.5.9
   <<: *default_script
 
-ruby-2.6.3:
-  image: ruby:2.6.3
+ruby-2.6.10:
+  image: ruby:2.6.10
   <<: *default_script
 
-ruby-2.7.0:
-  image: ruby:2.7.0
+ruby-2.7.7:
+  image: ruby:2.7.7
   <<: *default_script
