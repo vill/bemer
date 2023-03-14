@@ -11,6 +11,5 @@ gem "wwtd", "~> 1.4.0"
 gem "railties", "~> 6.1.0"
 gem "actionmailer", "~> 6.1.0"
 gem "sprockets-rails", "~> 3.2.0"
-gem "rexml"
 
 gemspec path: "../"

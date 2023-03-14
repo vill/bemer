@@ -20,7 +20,6 @@ def build_appraise(name, rails_version, sprockets_rails_version = nil)
     gem 'railties',        "~> #{rails_version}"
     gem 'actionmailer',    "~> #{rails_version}"
     gem 'sprockets-rails', "~> #{sprockets_rails_version}" unless sprockets_rails_version.nil?
-    gem 'rexml'
 
     next if rails_version[0].to_i > 3
 
