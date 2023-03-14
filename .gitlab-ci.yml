@@ -24,11 +24,8 @@ before_script:
   - export LANGUAGE=en_US:en
   - export LC_ALL=en_US.UTF-8
   - rm Gemfile.lock
-  - gem uninstall bundler
   - gem update --system 3.3.26
-  - gem install bundler --wrappers --no-document --default
   - bundle config --local path vendor/bundle
-  - bundle config --local without development
   - 'CI=true bundle install --quiet --jobs $(nproc) "${FLAGS[@]}"'
 
 ruby-2.3.8:
