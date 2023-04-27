@@ -26,7 +26,7 @@ module Bemer
     attr_reader :options, :path
 
     def add_default_templates
-      default_template = template('index.bemhtml')
+      default_template = template(:bemhtml)
 
       return unless view.lookup_context.exists?(default_template)
 
