@@ -17,7 +17,7 @@ app/
   ├── bemer_components/
   |     ├── panel/
   |     |     ├── index.html.slim
-  |     |     ├── index.bemhtml.slim
+  |     |     ├── bemhtml.slim
   |     |     ├── index.js
   |     |     └── index.css
   |     └── ...
@@ -71,11 +71,11 @@ app/
 /   <div class="panel-footer">Panel footer</div>
 / </div>
 ```
-С помощью файла `index.bemhtml.slim` можно задать дефолтные шаблоны для компонента, которые можно будет переопределить при вызове `render_component` или `refine_component`.
+С помощью файла `bemhtml.slim` можно задать дефолтные шаблоны для компонента, которые можно будет переопределить при вызове `render_component` или `refine_component`.
 
 Возможный вариант шаблонов по умолчанию для компонента `panel`:
 ```slim
-/ Содержимое файла index.bemhtml.slim компонента panel
+/ Содержимое файла bemhtml.slim компонента panel
 = define_templates do |template|
   = template.block(:panel).add_cls :panel_default
 ```

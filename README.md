@@ -75,7 +75,7 @@ app/
   |     |     ├── common/
   |     |     |     ├── carousel/
   |     |     |     |     ├── index.slim
-  |     |     |     |     ├── index.bemhtml.slim
+  |     |     |     |     ├── bemhtml.slim
   |     |     |     |     ├── index.js
   |     |     |     |     ├── index.scss
   |     |     |     |     └── ...
@@ -162,7 +162,7 @@ app/
   |     |     ├── common/
   |     |     |     ├── carousel/
   |     |     |     |     ├── index.slim
-  |     |     |     |     ├── index.bemhtml.slim
+  |     |     |     |     ├── bemhtml.slim
   |     |     |     |     ├── index.js
   |     |     |     |     ├── index.scss
   |     |     |     |     └── ...
@@ -247,7 +247,7 @@ Tree structure of the [Carousel component from Bootstrap](https://getbootstrap.c
 
 [Default template](docs/%D0%A5%D0%B5%D0%BB%D0%BF%D0%B5%D1%80-define_templates.md):
 ```slim
-/ app/frontend/components/common/carousel/index.bemhtml.slim
+/ app/frontend/components/common/carousel/bemhtml.slim
 
 = define_templates do |template|
   = template.elem(mods: :active).add_cls :active
