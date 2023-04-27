@@ -6,14 +6,18 @@ module Bemer
       @view = view
     end
 
-    def resolve(name, partial = false)
-      virtual_path = view.instance_variable_get(:@virtual_path)
-      directory    = [File.dirname(virtual_path)]
-      file_name    = name.to_s
+    def resolve(name, partial = false) # rubocop:disable Metrics/AbcSize
+      name         = name.to_s
+      virtual_dir  = File.dirname(view.instance_variable_get(:@virtual_path))
+      dirs         = [virtual_dir, File.dirname(name).delete('.')].reject(&:blank?)
+      prefixes     = [File.join(*dirs).to_s]
+      format       = File.extname(name).delete('.') unless partial
+      basename     = File.basename(name, '.*')
+      options      = { formats: [format.to_sym] } if format
 
-      return file_name unless view.lookup_context.exists?(file_name, directory, partial)
+      return name unless view.lookup_context.exists?(basename, prefixes, partial, **options.to_h)
 
-      File.join(directory, file_name).to_s
+      File.join(virtual_dir, name).to_s
     end
 
     protected
