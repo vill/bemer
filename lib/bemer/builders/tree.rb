@@ -8,11 +8,11 @@ module Bemer
       end
 
       def block(name = '', **options, &content)
-        tree.add_node(name, options, &content)
+        tree.add_node(name, **options, &content)
       end
 
       def elem(block = '', name = '', **options, &content)
-        tree.add_node(block, name, options, &content)
+        tree.add_node(block, name, **options, &content)
       end
 
       def text(content = nil, &callback)

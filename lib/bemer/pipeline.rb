@@ -48,11 +48,11 @@ module Bemer
     end
 
     def apply_next(template, node, **params)
-      handler_by(node.name).apply_next(template, node, params)
+      handler_by(node.name).apply_next(template, node, **params)
     end
 
     def apply(mode, template, node, **params)
-      handler_by(node.name).apply(mode, template, node, params)
+      handler_by(node.name).apply(mode, template, node, **params)
     end
 
     protected

@@ -3,11 +3,11 @@
 module Bemer
   module Helpers
     def block_tag(name = '', **options, &content)
-      Bemer::Tag.new(name, options, &content).render
+      Bemer::Tag.new(name, **options, &content).render
     end
 
     def elem_tag(block = '', element = '', **options, &content)
-      Bemer::Tag.new(block, element, options, &content).render
+      Bemer::Tag.new(block, element, **options, &content).render
     end
 
     def bem_mix(*mix)
@@ -21,7 +21,7 @@ module Bemer
     end
 
     def render_component(path, **options, &block)
-      Bemer::TemplateList.new(self, path, options).compile(&block)
+      Bemer::TemplateList.new(self, path, **options).compile(&block)
     end
 
     alias refine_component render_component
@@ -31,7 +31,7 @@ module Bemer
     end
 
     def define_component(**options, &block)
-      Bemer::Component.new(self).render(options, &block)
+      Bemer::Component.new(self).render(**options, &block)
     end
 
     def component_pack(&block)
@@ -49,7 +49,7 @@ module Bemer
     def bem_attrs_for(block = '', element = nil, **options)
       js = options[:js].nil? ? true : options.delete(:js)
 
-      Bemer::EntityBuilder.new(block, element, options.merge(bem: true, js: js)).attrs
+      Bemer::EntityBuilder.new(block, element, **options.merge(bem: true, js: js)).attrs
     end
   end
 end

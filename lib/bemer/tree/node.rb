@@ -12,7 +12,7 @@ module Bemer
       alias need_replace?     need_replace
 
       def initialize(tree, block = '', element = nil, **options, &content)
-        super(tree, block, element, options, &content)
+        super(tree, block, element, **options, &content)
 
         @applied_modes    = Pipeline::MODES.map { |mode| [mode, false] }.to_h
         @children         = []
@@ -62,11 +62,11 @@ module Bemer
       end
 
       def apply_next(template, **params)
-        tree.pipeline.apply_next(template, self, params)
+        tree.pipeline.apply_next(template, self, **params)
       end
 
       def apply(mode, template, **params)
-        tree.pipeline.apply(mode, template, self, params)
+        tree.pipeline.apply(mode, template, self, **params)
       end
 
       protected

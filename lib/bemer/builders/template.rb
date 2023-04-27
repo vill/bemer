@@ -44,7 +44,7 @@ module Bemer
         block   = @block.eql?('*') ? block : @block
         elem    = @element.nil? || @element.eql?('*') ? elem : @element
         params  = { **new_options, **options, condition: condition, block: block, elem: elem }
-        builder = Builders::Template.new(templates, params)
+        builder = Builders::Template.new(templates, **params)
 
         block_given? ? yield(builder) : builder
       end

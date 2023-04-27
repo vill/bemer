@@ -10,7 +10,7 @@ module Bemer
         end
 
         def elem(name = '', **options, &content)
-          tree.add_node(block, name, options, &content)
+          tree.add_node(block, name, **options, &content)
         end
 
         protected
