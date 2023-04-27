@@ -10,7 +10,7 @@ module Bemer
       def block(name = '*', condition = true, **options)
         params = { **options, condition: condition, block: name, elem: nil }
 
-        builder = Builders::Template.new(templates, params)
+        builder = Builders::Template.new(templates, **params)
 
         block_given? ? yield(builder) : builder
       end
@@ -18,7 +18,7 @@ module Bemer
       def elem(name = '*', condition = true, block: '*', **options)
         params = { **options, condition: condition, block: block || '*', elem: name }
 
-        builder = Builders::Template.new(templates, params)
+        builder = Builders::Template.new(templates, **params)
 
         block_given? ? yield(builder) : builder
       end

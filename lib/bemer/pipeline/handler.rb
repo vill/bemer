@@ -21,16 +21,16 @@ module Bemer
       def apply_next(current_template, node, **params)
         position = priorities[current_template.mode][current_template.object_id] + 1
 
-        apply_template(current_template.mode, node, position, params)
+        apply_template(current_template.mode, node, position, **params)
       end
 
       def apply(mode, current_template, node, **params)
         return unless allowable_mode?(mode) && compatible_modes?(mode, current_template.mode)
 
         if current_template.mode.eql?(mode)
-          apply_next(current_template, node, params)
+          apply_next(current_template, node, **params)
         else
-          apply_template(mode, node, params)
+          apply_template(mode, node, **params)
         end
       end
 

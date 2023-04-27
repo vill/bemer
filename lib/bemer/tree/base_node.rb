@@ -13,8 +13,8 @@ module Bemer
                      :content, :elem, :elem?, :element?, :js, :mix, :mods, :name, :tag
 
       def initialize(tree, block = '', element = nil, **options, &content)
-        @entity         = Entity.new(block, element, options, &content)
-        @entity_builder = EntityBuilder.new(block, element, options, &content)
+        @entity         = Entity.new(block, element, **options, &content)
+        @entity_builder = EntityBuilder.new(block, element, **options, &content)
         @renderer       = Renderer.new
         @tree           = tree
       end

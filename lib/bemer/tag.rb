@@ -8,7 +8,7 @@ module Bemer
 
     def initialize(block = '', element = nil, **options, &content)
       @bem_cascade = options[:bem_cascade]
-      @tag_builder = TagBuilder.new(block, element, options, &content)
+      @tag_builder = TagBuilder.new(block, element, **options, &content)
       @renderer    = Renderer.new
     end
 

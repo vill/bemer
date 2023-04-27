@@ -9,7 +9,7 @@ module Bemer
     def render(**options, &block)
       return if !block_given? || template_catalog.nil?
 
-      Tree.new(template_catalog, options).render(&block)
+      Tree.new(template_catalog, **options).render(&block)
     end
 
     protected
