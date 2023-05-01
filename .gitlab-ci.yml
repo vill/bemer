@@ -44,6 +44,18 @@ ruby-2.6.10:
   image: ruby:2.6.10
   <<: *default_script
 
-ruby-2.7.7:
-  image: ruby:2.7.7
+ruby-2.7.8:
+  image: ruby:2.7.8
+  <<: *default_script
+
+ruby-3.0.6:
+  image: ruby:3.0.6
+  <<: *default_script
+
+ruby-3.1.4:
+  image: ruby:3.1.4
+  <<: *default_script
+
+ruby-3.2.2:
+  image: ruby:3.2.2
   <<: *default_script
