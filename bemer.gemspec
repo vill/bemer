@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.name             = 'bemer'
   spec.version          = Bemer::VERSION
   spec.author           = 'Alexander Grigorev'
-  spec.email            = 'vill@rubyinventory.org'
+  spec.email            = 'vill@railsarchitect.dev'
   # rubocop:disable Metrics/LineLength
   spec.summary          = 'Build reusable UI components for Rails applications with the ability to use the BEM methodology.'
   spec.description      = 'Build reusable UI components for Rails applications with the ability to use the BEM methodology.'
