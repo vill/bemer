@@ -12,24 +12,12 @@ cache:
     - vendor/bundle/
 
 before_script:
-  - 'grep -q "/debian jessie main" /etc/apt/sources.list && echo "deb http://cdn-fastly.deb.debian.org/debian/ jessie main" > /etc/apt/sources.list.d/jessie.list'
-  - 'grep -q "/debian jessie main" /etc/apt/sources.list && echo "deb http://security.debian.org/ jessie/updates main" > /etc/apt/sources.list.d/jessie-updates.list'
-  - 'grep -q "/debian jessie main" /etc/apt/sources.list && echo "deb http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list'
-  - 'grep -q "/debian jessie main" /etc/apt/sources.list && echo "Acquire::Check-Valid-Until no;" > /etc/apt/apt.conf.d/99no-check-valid-until'
-  - sed -i '/jessie.* main/d' /etc/apt/sources.list
-  - 'if [ $RUBY_VERSION == "2.3.8" ]; then sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list; fi'
-  - 'if [ $RUBY_VERSION == "2.3.8" ]; then sed -i "s|security.debian.org|archive.debian.org/|g" /etc/apt/sources.list; fi'
-  - 'if [ $RUBY_VERSION == "2.3.8" ]; then sed -i "/stretch-updates/d" /etc/apt/sources.list; fi'
-  - 'apt-get update -y -qq && apt-get install -y -qq locales'
-  - echo "en_US UTF-8" > /etc/locale.gen
-  - locale-gen en_US.UTF-8
-  - export LANG=en_US.UTF-8
-  - export LANGUAGE=en_US:en
-  - export LC_ALL=en_US.UTF-8
-  - rm Gemfile.lock
+  - export LANG=C.UTF-8 LC_ALL=C.UTF-8
+  - ruby -e 'abort "UTF-8 locale is not active" unless Encoding.default_external == Encoding::UTF_8'
+  - rm -f Gemfile.lock
   - gem update --system 3.3.26
   - bundle config --local path vendor/bundle
-  - 'CI=true bundle install --quiet --jobs $(nproc) "${FLAGS[@]}"'
+  - 'CI=true bundle install --quiet --jobs "$(nproc)" "${FLAGS[@]}"'
 
 ruby-2.3.8:
   image: ruby:2.3.8
