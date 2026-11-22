@@ -21,6 +21,10 @@ def build_appraise(name, rails_version, sprockets_rails_version = nil)
     gem 'actionmailer',    "~> #{rails_version}"
     gem 'sprockets-rails', "~> #{sprockets_rails_version}" unless sprockets_rails_version.nil?
 
+    if %w[4.2.0 5.0.0 5.1.0 5.2.0].include?(rails_version)
+      gem 'loofah', '!= 2.21.0', '!= 2.21.1'
+    end
+
     next if rails_version[0].to_i > 3
 
     gem 'tzinfo'

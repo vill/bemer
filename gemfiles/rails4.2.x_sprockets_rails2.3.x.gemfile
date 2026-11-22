@@ -11,5 +11,6 @@ gem "wwtd", "~> 1.4.0"
 gem "railties", "~> 4.2.0"
 gem "actionmailer", "~> 4.2.0"
 gem "sprockets-rails", "~> 2.3.0"
+gem "loofah", "!= 2.21.0", "!= 2.21.1"
 
 gemspec path: "../"
