@@ -13,7 +13,7 @@
 # For a complete list of options that you can use to customize hooks, see:
 # https://github.com/brigade/overcommit#configuration
 
-gemfile: Gemfile
+gemfile: .overcommit_gems.rb
 
 CommitMsg:
   HardTabs:
