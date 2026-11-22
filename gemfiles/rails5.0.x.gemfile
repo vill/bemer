@@ -10,5 +10,6 @@ gem "rspec-rails", "~> 3.9.0"
 gem "wwtd", "~> 1.4.0"
 gem "railties", "~> 5.0.0"
 gem "actionmailer", "~> 5.0.0"
+gem "loofah", "!= 2.21.0", "!= 2.21.1"
 
 gemspec path: "../"
